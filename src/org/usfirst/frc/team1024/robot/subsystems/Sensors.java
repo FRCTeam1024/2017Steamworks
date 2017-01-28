@@ -9,8 +9,9 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
  * @author team1024
- * Changelog:
+ * Change Log:
  * 1/26/17: added both drive encoders and gyro, added Livewindow stuff
+ * 1/28/2017: Added the reset command
  */
 public class Sensors extends Subsystem {
 		public final Encoder leftDrivetrainEncoder  = new Encoder(RobotMap.LEFT_DRIVETRAIN_ENCODER_PORT_A,  RobotMap.LEFT_DRIVETRAIN_ENCODER_PORT_B);
@@ -23,7 +24,13 @@ public class Sensors extends Subsystem {
 			LiveWindow.addSensor("Sensors", "Shooter Encoder", 	   shooterEncoder);
 			LiveWindow.addSensor("Sensors", "Gyro", 			   gyro);
 		}
+		
     public void initDefaultCommand() {
+    
+    }
+    
+    public void reset() {
+    	
     }
 }
 

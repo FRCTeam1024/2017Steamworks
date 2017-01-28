@@ -1,7 +1,7 @@
 package org.usfirst.frc.team1024.robot;
 /**
  * @author team1024
- * Changelog:
+ * Change Log:
  * 1/26/17: Added drive motors
  */
 public class RobotMap {

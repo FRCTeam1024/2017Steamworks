@@ -17,7 +17,7 @@ import org.usfirst.frc.team1024.robot.subsystems.Shooter;
 
 /**
  * @author team1024
- * Changelog
+ * Change Log
  * 1/26/17: 
  */
 public class Robot extends IterativeRobot {
