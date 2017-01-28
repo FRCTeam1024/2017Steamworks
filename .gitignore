@@ -1,0 +1,8 @@
+*.class
+build/jars/cscore.jar
+build/jars/CTRLib.jar
+build/jars/navx_frc.jar
+build/jars/NetworkTables.jar
+build/jars/opencv.jar
+build/jars/WPILib.jar
+dist/FRCUserProgram.jar
