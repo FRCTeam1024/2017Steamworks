@@ -37,13 +37,11 @@ public class Blender implements Subsystem {
 
 	@Override
 	public void outputToSmartDashboard() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void resetSensors() {
-		// TODO Auto-generated method stub
 		
 	}
 }

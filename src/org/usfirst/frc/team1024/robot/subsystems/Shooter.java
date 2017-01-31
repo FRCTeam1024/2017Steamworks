@@ -40,13 +40,11 @@ public class Shooter implements Subsystem {
 
 	@Override
 	public void outputToSmartDashboard() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void stop() {
-		// TODO Auto-generated method stub
 		
 	}
 
