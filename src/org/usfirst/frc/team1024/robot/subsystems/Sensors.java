@@ -30,6 +30,10 @@ public class Sensors extends Subsystem {
     }
     
     public void reset() {
+    	leftDrivetrainEncoder.reset();
+    	rightDrivetrainEncoder.reset();
+    	shooterEncoder.reset();
+    	gyro.reset();
     	
     }
 }

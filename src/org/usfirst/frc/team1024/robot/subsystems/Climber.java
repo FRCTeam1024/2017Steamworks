@@ -33,11 +33,13 @@ public class Climber extends Subsystem {
 		
 	}
 	
-	public void eStop() {
-		
+	//
+	public void emergencyStop() {
+		//if(
 	}
 	
-	public void override() {
+	//"override" is a Java key word. "OverrideSafety" will reduce confusion.
+	public void overrideSafety() {
 		
 	}
 	
