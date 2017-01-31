@@ -4,6 +4,7 @@ import org.usfirst.frc.team1024.robot.RobotMap;
 
 import com.ctre.CANTalon;
 
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
@@ -30,7 +31,6 @@ public class Climber extends Subsystem {
 	}
 	
 	public void getCurrent() {
-		
 	}
 	
 	//
