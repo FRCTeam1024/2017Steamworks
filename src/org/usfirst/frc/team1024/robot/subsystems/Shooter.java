@@ -7,6 +7,7 @@ import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Change Log:
@@ -40,13 +41,14 @@ public class Shooter implements Subsystem {
 
 	@Override
 	public void outputToSmartDashboard() {
-		// TODO Auto-generated method stub
+		SmartDashboard.putData("Shooter", shooter);
+		SmartDashboard.putData("Shooter Encoder", shooterEncoder);
 		
 	}
 
 	@Override
 	public void stop() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 

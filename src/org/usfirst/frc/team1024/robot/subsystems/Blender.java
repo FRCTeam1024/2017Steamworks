@@ -7,6 +7,7 @@ import com.ctre.CANTalon;
 
 
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *Change Log
@@ -27,7 +28,9 @@ public class Blender implements Subsystem {
 	public void blend(double power) {
 		blenderMotor.set(power);
 	}
-	
+	 public void blend(){
+		 blenderMotor.set(0.5);//Will be set fo-reals later
+	 }
 	/**
 	 * Stops the blender
 	 */
@@ -37,13 +40,12 @@ public class Blender implements Subsystem {
 
 	@Override
 	public void outputToSmartDashboard() {
-		// TODO Auto-generated method stub
+		SmartDashboard.putData("Blender Motor", blenderMotor);
 		
 	}
 
 	@Override
 	public void resetSensors() {
-		// TODO Auto-generated method stub
 		
 	}
 }

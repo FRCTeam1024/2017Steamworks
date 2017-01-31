@@ -6,6 +6,7 @@ import org.usfirst.frc.team1024.robot.util.Subsystem;
 import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Change Log:
@@ -62,10 +63,13 @@ public class Climber implements Subsystem {
 	public void overrideSafety() {
 		
 	}
-	
+	/**
+	 * Outputs motor properties to Smart Dashboard.
+	 */
 	@Override
 	public void outputToSmartDashboard() {
-		
+		SmartDashboard.putData("Left Climber", leftClimber);
+		SmartDashboard.putData("Right Climber", rightClimber);
 	}
 	
 	@Override
