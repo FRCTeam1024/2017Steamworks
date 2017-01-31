@@ -12,7 +12,6 @@ import org.usfirst.frc.team1024.robot.commands.ExampleCommand;
 import org.usfirst.frc.team1024.robot.subsystems.Blender;
 import org.usfirst.frc.team1024.robot.subsystems.Climber;
 import org.usfirst.frc.team1024.robot.subsystems.Drivetrain;
-import org.usfirst.frc.team1024.robot.subsystems.Sensors;
 import org.usfirst.frc.team1024.robot.subsystems.Shooter;
 
 /**
@@ -21,10 +20,8 @@ import org.usfirst.frc.team1024.robot.subsystems.Shooter;
  * 1/26/17: 
  */
 public class Robot extends IterativeRobot {
-
 	public static final Drivetrain drivetrain = new Drivetrain();
 	public static final Shooter shooter = new Shooter();
-	public static final Sensors sensors = new Sensors();
 	public static final Climber climber = new Climber();
 	public static final Blender blender = new Blender();
 	public static OI oi;
@@ -39,6 +36,7 @@ public class Robot extends IterativeRobot {
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
 	}
+	
 	@Override
 	public void disabledInit() {
 
@@ -48,18 +46,7 @@ public class Robot extends IterativeRobot {
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 	}
-
-	/**
-	 * This autonomous (along with the chooser code above) shows how to select
-	 * between different autonomous modes using the dashboard. The sendable
-	 * chooser code works with the Java SmartDashboard. If you prefer the
-	 * LabVIEW Dashboard, remove all of the chooser code and uncomment the
-	 * getString code to get the auto name from the text box below the Gyro
-	 *
-	 * You can add additional auto modes by adding additional commands to the
-	 * chooser code above (like the commented example) or additional comparisons
-	 * to the switch structure below with additional strings & commands.
-	 */
+	
 	@Override
 	public void autonomousInit() {
 		autonomousCommand = chooser.getSelected();
@@ -75,6 +62,7 @@ public class Robot extends IterativeRobot {
 		if (autonomousCommand != null)
 			autonomousCommand.start();
 	}
+	
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
@@ -89,18 +77,12 @@ public class Robot extends IterativeRobot {
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 	}
-
-	/**
-	 * This function is called periodically during operator control
-	 */
+	
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 	}
-
-	/**
-	 * This function is called periodically during test mode
-	 */
+	
 	@Override
 	public void testPeriodic() {
 		LiveWindow.run();
