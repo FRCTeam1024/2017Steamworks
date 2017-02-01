@@ -8,10 +8,10 @@ public class RobotMap {
 //Motors
 	//Drivetrain
 	public static final int FRONT_LEFT_DRIVETRAIN_PORT = 0;
-	public static final int MIDDLE_LEFT_DRIVETRAIN_PORT = 1;
+	
 	public static final int REAR_LEFT_DRIVETRAIN_PORT = 2;
 	public static final int FRONT_RIGHT_DRIVETRAIN_PORT = 3;
-	public static final int MIDDLE_RIGHT_DRIVETRAIN_PORT = 6;
+	
 	public static final int REAR_RIGHT_DRIVETRAIN_PORT = 7;
 	//Shooter
 	public static final int SHOOTER_PORT = 8;
