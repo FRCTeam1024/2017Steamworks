@@ -7,5 +7,4 @@ build/jars/opencv.jar
 build/jars/WPILib.jar
 dist/FRCUserProgram.jar
 *.class
-*.class
-bin/org/usfirst/frc/team1024/robot/subsystems/Shooter.class
+bin
