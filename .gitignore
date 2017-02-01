@@ -6,4 +6,4 @@ build/jars/NetworkTables.jar
 build/jars/opencv.jar
 build/jars/WPILib.jar
 dist/FRCUserProgram.jar
-bin
+bin/
