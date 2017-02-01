@@ -43,13 +43,10 @@ public class Shooter implements Subsystem {
 	public void outputToSmartDashboard() {
 		SmartDashboard.putData("Shooter", shooter);
 		SmartDashboard.putData("Shooter Encoder", shooterEncoder);
-		
 	}
 
 	@Override
 	public void stop() {
-		
-		
 	}
 
 	@Override

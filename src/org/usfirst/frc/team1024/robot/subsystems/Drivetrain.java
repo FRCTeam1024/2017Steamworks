@@ -5,9 +5,12 @@ import org.usfirst.frc.team1024.robot.util.Constants;
 import org.usfirst.frc.team1024.robot.util.Subsystem;
 
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.FeedbackDevice;
+import com.ctre.CANTalon.TalonControlMode;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -32,10 +35,6 @@ public class Drivetrain implements Subsystem {
 	
 	public final Solenoid shifter 		   		= new Solenoid(RobotMap.DRIVETRAIN_SHIFTER_PORT);
 	
-	public final Encoder leftDrivetrainEncoder  = new Encoder(RobotMap.LEFT_DRIVETRAIN_ENCODER_PORT_A,
-															  RobotMap.LEFT_DRIVETRAIN_ENCODER_PORT_B);
-	public final Encoder rightDrivetrainEncoder = new Encoder(RobotMap.RIGHT_DRIVETRAIN_ENCODER_PORT_A,
-															  RobotMap.RIGHT_DRIVETRAIN_ENCODER_PORT_B);
 	public final AnalogGyro gyro 				= new AnalogGyro(RobotMap.GYRO_PORT);
 	
 	public Drivetrain() {
@@ -46,22 +45,45 @@ public class Drivetrain implements Subsystem {
 		LiveWindow.addActuator("Drivetrain", "MiddleRight Motor", middleRightDrive);
 		LiveWindow.addActuator("Drivetrain", "RearRight Motor",   rearRightDrive);
 		
-		LiveWindow.addSensor("Sensors", "Left Drive Encoder",  leftDrivetrainEncoder);
-		LiveWindow.addSensor("Sensors", "Right Drive Encoder", rightDrivetrainEncoder);
 		LiveWindow.addSensor("Sensors", "Gyro", 			   gyro);
+		
+		setMotorConfig(frontLeftDrive);
+		setMotorConfig(frontRightDrive);
+		
+		setFollowerMode(frontLeftDrive, middleLeftDrive);
+		setFollowerMode(frontLeftDrive, rearLeftDrive);
+		setFollowerMode(frontRightDrive, middleRightDrive);
+		setFollowerMode(frontRightDrive, rearRightDrive);
+	}
+	/**
+	 * Configures the motors settings
+	 * @param motor that is being configured
+	 */
+	public void setMotorConfig(CANTalon motor) {
+		motor.enableBrakeMode(true);
+		motor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		motor.configEncoderCodesPerRev(250);
+		motor.configNominalOutputVoltage(+0.0f, -0.0f);
+        motor.configPeakOutputVoltage(+12.0f, 0.0f);
+        motor.changeControlMode(TalonControlMode.Position);
+		motor.setPIDSourceType(PIDSourceType.kDisplacement);
+		motor.setProfile(0);
+		motor.setF(0.15);
+		motor.setP(0.3);
+		motor.setI(0.0);
+		motor.setD(0.0);
+	}
+	/**
+	 * Sets a motor to follow another motors commands
+	 * @param master the motor that is being followed by the slave
+	 * @param slave the motor that is following the masters instructions
+	 */
+	public void setFollowerMode(CANTalon master, CANTalon slave){
+		slave.changeControlMode(TalonControlMode.Follower);
+		slave.set(master.getDeviceID());
 	}
 	
-	/**
-	 * Sets the drivetrain motors to a preset value
-	 */
-	public void drive() {
-		frontLeftDrive.set(1.0); // Set this later
-		middleLeftDrive.set(1.0); // Set this later
-		rearLeftDrive.set(1.0); // Set this later
-		frontRightDrive.set(1.0); // Set this later
-		middleRightDrive.set(1.0); // Set this later
-		rearRightDrive.set(1.0); // Set this later
-	}
+	
 	
 	/**
 	 * Drive all motors with all power
@@ -127,8 +149,6 @@ public class Drivetrain implements Subsystem {
 	 */
 	@Override
 	public void resetSensors() {
-    	leftDrivetrainEncoder.reset();
-    	rightDrivetrainEncoder.reset();
     	gyro.reset();
 	}
 	

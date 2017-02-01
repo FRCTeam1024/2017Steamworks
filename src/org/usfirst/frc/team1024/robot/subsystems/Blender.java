@@ -41,7 +41,6 @@ public class Blender implements Subsystem {
 	@Override
 	public void outputToSmartDashboard() {
 		SmartDashboard.putData("Blender Motor", blenderMotor);
-		
 	}
 
 	@Override
