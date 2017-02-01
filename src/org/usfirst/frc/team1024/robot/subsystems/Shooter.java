@@ -16,11 +16,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Shooter implements Subsystem {
     public final CANTalon shooter        = new CANTalon(RobotMap.SHOOTER_PORT);
-	public final Encoder  shooterEncoder = new Encoder(RobotMap.SHOOTER_ENCODER_PORT_A, 
-													   RobotMap.SHOOTER_ENCODER_PORT_B);
 	public Shooter() {
 		LiveWindow.addActuator("Shooter", "Shooter Motor", shooter);
-		LiveWindow.addSensor("Sensors", "Shooter Encoder", 	   shooterEncoder);
 	}
 	
     public void initDefaultCommand() {
@@ -28,7 +25,7 @@ public class Shooter implements Subsystem {
     }
     
     public void displayRPM() {
-    	
+    	shooter.getSpeed();
     }
     
     public void shoot(double power) {
@@ -42,7 +39,6 @@ public class Shooter implements Subsystem {
 	@Override
 	public void outputToSmartDashboard() {
 		SmartDashboard.putData("Shooter", shooter);
-		SmartDashboard.putData("Shooter Encoder", shooterEncoder);
 	}
 
 	@Override
@@ -51,7 +47,6 @@ public class Shooter implements Subsystem {
 
 	@Override
 	public void resetSensors() {
-		shooterEncoder.reset();
 		
 	}
     

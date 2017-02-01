@@ -62,7 +62,7 @@ public class Drivetrain implements Subsystem {
 	public void setMotorConfig(CANTalon motor) {
 		motor.enableBrakeMode(true);
 		motor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		motor.configEncoderCodesPerRev(250);
+		motor.configEncoderCodesPerRev((int) (10 * Constants.ENCODER_CONSTANT_INCHES));
 		motor.configNominalOutputVoltage(+0.0f, -0.0f);
         motor.configPeakOutputVoltage(+12.0f, 0.0f);
         motor.changeControlMode(TalonControlMode.Position);
@@ -83,8 +83,6 @@ public class Drivetrain implements Subsystem {
 		slave.set(master.getDeviceID());
 	}
 	
-	
-	
 	/**
 	 * Drive all motors with all power
 	 * @param power
@@ -99,9 +97,9 @@ public class Drivetrain implements Subsystem {
 	}
 	
 	/**
-	 * Sets the drivetrain motors with left and right powers
-	 * @param leftpower
-	 * @param rightpower
+	 * Sets the drivetrain motors with left and right powers.
+	 * @param leftpower (-1.0, 1.0)
+	 * @param rightpower (-1.0, 1.0)
 	 */
 	public void drive(double leftpower, double rightpower) {
 		frontLeftDrive.set(leftpower);
@@ -114,7 +112,7 @@ public class Drivetrain implements Subsystem {
 	}
 	
 	/**
-	 * Stops all drivetrain motors
+	 * Stops all drivetrain motors.
 	 */
 	public void stop() {
 		frontLeftDrive.set(0.0);
@@ -124,7 +122,12 @@ public class Drivetrain implements Subsystem {
 		middleRightDrive.set(0.0);
 		rearRightDrive.set(0.0);
 	}
-	
+	/**
+	 * Drives all drivetrain motors for a given time and powers.
+	 * @param time (seconds)
+	 * @param leftPower (-1.0, 1.0)
+	 * @param rightPower (-1.0, 1.0)
+	 */
 	public void driveForTime(double time, double leftPower, double rightPower){
 		drive(leftPower, rightPower);
 		Timer.delay(time);
@@ -132,7 +135,7 @@ public class Drivetrain implements Subsystem {
 	}
 	
 	/**
-	 * Outputs motor properties to SM
+	 * Outputs motor properties to SmartDashboard.
 	 */
 	@Override
 	public void outputToSmartDashboard() {
@@ -145,19 +148,56 @@ public class Drivetrain implements Subsystem {
 	}
 	
 	/**
-	 * 
+	 * Resets all sensors.
 	 */
 	@Override
 	public void resetSensors() {
     	gyro.reset();
 	}
 	
+	/**
+	 * Gets the average of the encoder positions on the left and right side of the drivetrain.
+	 * @returns the average position of the drive encoders.
+	 */
+	public double getAverageEncoderDistance() {
+		return (frontLeftDrive.getEncPosition() + frontRightDrive.getEncPosition()) / 2;
+	}
+	
+	/**
+	 * Drives the drivetrain motors for a specified distance and power.
+	 * @param distance (inches)
+	 * @param power (-1.0, 1.0)
+	 */
 	public void driveForDistance(double distance, double power) {
-		while ((leftDrivetrainEncoder.getDistance() + rightDrivetrainEncoder.getDistance()) / 2 <
-			  (Constants.ENCODER_CONSTANT_INCHES * distance)) {
+		while (getAverageEncoderDistance() < distance) {
 			drive(power);
 		}
-		
+	}
+	
+	/**
+	 * Gets the distance in inches from the CANTalon
+	 * @param encoder that is being read
+	 * @return
+	 */
+	public double getEncoderDisance(CANTalon encoder) {
+		double distance;
+		distance = encoder.getPosition() * Constants.ENCODER_CONSTANT_INCHES;
+		return distance;
+	}
+	
+	/**
+	 * Drives with PID to a distance. Changes the Talon Control Mode to position mode
+	 * @param distance (inches)
+	 */
+	public void driveToDistance(double distance) {
+		//We need to be in position mode in order to drive for a distance
+		frontLeftDrive.changeControlMode(TalonControlMode.Position);
+		frontRightDrive.changeControlMode(TalonControlMode.Position);
+		//We have to multiply distance by 10 because we can only set the 
+		frontLeftDrive.setSetpoint(distance * 10);
+		frontRightDrive.setSetpoint(distance * 10);
+		frontLeftDrive.enable();
+		frontRightDrive.enable();
 	}
 	
 }
