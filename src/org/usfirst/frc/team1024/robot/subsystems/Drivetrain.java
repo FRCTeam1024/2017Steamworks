@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1024.robot.subsystems;
 
 import org.usfirst.frc.team1024.robot.RobotMap;
+import org.usfirst.frc.team1024.robot.util.Constants;
 import org.usfirst.frc.team1024.robot.util.Subsystem;
 
 import com.ctre.CANTalon;
@@ -13,6 +14,7 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 /**
@@ -129,14 +131,33 @@ public class Drivetrain implements Subsystem {
 		stop();
 	}
 	
+	/**
+	 * Outputs motor properties to SM
+	 */
 	@Override
 	public void outputToSmartDashboard() {
-		
+		SmartDashboard.putData("Front Left Drive",   frontLeftDrive);
+		SmartDashboard.putData("Middle Left Drive",  middleLeftDrive);
+		SmartDashboard.putData("Rear Left Drive",    rearLeftDrive);
+		SmartDashboard.putData("Front Right Drive",  frontRightDrive);
+		SmartDashboard.putData("Middle Right Drive", middleRightDrive);
+		SmartDashboard.putData("Rear Right Drive",   rearRightDrive);
 	}
 	
+	/**
+	 * 
+	 */
 	@Override
 	public void resetSensors() {
     	gyro.reset();
+	}
+	
+	public void driveForDistance(double distance, double power) {
+		while ((leftDrivetrainEncoder.getDistance() + rightDrivetrainEncoder.getDistance()) / 2 <
+			  (Constants.ENCODER_CONSTANT_INCHES * distance)) {
+			drive(power);
+		}
+		
 	}
 	
 }
