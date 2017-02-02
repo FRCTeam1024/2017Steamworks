@@ -19,36 +19,52 @@ public class Shooter implements Subsystem {
 	public Shooter() {
 		LiveWindow.addActuator("Shooter", "Shooter Motor", shooter);
 	}
-	
-    public void initDefaultCommand() {
-    
+
+	/**
+	 * The preset value of the shooter's power
+	 */
+    public void shoot() {
+    	shoot(1.0); // Set this later
     }
     
-    public void displayRPM() {
-    	shooter.getSpeed();
-    }
-    
+
+	/**
+	 * Sets the parameters of shooter
+	 */
     public void shoot(double power) {
     	shooter.set(power);
     }
     
-    public void shoot() {
-    	shooter.set(1.0); // Set this later
-    }
 
+	/**
+	 * Displays the RPM of the shooter's wheel
+	 */
+    public void displayRPM() {
+    	shooter.getSpeed();
+    }
+    
+
+	/**
+	 * Outputs the shooter's values to the SmartDashboard
+	 */
 	@Override
 	public void outputToSmartDashboard() {
 		SmartDashboard.putData("Shooter", shooter);
 	}
-
+	
+	/**
+	 * Stops the shooter 
+	 */
 	@Override
 	public void stop() {
+		shooter.set(0.0);
 	}
 
+	/**
+	 * Resets the sensors 
+	 */
 	@Override
 	public void resetSensors() {
 		
 	}
-    
 }
-
