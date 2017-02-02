@@ -2,6 +2,7 @@ package org.usfirst.frc.team1024.robot.subsystems;
 
 import org.usfirst.frc.team1024.robot.RobotMap;
 import org.usfirst.frc.team1024.robot.util.Constants;
+import org.usfirst.frc.team1024.robot.util.KilaTalon;
 import org.usfirst.frc.team1024.robot.util.Subsystem;
 
 import com.ctre.CANTalon;
@@ -26,10 +27,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * 2/1/17: Removed middle motors and added javadocs
  */
 public class Drivetrain implements Subsystem {
-	public final CANTalon frontLeftDrive   		= new CANTalon(RobotMap.FRONT_LEFT_DRIVETRAIN_PORT);
-	public final CANTalon rearLeftDrive    		= new CANTalon(RobotMap.REAR_LEFT_DRIVETRAIN_PORT);
-	public final CANTalon frontRightDrive  		= new CANTalon(RobotMap.FRONT_RIGHT_DRIVETRAIN_PORT);
-	public final CANTalon rearRightDrive   		= new CANTalon(RobotMap.REAR_RIGHT_DRIVETRAIN_PORT);
+	public final KilaTalon frontLeftDrive   		= new KilaTalon(RobotMap.FRONT_LEFT_DRIVETRAIN_PORT);
+	public final KilaTalon rearLeftDrive    		= new KilaTalon(RobotMap.REAR_LEFT_DRIVETRAIN_PORT);
+	public final KilaTalon frontRightDrive  		= new KilaTalon(RobotMap.FRONT_RIGHT_DRIVETRAIN_PORT);
+	public final KilaTalon rearRightDrive   		= new KilaTalon(RobotMap.REAR_RIGHT_DRIVETRAIN_PORT);
 	
 	public final Solenoid shifter 		   		= new Solenoid(RobotMap.DRIVETRAIN_SHIFTER_PORT);
 	
@@ -54,7 +55,7 @@ public class Drivetrain implements Subsystem {
 	 * Configures the motors settings
 	 * @param motor that is being configured
 	 */
-	public void setMotorConfig(CANTalon motor) {
+	public void setMotorConfig(KilaTalon motor) {
 		motor.enableBrakeMode(true);
 		motor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		motor.configEncoderCodesPerRev(360);
@@ -74,7 +75,7 @@ public class Drivetrain implements Subsystem {
 	 * @param master the motor that is being followed by the slave
 	 * @param slave the motor that is following the masters instructions
 	 */
-	public void setFollowerMode(CANTalon master, CANTalon slave){
+	public void setFollowerMode(KilaTalon master, KilaTalon slave){
 		slave.changeControlMode(TalonControlMode.Follower);
 		slave.set(master.getDeviceID());
 	}
@@ -148,7 +149,7 @@ public class Drivetrain implements Subsystem {
 	 * @returns the average position of the drive encoders.
 	 */
 	public double getAverageEncoderDistance() {
-		return (frontLeftDrive.getEncPosition() + frontRightDrive.getEncPosition()) / 2;
+		return (frontLeftDrive.getDistance() + frontRightDrive.getDistance()) / 2;
 	}
 	
 	/**
@@ -160,17 +161,6 @@ public class Drivetrain implements Subsystem {
 		while (getAverageEncoderDistance() < distance) {
 			drive(power);
 		}
-	}
-	
-	/**
-	 * Gets the distance in inches from the CANTalon
-	 * @param encoder that is being read
-	 * @return distance the encoder reads in inches
-	 */
-	public double getEncoderDisance(CANTalon encoder) {
-		double distance;
-		distance = encoder.getPosition() * Constants.ENCODER_CONSTANT_INCHES;
-		return distance;
 	}
 	
 	/**
