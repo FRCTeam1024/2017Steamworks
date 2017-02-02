@@ -174,6 +174,40 @@ public class Drivetrain implements Subsystem {
 		frontRightDrive.enable();
 	}
 	
+	/**
+	 * Turns the robot to an angle relative to where it is facing at the time that the function is executed
+	 * @param power (-1.0, 1.0)
+	 * @param desiredAngle (0, 360) Relative to where the robot is facing at that moment
+	 */
+	public void turnRelative(double power, double desiredAngle) {
+		gyro.reset();
+		if (desiredAngle < 180 && desiredAngle > -180) {
+			if (desiredAngle >= 0) { // Turn left desiredAngle
+				while (gyro.getAngle() < desiredAngle) {
+					drive(-power, power);
+				}
+				stop();
+			} else if (desiredAngle < 0){ // Turn right desiredAngle
+				while (gyro.getAngle() > desiredAngle) {
+					drive(power, -power);
+				}
+				stop();
+			}
+		} else if (desiredAngle == 180) { // Turn left 180
+			while (gyro.getAngle() < 180) {
+				drive(-power, power);
+			}
+			stop();
+		} else if (desiredAngle == -180) { // Turn right 180
+			while (gyro.getAngle() > -180) {
+				drive(power, -power);
+			}
+			stop();
+		} else {
+			System.out.println("Angle cannot be greater than 180 or less than -180, please input the coterminal version of that angle");
+		}
+	}
+	
 	public void turnLeft(double power, double desiredAngle) {
 		while(gyro.getAngle() <= desiredAngle) {
 			drive(-power, power);
