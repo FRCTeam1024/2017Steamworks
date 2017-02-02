@@ -183,4 +183,18 @@ public class Drivetrain implements Subsystem {
 		frontLeftDrive.enable();
 		frontRightDrive.enable();
 	}
+	
+	public void turnLeft(double power, double desiredAngle) {
+		while(gyro.getAngle() <= desiredAngle) {
+			drive(-power, power);
+		}
+		stop();
+	}
+	
+	public void turnRight(double power, double desiredAngle) {
+		while(gyro.getAngle() >= desiredAngle) {
+			drive(power, -power);
+		}
+		stop();
+	}
 }

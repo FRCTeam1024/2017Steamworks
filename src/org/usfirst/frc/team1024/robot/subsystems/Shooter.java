@@ -39,7 +39,7 @@ public class Shooter implements Subsystem {
 	 * Displays the RPM of the shooter's wheel
 	 */
     public void displayRPM() {
-    	shooter.getSpeed();
+    	SmartDashboard.putNumber("Shooter RPM", shooter.getSpeed());
     }
     
 
