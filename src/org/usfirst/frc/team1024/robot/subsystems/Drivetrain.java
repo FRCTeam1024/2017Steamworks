@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * 1/28/2017: Added commands for full drive, preset drive, and driveForTime
  * 1/30/2017: Added javadocs
  * 1/31/2017: Now implements our subsystem interface
+ * 2/1/17: Removed middle motors and added javadocs
  */
 public class Drivetrain implements Subsystem {
 	public final CANTalon frontLeftDrive   		= new CANTalon(RobotMap.FRONT_LEFT_DRIVETRAIN_PORT);
@@ -48,6 +49,7 @@ public class Drivetrain implements Subsystem {
 		setFollowerMode(frontLeftDrive, rearLeftDrive);
 		setFollowerMode(frontRightDrive, rearRightDrive);
 	}
+	
 	/**
 	 * Configures the motors settings
 	 * @param motor that is being configured
@@ -55,7 +57,7 @@ public class Drivetrain implements Subsystem {
 	public void setMotorConfig(CANTalon motor) {
 		motor.enableBrakeMode(true);
 		motor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
-		motor.configEncoderCodesPerRev((int) (10 * Constants.ENCODER_CONSTANT_INCHES));
+		motor.configEncoderCodesPerRev(360);
 		motor.configNominalOutputVoltage(+0.0f, -0.0f);
         motor.configPeakOutputVoltage(+12.0f, 0.0f);
         motor.changeControlMode(TalonControlMode.Position);
@@ -66,6 +68,7 @@ public class Drivetrain implements Subsystem {
 		motor.setI(0.0);
 		motor.setD(0.0);
 	}
+	
 	/**
 	 * Sets a motor to follow another motors commands
 	 * @param master the motor that is being followed by the slave
@@ -162,7 +165,7 @@ public class Drivetrain implements Subsystem {
 	/**
 	 * Gets the distance in inches from the CANTalon
 	 * @param encoder that is being read
-	 * @return
+	 * @return distance the encoder reads in inches
 	 */
 	public double getEncoderDisance(CANTalon encoder) {
 		double distance;
@@ -175,14 +178,9 @@ public class Drivetrain implements Subsystem {
 	 * @param distance (inches)
 	 */
 	public void driveToDistance(double distance) {
-		//We need to be in position mode in order to drive for a distance
-		frontLeftDrive.changeControlMode(TalonControlMode.Position);
-		frontRightDrive.changeControlMode(TalonControlMode.Position);
-		//We have to multiply distance by 10 because we can only set the 
-		frontLeftDrive.setSetpoint(distance * 10);
-		frontRightDrive.setSetpoint(distance * 10);
+		frontLeftDrive.setSetpoint(distance * Constants.ENCODER_CONSTANT_INCHES);
+		frontRightDrive.setSetpoint(distance * Constants.ENCODER_CONSTANT_INCHES);
 		frontLeftDrive.enable();
 		frontRightDrive.enable();
 	}
-	
 }
