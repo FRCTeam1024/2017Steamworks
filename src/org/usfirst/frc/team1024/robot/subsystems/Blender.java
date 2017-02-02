@@ -23,14 +23,19 @@ public class Blender implements Subsystem {
 	
 	/**
 	 * Sets the power of the blender motor
-	 * @param power
+	 * @param power of the blender motor
 	 */
 	public void blend(double power) {
 		blenderMotor.set(power);
 	}
-	 public void blend(){
-		 blenderMotor.set(0.5);//Will be set fo-reals later
-	 }
+	
+	/**
+	 * Calls blend at a preset power
+	 */
+	public void blend(){
+		blend(0.5); //Will be set fo-reals later
+	}
+	
 	/**
 	 * Stops the blender
 	 */
