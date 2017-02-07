@@ -22,18 +22,16 @@ public class Shooter implements Subsystem {
 	/**
 	 * The preset value of the shooter's power
 	 */
-    public void shoot() {
+    public void shootPreset() {
     	shoot(1.0); // Set this later
     }
     
-
 	/**
 	 * Sets the parameters of shooter
 	 */
     public void shoot(double power) {
     	shooter.set(power);
     }
-    
 
 	/**
 	 * Displays the RPM of the shooter's wheel
@@ -42,7 +40,6 @@ public class Shooter implements Subsystem {
     	SmartDashboard.putNumber("Shooter RPM", shooter.getSpeed());
     }
     
-
 	/**
 	 * Outputs the shooter's values to the SmartDashboard
 	 */
@@ -58,10 +55,17 @@ public class Shooter implements Subsystem {
 	public void stop() {
 		shooter.set(0.0);
 	}
-
+	
+	/*
+	public void autoShoot(){
+		
+	}
+	
+	*/
 	/**
 	 * Resets the sensors 
 	 */
+	
 	@Override
 	public void resetSensors() {
 		

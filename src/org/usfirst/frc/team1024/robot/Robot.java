@@ -25,6 +25,7 @@ public class Robot extends IterativeRobot {
 	public static final Climber climber = new Climber();
 	public static final Blender blender = new Blender();
 	public static OI oi;
+	public static double shooterPower = 0.0; //preset shooter power
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -81,6 +82,30 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		
+		if (oi.getGearPush() == true) {
+			//gear push
+		} else {
+			//retract???
+		}
+		if (oi.getGearClampClose() == true) {
+			//close gear clamp
+		} else if(oi.getGearClampOpen() == true) {
+			//open gear clamp
+		} else {
+			//return to neutral
+		}
+		if (oi.getShooterSpeedIncrease() == true) {
+			shooterPower = shooterPower + 0.001;
+		} else if (oi.logi.getDPadWest() == true) {
+			shooterPower = shooterPower - 0.001;
+		}
+		blender.blend(oi.logi.getLeftY());
+		climber.climb(Math.abs(oi.logi.getRightY()));
+		if (oi.logi.getButtonRT() == true) {
+			shooter.shoot(shooterPower);
+		}
+		
 	}
 	
 	@Override

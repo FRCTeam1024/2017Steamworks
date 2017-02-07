@@ -16,8 +16,8 @@ public class ExampleCommand extends Command {
 		Robot.drivetrain.driveForDistance(98.3, 0.5);
 		//Drive to boiler
 		Robot.drivetrain.driveForTime(2.5, 0.4, 0.4);//Set this later
-		Robot.shooter.shoot();
-		Robot.drivetrain.turnLeft(0.5, 45); //Set this angle later
+		//Robot.shooter.shoot();
+		//Robot.drivetrain.turnLeft(0.5, 45); //Set this angle later
 		Robot.drivetrain.driveForDistance(90, 0.4); //Set this distance later
 		//
 		}
