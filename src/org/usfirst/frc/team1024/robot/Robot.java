@@ -27,7 +27,8 @@ public class Robot extends IterativeRobot {
 	public static final Blender blender = new Blender();
 	public static final Gear gear = new Gear();
 	public static OI oi;
-	public static double shooterPower = 0.0; //preset shooter power
+	public static double initShooterPower = 0.0; //preset shooter power
+	public static double shooterPower = initShooterPower;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -83,49 +84,45 @@ public class Robot extends IterativeRobot {
 	
 	@Override
 	public void teleopPeriodic() {
-		boolean Open = true; 
+		Scheduler.getInstance().run();
 		
-		Scheduler.getInstance().run();	 
-		
+		//Gear pusher
 		if (oi.getGearPush() == true) {
 			gear.pusher.set(true);
 		} else {
 			gear.pusher.set(false);
 		}
 		
-		if (oi.getGearClampClose() == true) {
-			Open = !Open;
-		}
-		
-		if (Open == true) {
+		//Gear clamper
+		if (oi.getGearClampClose() == true) { //close gear clamp
 			gear.clamp.set(true);
-		} else if (Open == false) {
+		} else if(oi.getGearClampOpen() == true) { //open gear clamp
 			gear.clamp.set(false);
 		}
 		
-		/* if (oi.getGearClampClose() == true) {
-			gear.clamp.set(true);
-			//close gear clamp
-		} else if(oi.getGearClampOpen() == true) {
-			gear.clamp.set(false);
-			//open gear clamp
-		} */
-		
-		if (oi.getShooterSpeedIncrease() == true) {
-			shooterPower = shooterPower + 0.001;
-		} else if (oi.logi.getDPadWest() == true) {
-			shooterPower = shooterPower - 0.001;
-		}
-		blender.blend(oi.logi.getLeftY());
-		climber.climb(Math.abs(oi.logi.getRightY()));
+		//Shooter shooting
 		if (oi.logi.getButtonRT() == true) {
 			shooter.shoot(shooterPower);
-	  /*} else {
-			shooter.shoot(0);
-		}
-		*/
+		} else {
+			shooter.shoot(0.0);
 		}
 		
+		//Shooter speed adjust
+		if (oi.getShooterSpeedIncrease() == true) {
+			shooterPower = shooterPower + 0.001;
+		} else if (oi.getShooterSpeedDecrease() == true) {
+			shooterPower = shooterPower - 0.001;
+		}
+		
+		//Shooter speed reset
+		if (oi.getSpeedReset() == true) {
+			shooterPower = initShooterPower;
+		}
+		//Blender
+		blender.blend(oi.logi.getLeftY());
+		
+		//Climber
+		climber.climb(Math.abs(oi.logi.getRightY()));
 	}
 	
 	@Override

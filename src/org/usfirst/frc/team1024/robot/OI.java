@@ -7,10 +7,11 @@ public class OI {
 	public Logitech logi;
 	public Joystick lJoy;
 	public Joystick rJoy;
+	
 	public OI() {
-		logi = new Logitech(0);
-		lJoy = new Joystick(1);
-		rJoy = new Joystick(2);
+		logi = new Logitech(RobotMap.LOGITECH_PORT);
+		lJoy = new Joystick(RobotMap.LEFT_JOYSTICK_PORT);
+		rJoy = new Joystick(RobotMap.RIGHT_JOYSTICK_PORT);
 	}
 	
 	/**
@@ -83,5 +84,13 @@ public class OI {
 	 */
 	public boolean getShoot() {
 		return logi.getButtonRT();
+	}
+
+	/**
+	 * 
+	 * @return state of right bumper
+	 */
+	public boolean getSpeedReset() {
+		return logi.getButtonRB();
 	}
 }

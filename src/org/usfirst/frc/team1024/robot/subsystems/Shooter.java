@@ -1,10 +1,14 @@
 package org.usfirst.frc.team1024.robot.subsystems;
 
 import org.usfirst.frc.team1024.robot.RobotMap;
+import org.usfirst.frc.team1024.robot.util.KilaTalon;
 import org.usfirst.frc.team1024.robot.util.Subsystem;
 
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.FeedbackDevice;
+import com.ctre.CANTalon.TalonControlMode;
 
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -14,9 +18,21 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * 1/28/2017: Added displayRPM, shoot, and preset shoot commands
  */
 public class Shooter implements Subsystem {
-    public final CANTalon shooter        = new CANTalon(RobotMap.SHOOTER_PORT);
+    public final KilaTalon shooter = new KilaTalon(RobotMap.SHOOTER_PORT);
 	public Shooter() {
 		LiveWindow.addActuator("Shooter", "Shooter Motor", shooter);
+		setMotorConfig(shooter, 0.0, 0.0, 0.0, 0.0);
+	}
+	
+	public void setMotorConfig(KilaTalon motor, double f, double p, double i, double d) {
+		motor.enableBrakeMode(false);
+		motor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		motor.configEncoderCodesPerRev(360);
+		motor.configNominalOutputVoltage(+0.0f, -0.0f);
+        motor.configPeakOutputVoltage(+12.0f, 0.0f);
+        motor.changeControlMode(TalonControlMode.Speed);
+		motor.setPIDSourceType(PIDSourceType.kRate);
+		motor.setPID(p, i, d, f, 0, 0.0, 0);
 	}
 
 	/**
@@ -30,7 +46,13 @@ public class Shooter implements Subsystem {
 	 * Sets the parameters of shooter
 	 */
     public void shoot(double power) {
+    	shooter.changeControlMode(TalonControlMode.PercentVbus);
     	shooter.set(power);
+    }
+    
+    public void shootPID(double speed) {
+    	shooter.changeControlMode(TalonControlMode.Speed);
+    	shooter.setSetpoint(speed);
     }
 
 	/**

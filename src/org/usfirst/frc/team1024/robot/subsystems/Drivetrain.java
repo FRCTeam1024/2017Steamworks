@@ -44,8 +44,8 @@ public class Drivetrain implements Subsystem {
 		
 		LiveWindow.addSensor("Sensors", "Gyro", 			   gyro);
 		
-		setMotorConfig(frontLeftDrive);
-		setMotorConfig(frontRightDrive);
+		setMotorConfig(frontLeftDrive, 0.0, 0.0, 0.0, 0.0);
+		setMotorConfig(frontRightDrive, 0.0, 0.0, 0.0, 0.0);
 		
 		setFollowerMode(frontLeftDrive, rearLeftDrive);
 		setFollowerMode(frontRightDrive, rearRightDrive);
@@ -55,7 +55,7 @@ public class Drivetrain implements Subsystem {
 	 * Configures the motors settings
 	 * @param motor that is being configured
 	 */
-	public void setMotorConfig(KilaTalon motor) {
+	public void setMotorConfig(KilaTalon motor, double f, double p, double i, double d) {
 		motor.enableBrakeMode(true);
 		motor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		motor.configEncoderCodesPerRev(360);
@@ -63,11 +63,7 @@ public class Drivetrain implements Subsystem {
         motor.configPeakOutputVoltage(+12.0f, 0.0f);
         motor.changeControlMode(TalonControlMode.Position);
 		motor.setPIDSourceType(PIDSourceType.kDisplacement);
-		motor.setProfile(0);
-		motor.setF(0.15);
-		motor.setP(0.3);
-		motor.setI(0.0);
-		motor.setD(0.0);
+		motor.setPID(p, i, d, f, 0, 0.0, 0);
 	}
 	
 	/**
