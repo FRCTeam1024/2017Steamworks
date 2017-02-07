@@ -21,6 +21,8 @@ public class RobotMap {
 	public static final int BLENDER_PORT = 9;
 //Pneumatics
 	public static final int DRIVETRAIN_SHIFTER_PORT = 0;
+	public static final int GEAR_PUSHER_PORT = 1;
+	public static final int GEAR_CLAMP_PORT = 2;
 	
 //Analog Sensors
 	public static final int GYRO_PORT = 0;

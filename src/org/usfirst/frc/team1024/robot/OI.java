@@ -17,7 +17,8 @@ public class OI {
 	 * 
 	 */
 	public void outputToSmartDashboard() {
-		SmartDashboard.getBoolean("X", logi.getRawButton(1));
+		//SmartDashboard.getBoolean("X", logi.getRawButton(1));
+		//replace with what?
 	}
 	
 	/**

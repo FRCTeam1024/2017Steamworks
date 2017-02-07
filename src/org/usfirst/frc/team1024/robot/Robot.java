@@ -12,6 +12,7 @@ import org.usfirst.frc.team1024.robot.commands.ExampleCommand;
 import org.usfirst.frc.team1024.robot.subsystems.Blender;
 import org.usfirst.frc.team1024.robot.subsystems.Climber;
 import org.usfirst.frc.team1024.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team1024.robot.subsystems.Gear;
 import org.usfirst.frc.team1024.robot.subsystems.Shooter;
 
 /**
@@ -24,6 +25,7 @@ public class Robot extends IterativeRobot {
 	public static final Shooter shooter = new Shooter();
 	public static final Climber climber = new Climber();
 	public static final Blender blender = new Blender();
+	public static final Gear gear = new Gear();
 	public static OI oi;
 	public static double shooterPower = 0.0; //preset shooter power
 
@@ -81,20 +83,34 @@ public class Robot extends IterativeRobot {
 	
 	@Override
 	public void teleopPeriodic() {
-		Scheduler.getInstance().run();
+		boolean Open = true; 
+		
+		Scheduler.getInstance().run();	 
 		
 		if (oi.getGearPush() == true) {
-			//gear push
+			gear.pusher.set(true);
 		} else {
-			//retract???
+			gear.pusher.set(false);
 		}
+		
 		if (oi.getGearClampClose() == true) {
+			Open = !Open;
+		}
+		
+		if (Open == true) {
+			gear.clamp.set(true);
+		} else if (Open == false) {
+			gear.clamp.set(false);
+		}
+		
+		/* if (oi.getGearClampClose() == true) {
+			gear.clamp.set(true);
 			//close gear clamp
 		} else if(oi.getGearClampOpen() == true) {
+			gear.clamp.set(false);
 			//open gear clamp
-		} else {
-			//return to neutral
-		}
+		} */
+		
 		if (oi.getShooterSpeedIncrease() == true) {
 			shooterPower = shooterPower + 0.001;
 		} else if (oi.logi.getDPadWest() == true) {
@@ -104,6 +120,10 @@ public class Robot extends IterativeRobot {
 		climber.climb(Math.abs(oi.logi.getRightY()));
 		if (oi.logi.getButtonRT() == true) {
 			shooter.shoot(shooterPower);
+	  /*} else {
+			shooter.shoot(0);
+		}
+		*/
 		}
 		
 	}
