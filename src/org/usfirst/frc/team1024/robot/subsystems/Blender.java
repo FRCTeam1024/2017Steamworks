@@ -1,7 +1,7 @@
 package org.usfirst.frc.team1024.robot.subsystems;
 
 import org.usfirst.frc.team1024.robot.RobotMap;
-import org.usfirst.frc.team1024.robot.util.Subsystem;
+import org.usfirst.frc.team1024.robot.util.Subsystem1024;
 
 import com.ctre.CANTalon;
 
@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * 1/28/2017: Added the blend and stop functions
  * 1/30/2017: added javadocs
  */
-public class Blender implements Subsystem {
+public class Blender implements Subsystem1024 {
 	public final CANTalon blenderMotor = new CANTalon(RobotMap.BLENDER_PORT);
 	
 	public Blender() {

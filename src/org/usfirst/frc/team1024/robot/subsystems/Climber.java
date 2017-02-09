@@ -1,7 +1,7 @@
 package org.usfirst.frc.team1024.robot.subsystems;
 
 import org.usfirst.frc.team1024.robot.RobotMap;
-import org.usfirst.frc.team1024.robot.util.Subsystem;
+import org.usfirst.frc.team1024.robot.util.Subsystem1024;
 
 import com.ctre.CANTalon;
 
@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * 1/30/2017: Added javadocs
  * 1/31/2017: Now implements our subsystem interface
  */
-public class Climber implements Subsystem {
+public class Climber implements Subsystem1024 {
 	public final CANTalon leftClimber  = new CANTalon(RobotMap.LEFT_CLIMBER_PORT);
 	public final CANTalon rightClimber = new CANTalon(RobotMap.RIGHT_CLIMBER_PORT);
 	public Climber() {
