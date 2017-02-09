@@ -4,6 +4,7 @@ package org.usfirst.frc.team1024.robot;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -27,8 +28,7 @@ public class Robot extends IterativeRobot {
 	public static final Blender blender = new Blender();
 	public static final Gear gear = new Gear();
 	public static OI oi;
-	public static double initShooterPower = 0.0; //preset shooter power
-	public static double shooterPower = initShooterPower;
+	
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -81,7 +81,7 @@ public class Robot extends IterativeRobot {
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 	}
-	
+	/*
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
@@ -124,7 +124,7 @@ public class Robot extends IterativeRobot {
 		//Climber
 		climber.climb(Math.abs(oi.logi.getRightY()));
 	}
-	
+	*/
 	@Override
 	public void testPeriodic() {
 		LiveWindow.run();

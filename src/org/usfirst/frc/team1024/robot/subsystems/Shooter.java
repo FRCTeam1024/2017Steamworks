@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1024.robot.subsystems;
 
 import org.usfirst.frc.team1024.robot.RobotMap;
+import org.usfirst.frc.team1024.robot.util.Constants;
 import org.usfirst.frc.team1024.robot.util.KilaTalon;
 import org.usfirst.frc.team1024.robot.util.Subsystem1024;
 
@@ -19,9 +20,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Shooter implements Subsystem1024 {
     public final KilaTalon shooter = new KilaTalon(RobotMap.SHOOTER_PORT);
+    public double shooterPower;
 	public Shooter() {
 		LiveWindow.addActuator("Shooter", "Shooter Motor", shooter);
 		setMotorConfig(shooter, 0.0, 0.0, 0.0, 0.0);
+		shooterPower = Constants.initShooterPower;
 	}
 	
 	public void setMotorConfig(KilaTalon motor, double f, double p, double i, double d) {
