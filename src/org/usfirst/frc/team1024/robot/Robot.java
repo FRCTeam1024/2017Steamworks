@@ -4,6 +4,7 @@ package org.usfirst.frc.team1024.robot;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -27,8 +28,7 @@ public class Robot extends IterativeRobot {
 	public static final Blender blender = new Blender();
 	public static final Gear gear = new Gear();
 	public static OI oi;
-	public static double initShooterPower = 0.0; //preset shooter power
-	public static double shooterPower = initShooterPower;
+	
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -86,38 +86,6 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		
-		//Gear pusher
-		if (oi.getGearPush() == true) {
-			gear.pusher.set(true);
-		} else {
-			gear.pusher.set(false);
-		}
-		
-		//Gear clamper
-		if (oi.getGearClampClose() == true) { //close gear clamp
-			gear.clamp.set(true);
-		} else if(oi.getGearClampOpen() == true) { //open gear clamp
-			gear.clamp.set(false);
-		}
-		
-		//Shooter shooting
-		if (oi.logi.getButtonRT() == true) {
-			shooter.shoot(shooterPower);
-		} else {
-			shooter.shoot(0.0);
-		}
-		
-		//Shooter speed adjust
-		if (oi.getShooterSpeedIncrease() == true) {
-			shooterPower = shooterPower + 0.001;
-		} else if (oi.getShooterSpeedDecrease() == true) {
-			shooterPower = shooterPower - 0.001;
-		}
-		
-		//Shooter speed reset
-		if (oi.getSpeedReset() == true) {
-			shooterPower = initShooterPower;
-		}
 		//Blender
 		blender.blend(oi.logi.getLeftY());
 		

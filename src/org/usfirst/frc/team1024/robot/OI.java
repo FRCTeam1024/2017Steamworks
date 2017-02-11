@@ -1,25 +1,62 @@
 package org.usfirst.frc.team1024.robot;
 
+import org.usfirst.frc.team1024.robot.commands.CloseClampCommand;
+import org.usfirst.frc.team1024.robot.commands.OpenClampCommand;
+import org.usfirst.frc.team1024.robot.commands.GearPushCommand;
+import org.usfirst.frc.team1024.robot.commands.GearRetractCommand;
+import org.usfirst.frc.team1024.robot.commands.ShootCommand;
+import org.usfirst.frc.team1024.robot.commands.ShooterSpeedDecreaseCommand;
+import org.usfirst.frc.team1024.robot.commands.ShooterSpeedIncreaseCommand;
+import org.usfirst.frc.team1024.robot.commands.ShooterSpeedResetCommand;
+
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public class OI {
 	public Logitech logi;
 	public Joystick lJoy;
 	public Joystick rJoy;
+	public Button gearClampOpenButton;
+	public Button gearClampCloseButton;
+	public Button gearPushButton;
+	public Button shooterSpeedIncreaseButton;
+	public Button shooterSpeedDecreaseButton;
+	public Button shootButton;
+	public Button speedResetButton;
 	
 	public OI() {
 		logi = new Logitech(RobotMap.LOGITECH_PORT);
 		lJoy = new Joystick(RobotMap.LEFT_JOYSTICK_PORT);
 		rJoy = new Joystick(RobotMap.RIGHT_JOYSTICK_PORT);
+		
+		gearClampOpenButton = new JoystickButton(logi, 5);
+		gearClampCloseButton = new JoystickButton(logi, 7);
+		gearPushButton = new JoystickButton(logi, 4);
+		
+		shootButton = new JoystickButton(logi, 2);
+		shooterSpeedIncreaseButton = new JoystickButton(logi, 1);
+		shooterSpeedDecreaseButton = new JoystickButton(logi, 1);
+		speedResetButton = new JoystickButton(logi, 6);
+		
+		gearClampOpenButton.whenPressed(new OpenClampCommand());
+		gearClampCloseButton.whenPressed(new CloseClampCommand());
+		gearPushButton.whenPressed(new GearPushCommand());
+		gearPushButton.whenReleased(new GearRetractCommand());
+		
+		shootButton.whenPressed(new ShootCommand());
+		shooterSpeedIncreaseButton.whileHeld(new ShooterSpeedIncreaseCommand());
+		shooterSpeedDecreaseButton.whileHeld(new ShooterSpeedDecreaseCommand());
+		speedResetButton.whenPressed(new ShooterSpeedResetCommand());
+		
+		
 	}
 	
 	/**
-	 * 
+	 * Outputs data to the SmartDashboard
 	 */
 	public void outputToSmartDashboard() {
-		//SmartDashboard.getBoolean("X", logi.getRawButton(1));
-		//replace with what?
+		
 	}
 	
 	/**

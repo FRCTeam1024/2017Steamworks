@@ -1,10 +1,11 @@
 package org.usfirst.frc.team1024.robot.subsystems;
 
 import org.usfirst.frc.team1024.robot.RobotMap;
-import org.usfirst.frc.team1024.robot.util.Subsystem;
+import org.usfirst.frc.team1024.robot.util.Subsystem1024;
 
 import com.ctre.CANTalon;
 
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -15,9 +16,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * 1/30/2017: Added javadocs
  * 1/31/2017: Now implements our subsystem interface
  */
-public class Climber implements Subsystem {
+public class Climber extends Subsystem implements Subsystem1024 {
 	public final CANTalon leftClimber  = new CANTalon(RobotMap.LEFT_CLIMBER_PORT);
 	public final CANTalon rightClimber = new CANTalon(RobotMap.RIGHT_CLIMBER_PORT);
+	
 	public Climber() {
 		LiveWindow.addActuator("Climber", "Left Motor",  leftClimber);
 		LiveWindow.addActuator("Climber", "Right Motor", rightClimber);
@@ -76,6 +78,10 @@ public class Climber implements Subsystem {
 	public void resetSensors() {
 		
 	}
-	
+
+	@Override
+	protected void initDefaultCommand() {
+		
+	}
 }
 

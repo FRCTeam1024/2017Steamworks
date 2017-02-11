@@ -7,3 +7,4 @@ build/jars/opencv.jar
 build/jars/WPILib.jar
 dist/FRCUserProgram.jar
 bin/
+*.class

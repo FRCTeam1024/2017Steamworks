@@ -1,14 +1,15 @@
 package org.usfirst.frc.team1024.robot.subsystems;
 
 import org.usfirst.frc.team1024.robot.RobotMap;
-import org.usfirst.frc.team1024.robot.util.Subsystem;
+import org.usfirst.frc.team1024.robot.util.Subsystem1024;
 
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
  */
-public class Gear implements Subsystem {
+public class Gear extends Subsystem implements Subsystem1024 {
 	public Solenoid pusher = new Solenoid(RobotMap.GEAR_PUSHER_PORT);
 	public Solenoid clamp = new Solenoid(RobotMap.GEAR_CLAMP_PORT);
 	
@@ -34,6 +35,12 @@ public class Gear implements Subsystem {
 
 	@Override
 	public void resetSensors() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub
 		
 	}
