@@ -1,13 +1,11 @@
 package org.usfirst.frc.team1024.robot.commands;
 
 import org.usfirst.frc.team1024.robot.Robot;
+import org.usfirst.frc.team1024.robot.util.Constants;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class Shoot extends Command {
-
-	public Shoot() {
-	}
+public class ShooterSpeedResetCommand extends Command {
 
 	@Override
 	protected void initialize() {
@@ -15,7 +13,7 @@ public class Shoot extends Command {
 	
 	@Override
 	protected void execute() {
-		Robot.shooter.shoot(Robot.shooter.shooterPower);
+		Robot.shooter.shooterPower = Constants.initShooterPower;
 	}
 	
 	@Override

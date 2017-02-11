@@ -1,19 +1,22 @@
 package org.usfirst.frc.team1024.robot.commands;
 
 import org.usfirst.frc.team1024.robot.Robot;
-import org.usfirst.frc.team1024.robot.util.Constants;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class SpeedReset extends Command {
+public class GearPushCommand extends Command {
 
+	public GearPushCommand() {
+		requires(Robot.gear);
+	}
+	
 	@Override
 	protected void initialize() {
 	}
 	
 	@Override
 	protected void execute() {
-		Robot.shooter.shooterPower = Constants.initShooterPower;
+		Robot.gear.push(true);
 	}
 	
 	@Override

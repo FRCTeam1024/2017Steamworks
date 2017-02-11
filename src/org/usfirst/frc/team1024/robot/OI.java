@@ -1,68 +1,62 @@
 package org.usfirst.frc.team1024.robot;
 
-import org.usfirst.frc.team1024.robot.commands.Blend;
-import org.usfirst.frc.team1024.robot.commands.Climb;
-import org.usfirst.frc.team1024.robot.commands.CloseClamp;
-import org.usfirst.frc.team1024.robot.commands.OpenClamp;
-import org.usfirst.frc.team1024.robot.commands.Push;
-import org.usfirst.frc.team1024.robot.commands.Shoot;
-import org.usfirst.frc.team1024.robot.commands.SpeedDecreasing;
-import org.usfirst.frc.team1024.robot.commands.SpeedIncreasing;
-import org.usfirst.frc.team1024.robot.commands.SpeedReset;
-import org.usfirst.frc.team1024.robot.subsystems.Gear;
+import org.usfirst.frc.team1024.robot.commands.CloseClampCommand;
+import org.usfirst.frc.team1024.robot.commands.OpenClampCommand;
+import org.usfirst.frc.team1024.robot.commands.GearPushCommand;
+import org.usfirst.frc.team1024.robot.commands.GearRetractCommand;
+import org.usfirst.frc.team1024.robot.commands.ShootCommand;
+import org.usfirst.frc.team1024.robot.commands.ShooterSpeedDecreaseCommand;
+import org.usfirst.frc.team1024.robot.commands.ShooterSpeedIncreaseCommand;
+import org.usfirst.frc.team1024.robot.commands.ShooterSpeedResetCommand;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class OI {
 	public Logitech logi;
 	public Joystick lJoy;
 	public Joystick rJoy;
-	public Button gearClampOpen;
-	public Button gearClampClose;
-	public Button gearPush;
-	public Button shooterSpeedIncrease;
-	public Button shooterSpeedDecrease;
-	public Button blend;
-	public Button climb;
-	public Button shoot;
-	public Button speedReset;
-	Gear gear = new Gear();
-	
+	public Button gearClampOpenButton;
+	public Button gearClampCloseButton;
+	public Button gearPushButton;
+	public Button shooterSpeedIncreaseButton;
+	public Button shooterSpeedDecreaseButton;
+	public Button shootButton;
+	public Button speedResetButton;
 	
 	public OI() {
 		logi = new Logitech(RobotMap.LOGITECH_PORT);
 		lJoy = new Joystick(RobotMap.LEFT_JOYSTICK_PORT);
 		rJoy = new Joystick(RobotMap.RIGHT_JOYSTICK_PORT);
 		
-		gearClampOpen = new JoystickButton(logi, 6);
-		gearClampClose = new JoystickButton(logi, 2);
-		gearPush = new JoystickButton(logi, 3);
-		shooterSpeedIncrease = new JoystickButton(logi, 4);
-		shooterSpeedDecrease= new JoystickButton(logi, 5);
-		blend = new JoystickButton(logi, 6);
-		climb = new JoystickButton(logi, 7);
-		shoot = new JoystickButton(logi, 8);
-		speedReset = new JoystickButton(logi, 9);
-		 
-		gearClampOpen.whenPressed(new OpenClamp());
-		gearClampClose.whenPressed(new CloseClamp());
-		gearPush.whenPressed(new Push());
-		shooterSpeedIncrease.whenPressed(new SpeedIncreasing());
-		shooterSpeedDecrease.whenPressed(new SpeedDecreasing());
-		blend.whenPressed(new Blend());
-		climb.whenPressed(new Climb());
-		shoot.whenPressed(new Shoot());
-		speedReset.whenPressed(new SpeedReset());
+		gearClampOpenButton = new JoystickButton(logi, 5);
+		gearClampCloseButton = new JoystickButton(logi, 7);
+		gearPushButton = new JoystickButton(logi, 4);
+		
+		shootButton = new JoystickButton(logi, 2);
+		shooterSpeedIncreaseButton = new JoystickButton(logi, 1);
+		shooterSpeedDecreaseButton = new JoystickButton(logi, 1);
+		speedResetButton = new JoystickButton(logi, 6);
+		
+		gearClampOpenButton.whenPressed(new OpenClampCommand());
+		gearClampCloseButton.whenPressed(new CloseClampCommand());
+		gearPushButton.whenPressed(new GearPushCommand());
+		gearPushButton.whenReleased(new GearRetractCommand());
+		
+		shootButton.whenPressed(new ShootCommand());
+		shooterSpeedIncreaseButton.whileHeld(new ShooterSpeedIncreaseCommand());
+		shooterSpeedDecreaseButton.whileHeld(new ShooterSpeedDecreaseCommand());
+		speedResetButton.whenPressed(new ShooterSpeedResetCommand());
+		
+		
 	}
 	
 	/**
 	 * Outputs data to the SmartDashboard
 	 */
 	public void outputToSmartDashboard() {
-		//SmartDashboard
+		
 	}
 	
 	/**

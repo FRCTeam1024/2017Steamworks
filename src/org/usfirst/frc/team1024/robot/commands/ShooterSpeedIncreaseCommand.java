@@ -4,9 +4,8 @@ import org.usfirst.frc.team1024.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class OpenClamp extends Command {
-	
-	public OpenClamp() {
+public class ShooterSpeedIncreaseCommand extends Command {
+	public ShooterSpeedIncreaseCommand() {
 		requires(Robot.gear);
 	}
 	
@@ -16,7 +15,7 @@ public class OpenClamp extends Command {
 	
 	@Override
 	protected void execute() {
-		Robot.gear.clamp.set(false);
+		Robot.shooter.shooterPower += 0.001;
 	}
 	
 	@Override
@@ -31,4 +30,5 @@ public class OpenClamp extends Command {
 	@Override
 	protected void interrupted() {
 	}
+
 }

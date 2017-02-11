@@ -81,50 +81,18 @@ public class Robot extends IterativeRobot {
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 	}
-	/*
+	
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		
-		//Gear pusher
-		if (oi.getGearPush() == true) {
-			gear.pusher.set(true);
-		} else {
-			gear.pusher.set(false);
-		}
-		
-		//Gear clamper
-		if (oi.getGearClampClose() == true) { //close gear clamp
-			gear.clamp.set(true);
-		} else if(oi.getGearClampOpen() == true) { //open gear clamp
-			gear.clamp.set(false);
-		}
-		
-		//Shooter shooting
-		if (oi.logi.getButtonRT() == true) {
-			shooter.shoot(shooterPower);
-		} else {
-			shooter.shoot(0.0);
-		}
-		
-		//Shooter speed adjust
-		if (oi.getShooterSpeedIncrease() == true) {
-			shooterPower = shooterPower + 0.001;
-		} else if (oi.getShooterSpeedDecrease() == true) {
-			shooterPower = shooterPower - 0.001;
-		}
-		
-		//Shooter speed reset
-		if (oi.getSpeedReset() == true) {
-			shooterPower = initShooterPower;
-		}
 		//Blender
 		blender.blend(oi.logi.getLeftY());
 		
 		//Climber
 		climber.climb(Math.abs(oi.logi.getRightY()));
 	}
-	*/
+	
 	@Override
 	public void testPeriodic() {
 		LiveWindow.run();

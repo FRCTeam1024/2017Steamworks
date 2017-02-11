@@ -5,7 +5,6 @@ import org.usfirst.frc.team1024.robot.util.Constants;
 import org.usfirst.frc.team1024.robot.util.KilaTalon;
 import org.usfirst.frc.team1024.robot.util.Subsystem1024;
 
-import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
 
@@ -21,6 +20,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Shooter implements Subsystem1024 {
     public final KilaTalon shooter = new KilaTalon(RobotMap.SHOOTER_PORT);
     public double shooterPower;
+    
 	public Shooter() {
 		LiveWindow.addActuator("Shooter", "Shooter Motor", shooter);
 		setMotorConfig(shooter, 0.0, 0.0, 0.0, 0.0);
@@ -85,8 +85,8 @@ public class Shooter implements Subsystem1024 {
 	public void autoShoot(){
 		
 	}
-	
 	*/
+	
 	/**
 	 * Resets the sensors 
 	 */
