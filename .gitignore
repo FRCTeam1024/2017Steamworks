@@ -8,3 +8,4 @@ build/jars/WPILib.jar
 dist/FRCUserProgram.jar
 bin/
 *.class
+*.class
