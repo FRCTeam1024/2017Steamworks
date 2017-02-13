@@ -1,23 +1,21 @@
 package org.usfirst.frc.team1024.robot.commands;
 
 import org.usfirst.frc.team1024.robot.Robot;
-import org.usfirst.frc.team1024.robot.util.Constants;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 public class PushGearCommand extends Command {
-
-	public PushGearCommand() {
-		requires(Robot.gear);
+	boolean state;
+	public PushGearCommand(boolean state) {
+		this.state = state;
 	}
-	
 	@Override
 	protected void initialize() {
 	}
 	
 	@Override
 	protected void execute() {
-		Robot.gear.pusher.set(true);
+		Robot.gear.push(state);
 	}
 	
 	@Override
@@ -27,9 +25,12 @@ public class PushGearCommand extends Command {
 	
 	@Override
 	protected void end() {
+		Robot.gear.push(false);
 	}
 	
 	@Override
 	protected void interrupted() {
+		Robot.gear.push(false);
 	}
+
 }

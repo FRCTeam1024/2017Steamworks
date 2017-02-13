@@ -4,10 +4,11 @@ import org.usfirst.frc.team1024.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class CloseClampCommand extends Command {
-
-	public CloseClampCommand() {
+public class GearClampCommand extends Command {
+	int state = 0;
+	public GearClampCommand(int state) {
 		requires(Robot.gear);
+		this.state = state;
 	}
 	
 	@Override
@@ -16,7 +17,7 @@ public class CloseClampCommand extends Command {
 	
 	@Override
 	protected void execute() {
-		Robot.gear.clamp.set(true);
+		Robot.gear.clamp(state);
 	}
 	
 	@Override

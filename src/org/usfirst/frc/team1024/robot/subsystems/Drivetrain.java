@@ -44,11 +44,11 @@ public class Drivetrain implements Subsystem1024 {
 		
 		LiveWindow.addSensor("Sensors", "Gyro", 			   gyro);
 		
-		setMotorConfig(frontLeftDrive, 0.0, 0.0, 0.0, 0.0);
+		/*setMotorConfig(frontLeftDrive, 0.0, 0.0, 0.0, 0.0);
 		setMotorConfig(frontRightDrive, 0.0, 0.0, 0.0, 0.0);
 		
 		setFollowerMode(frontLeftDrive, rearLeftDrive);
-		setFollowerMode(frontRightDrive, rearRightDrive);
+		setFollowerMode(frontRightDrive, rearRightDrive);*/
 	}
 	
 	/**
@@ -83,8 +83,8 @@ public class Drivetrain implements Subsystem1024 {
 	public void drive(double power) {
 		frontLeftDrive.set(power);
 		rearLeftDrive.set(power);
-		frontRightDrive.set(power);
-		rearRightDrive.set(power);
+		frontRightDrive.set(-power);
+		rearRightDrive.set(-power);
 	}
 	
 	/**
@@ -95,8 +95,8 @@ public class Drivetrain implements Subsystem1024 {
 	public void drive(double leftpower, double rightpower) {
 		frontLeftDrive.set(leftpower);
 		rearLeftDrive.set(leftpower);
-		frontRightDrive.set(rightpower);
-		rearRightDrive.set(rightpower);
+		frontRightDrive.set(-rightpower);
+		rearRightDrive.set(-rightpower);
 		
 	}
 	
@@ -111,15 +111,27 @@ public class Drivetrain implements Subsystem1024 {
 	}
 	/**
 	 * Drives all drivetrain motors for a given time and powers.
-	 * @param time (seconds)
+	 * @param power
+	 * @param time
+	 */
+	public void driveForTime(double power, double time) {
+		drive(power);
+		Timer.delay(time);
+		stop();
+	}
+	
+	/**
+	 * Drives all drivetrain motors for a given time and powers.
 	 * @param leftPower (-1.0, 1.0)
 	 * @param rightPower (-1.0, 1.0)
+	 * @param time (seconds)
 	 */
-	public void driveForTime(double time, double leftPower, double rightPower){
+	public void driveForTime(double leftPower, double rightPower, double time){
 		drive(leftPower, rightPower);
 		Timer.delay(time);
 		stop();
 	}
+	
 	
 	/**
 	 * Outputs motor properties to SmartDashboard.
@@ -150,10 +162,10 @@ public class Drivetrain implements Subsystem1024 {
 	
 	/**
 	 * Drives the drivetrain motors for a specified distance and power.
-	 * @param distance (inches)
 	 * @param power (-1.0, 1.0)
+	 * @param distance (inches)
 	 */
-	public void driveForDistance(double distance, double power) {
+	public void driveForDistance(double power, double distance) {
 		while (getAverageEncoderDistance() < distance) {
 			drive(power);
 		}

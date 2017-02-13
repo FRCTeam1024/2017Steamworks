@@ -23,7 +23,7 @@ public class Shooter implements Subsystem1024 {
     
 	public Shooter() {
 		LiveWindow.addActuator("Shooter", "Shooter Motor", shooter);
-		setMotorConfig(shooter, 0.0, 0.0, 0.0, 0.0);
+		setMotorConfig(shooter, 0.12, 0.0, 0.0, 0.0);
 		shooterPower = Constants.initShooterPower;
 	}
 	
@@ -50,7 +50,7 @@ public class Shooter implements Subsystem1024 {
 	 */
     public void shoot(double power) {
     	shooter.changeControlMode(TalonControlMode.PercentVbus);
-    	shooter.set(power);
+    	shooter.set(-power);
     }
     
     public void shootPID(double speed) {
