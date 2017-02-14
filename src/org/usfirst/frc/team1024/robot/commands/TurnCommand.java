@@ -5,14 +5,17 @@ import org.usfirst.frc.team1024.robot.Robot;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class TurnCommand extends CommandGroup {
-	
-	public TurnCommand(){
+	double power;
+	double angleChange;
+	public TurnCommand(double power, double angleChange){
 		requires(Robot.drivetrain);
+		this.power = power;
+		this.angleChange = angleChange;
 	}
 	
 	@Override
 	protected void execute() {
-		Robot.drivetrain.turnRelative(0.5, 45); //Set this later
+		Robot.drivetrain.turnRelative(power, angleChange); //Set this later
 	}
 	
 	@Override
