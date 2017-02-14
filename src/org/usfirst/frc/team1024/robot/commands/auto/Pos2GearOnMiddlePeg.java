@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1024.robot.commands.Auto;
+package org.usfirst.frc.team1024.robot.commands.auto;
 import org.usfirst.frc.team1024.robot.commands.DriveForDistance;
 
 import org.usfirst.frc.team1024.robot.commands.DriveForTime;
@@ -8,12 +8,16 @@ import org.usfirst.frc.team1024.robot.util.Constants;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class GearOnMiddlePeg extends CommandGroup {
-	public GearOnMiddlePeg() {
-		addSequential(new DriveForDistance(0.5, Constants.DISTANCE_TO_BASELINE - Constants.ROBOT_WIDTH));
-		//addSequential(new GearClampCommand());
-		addSequential(new PushGearCommand(true));
-		addSequential(new DriveForTime(-0.5, 1.0));
+public class Pos2GearOnMiddlePeg extends CommandGroup {
+	
+	
+	public Pos2GearOnMiddlePeg() {
+
+			addSequential(new DriveForDistance(0.5, Constants.DISTANCE_TO_BASELINE - Constants.ROBOT_WIDTH));
+			//addSequential(new GearClampCommand());
+			addSequential(new PushGearCommand(true));
+			addSequential(new DriveForTime(-0.5, 1.0));
+			//make it so that "isFinished" returns True
 	}
 	
 	@Override

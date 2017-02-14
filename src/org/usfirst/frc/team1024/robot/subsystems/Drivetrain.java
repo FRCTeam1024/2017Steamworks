@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -26,7 +27,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * 1/31/2017: Now implements our subsystem interface
  * 2/1/17: Removed middle motors and added javadocs
  */
-public class Drivetrain implements Subsystem1024 {
+public class Drivetrain extends Subsystem implements Subsystem1024 {
 	public final KilaTalon frontLeftDrive   		= new KilaTalon(RobotMap.FRONT_LEFT_DRIVETRAIN_PORT);
 	public final KilaTalon rearLeftDrive    		= new KilaTalon(RobotMap.REAR_LEFT_DRIVETRAIN_PORT);
 	public final KilaTalon frontRightDrive  		= new KilaTalon(RobotMap.FRONT_RIGHT_DRIVETRAIN_PORT);
@@ -228,5 +229,11 @@ public class Drivetrain implements Subsystem1024 {
 			drive(power, -power);
 		}
 		stop();
+	}
+
+	@Override
+	protected void initDefaultCommand() {
+		// TODO Auto-generated method stub
+		
 	}
 }
