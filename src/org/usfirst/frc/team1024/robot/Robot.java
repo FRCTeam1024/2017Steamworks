@@ -128,6 +128,11 @@ public class Robot extends IterativeRobot {
 		if (oi.logi.getRawButton(1) == true) {
 			gear.clamper.set(Value.kOff);
 		}
+		shooter.outputToSmartDashboard();
+		drivetrain.outputToSmartDashboard();
+		gear.outputToSmartDashboard();
+		climber.outputToSmartDashboard();
+		blender.outputToSmartDashboard();
 	}
 	
 	@Override
