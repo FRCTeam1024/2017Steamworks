@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ShootCommand extends Command {
 
 	public ShootCommand() {
-		
+		requires(Robot.shooter);
 	}
 
 	@Override
