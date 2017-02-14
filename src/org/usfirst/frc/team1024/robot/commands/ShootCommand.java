@@ -26,10 +26,12 @@ public class ShootCommand extends Command {
 	
 	@Override
 	protected void end() {
+		Robot.shooter.stop();
 	}
 	
 	@Override
 	protected void interrupted() {
+		Robot.shooter.stop();
 	}
 
 }

@@ -33,7 +33,7 @@ public class Blender implements Subsystem1024 {
 	 * Calls blend at a preset power
 	 */
 	public void blend(){
-		blend(0.5); //Will be set fo-reals later
+		blend(1.0); //Will be set fo-reals later
 	}
 	
 	/**

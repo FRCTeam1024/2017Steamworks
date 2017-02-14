@@ -4,9 +4,9 @@ import org.usfirst.frc.team1024.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class OpenClampCommand extends Command {
-	
-	public OpenClampCommand() {
+public class CloseGearClampCommand extends Command {
+
+	public CloseGearClampCommand() {
 		requires(Robot.gear);
 	}
 	
@@ -16,7 +16,7 @@ public class OpenClampCommand extends Command {
 	
 	@Override
 	protected void execute() {
-		Robot.gear.clamp.set(false);
+		//Robot.gear.clamp(true);
 	}
 	
 	@Override
