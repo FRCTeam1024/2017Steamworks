@@ -15,7 +15,7 @@ public class ShooterSpeedIncreaseCommand extends Command {
 	
 	@Override
 	protected void execute() {
-		Robot.shooter.shooterPower += 0.001;
+		Robot.shooter.shooterSetSpeed += 0.001;
 	}
 	
 	@Override

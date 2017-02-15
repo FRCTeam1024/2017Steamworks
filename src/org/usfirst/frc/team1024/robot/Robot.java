@@ -41,6 +41,8 @@ public class Robot extends IterativeRobot {
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
+	
+	public boolean shooterSetState = false;
 
 	@Override
 	public void robotInit() {
@@ -86,7 +88,7 @@ public class Robot extends IterativeRobot {
 			autoChooser.display("NULL");
 		}
 		autonomousCommand = new StateAndWorldsAuto(autoSelected, position); */
-	//}
+	}
 	
 	@Override
 	public void autonomousInit() {
@@ -165,6 +167,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		outputTheThings();
 		//Blender
 		blender.blend(oi.logi.getRawAxis(1));
 		//Climber
@@ -180,15 +183,22 @@ public class Robot extends IterativeRobot {
 		if (oi.logi.getRawButton(1) == true) {
 			gear.clamper.set(Value.kOff);
 		}
-		shooter.outputToSmartDashboard();
-		drivetrain.outputToSmartDashboard();
-		gear.outputToSmartDashboard();
-		climber.outputToSmartDashboard();
-		blender.outputToSmartDashboard();
+		if (oi.logi.getPOV() == 0) {
+			shooter.shooterSetSpeed += 5.0;
+		} else if (oi.logi.getPOV() == 180) {
+			shooter.shooterSetSpeed -= 5.0;
+		}
 	}
 	
 	@Override
 	public void testPeriodic() {
 		LiveWindow.run();
+	}
+	public void outputTheThings() {
+		shooter.outputToSmartDashboard();
+		drivetrain.outputToSmartDashboard();
+		gear.outputToSmartDashboard();
+		climber.outputToSmartDashboard();
+		blender.outputToSmartDashboard();
 	}
 }

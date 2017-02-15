@@ -13,7 +13,7 @@ public class ShooterSpeedResetCommand extends Command {
 	
 	@Override
 	protected void execute() {
-		Robot.shooter.shooterPower = Constants.initShooterPower;
+		Robot.shooter.shooterSetSpeed = Constants.INIT_SHOOTER_POWER;
 	}
 	
 	@Override

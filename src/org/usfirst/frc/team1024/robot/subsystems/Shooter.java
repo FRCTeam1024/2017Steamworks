@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1024.robot.subsystems;
 
+import org.usfirst.frc.team1024.robot.Robot;
 import org.usfirst.frc.team1024.robot.RobotMap;
 import org.usfirst.frc.team1024.robot.util.Constants;
 import org.usfirst.frc.team1024.robot.util.KilaTalon;
@@ -20,13 +21,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Shooter extends Subsystem implements Subsystem1024 {
     public final KilaTalon shooter = new KilaTalon(RobotMap.SHOOTER_PORT);
-    public double shooterPower;
+    public double shooterSetSpeed;
     
 	public Shooter() {
 		LiveWindow.addActuator("Shooter", "Shooter Motor", shooter);
-		
-		setMotorConfig(shooter, 0.1724137931034483, 0.12, 0.0005, 0.0003);
-		shooterPower = Constants.initShooterPower;
+		setMotorConfig(shooter, Constants.SHOOTER_kF, Constants.SHOOTER_kP, Constants.SHOOTER_kI, Constants.SHOOTER_kD);
+		shooterSetSpeed = Constants.INIT_SHOOTER_POWER;
 	}
 	
 	public void setMotorConfig(KilaTalon motor, double f, double p, double i, double d) {
@@ -57,10 +57,9 @@ public class Shooter extends Subsystem implements Subsystem1024 {
     	shooter.set(power);
     }
     
-    /*public void shootPID(double speed) {
-    	shooter.changeControlMode(TalonControlMode.Speed);
+    public void shootPID(double speed) {
     	shooter.setSetpoint(speed);
-    }*/
+    }
 
 	/**
 	 * Displays the RPM of the shooter's wheel
@@ -76,18 +75,21 @@ public class Shooter extends Subsystem implements Subsystem1024 {
 	public void outputToSmartDashboard() {
 		//SmartDashboard.putData("Shooter", shooter);
 		
-		shooter.setP(SmartDashboard.getNumber("P", shooter.getP()));
-		shooter.setI(SmartDashboard.getNumber("I", shooter.getI()));
-		shooter.setD(SmartDashboard.getNumber("D", shooter.getD()));
-		shooter.setSetpoint(SmartDashboard.getNumber("Setpoint", shooter.getSetpoint()));
 		
 		SmartDashboard.putNumber("F", shooter.getF());
 		if (SmartDashboard.getBoolean("GO", false) == true) {
+			shooter.setP(SmartDashboard.getNumber("P", shooter.getP()));
+			shooter.setI(SmartDashboard.getNumber("I", shooter.getI()));
+			shooter.setD(SmartDashboard.getNumber("D", shooter.getD()));
+			shooter.setSetpoint(SmartDashboard.getNumber("Setpoint", shooter.getSetpoint()));
 			shooter.enable();
-		} else {
+		} else if (Robot.oi.logi.getRawButton(8) == true){
+		}
+		else {
 			shooter.disable();
 		}
 		SmartDashboard.putNumber("Shooter RPM", shooter.getSpeed());
+		SmartDashboard.putNumber("Shooter SetSpeed", shooterSetSpeed);
 	}
 	
 	public void initDashboard() {
@@ -103,7 +105,7 @@ public class Shooter extends Subsystem implements Subsystem1024 {
 	 */
 	@Override
 	public void stop() {
-		shooter.set(0.0);
+		shooter.disable();
 	}
 	
 	/*

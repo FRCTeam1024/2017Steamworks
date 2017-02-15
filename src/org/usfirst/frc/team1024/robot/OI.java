@@ -46,7 +46,7 @@ public class OI {
 		
 		
 		shootButton.whileHeld(new ShootCommand());
-		speedResetButton.whenPressed(new ShooterSpeedResetCommand());
+		speedResetButton.whileHeld(new ShooterSpeedResetCommand());
 		
 		
 	}

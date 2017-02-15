@@ -5,9 +5,10 @@ import org.usfirst.frc.team1024.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class ShootCommand extends Command {
-
+	boolean hasDone;
 	public ShootCommand() {
 		requires(Robot.shooter);
+		hasDone = false;
 	}
 
 	@Override
@@ -16,7 +17,8 @@ public class ShootCommand extends Command {
 	
 	@Override
 	protected void execute() {
-		Robot.shooter.shoot(Robot.shooter.shooterPower);
+		Robot.shooter.shooter.setSetpoint(Robot.shooter.shooterSetSpeed);
+		Robot.shooter.shooter.enable();
 	}
 	
 	@Override
