@@ -17,10 +17,11 @@ public class DriveForTime extends Command {
 	 * @param time
 	 */
 	public DriveForTime(double power, double time) {
+		this();
 		this.power = power;
 		this.time = time;
 		type = 0;
-		
+		requires(Robot.drivetrain);
 	}
 	
 	/**
@@ -30,10 +31,15 @@ public class DriveForTime extends Command {
 	 * @param time (seconds)
 	 */
 	public DriveForTime(double leftPower, double rightPower, double time) {
+		this();
 		this.leftPower = leftPower;
 		this.rightPower = rightPower;
 		this.time = time;
 		type = 1;
+	}
+	
+	private DriveForTime() {
+		requires(Robot.drivetrain);
 	}
 	
 	@Override

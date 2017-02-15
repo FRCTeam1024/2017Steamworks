@@ -9,6 +9,7 @@ import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
 
 import edu.wpi.first.wpilibj.PIDSourceType;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -17,7 +18,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * 1/26/17: added shooter motor and Livewindow stuff
  * 1/28/2017: Added displayRPM, shoot, and preset shoot commands
  */
-public class Shooter implements Subsystem1024 {
+public class Shooter extends Subsystem implements Subsystem1024 {
     public final KilaTalon shooter = new KilaTalon(RobotMap.SHOOTER_PORT);
     public double shooterPower;
     
@@ -93,6 +94,12 @@ public class Shooter implements Subsystem1024 {
 	
 	@Override
 	public void resetSensors() {
+		
+	}
+
+	@Override
+	protected void initDefaultCommand() {
+		// TODO Auto-generated method stub
 		
 	}
 }

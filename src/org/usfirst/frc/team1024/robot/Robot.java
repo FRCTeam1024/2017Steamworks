@@ -6,12 +6,11 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team1024.robot.commands.Auto.GearOnMiddlePeg;
+import org.usfirst.frc.team1024.robot.commands.auto.Pos2GearOnMiddlePeg;
 import org.usfirst.frc.team1024.robot.subsystems.Blender;
 import org.usfirst.frc.team1024.robot.subsystems.Climber;
 import org.usfirst.frc.team1024.robot.subsystems.Drivetrain;
@@ -45,8 +44,10 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
+
 		/*chooser.addDefault("Default Auto", new GearOnMiddlePeg());
-		chooser.addObject("", new command);
+		chooser.addObject("", new command); */
+
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
 	}
@@ -86,8 +87,9 @@ public class Robot extends IterativeRobot {
 	
 	@Override
 	public void autonomousInit() {
-		/* autonomousCommand = chooser.getSelected();
-		autonomousCommand = new GearOnMiddlePeg();
+		//autonomousCommand = chooser.getSelected();
+		autonomousCommand = new Pos2GearOnMiddlePeg();
+
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
 		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
@@ -174,6 +176,11 @@ public class Robot extends IterativeRobot {
 		if (oi.logi.getRawButton(1) == true) {
 			gear.clamper.set(Value.kOff);
 		}
+		shooter.outputToSmartDashboard();
+		drivetrain.outputToSmartDashboard();
+		gear.outputToSmartDashboard();
+		climber.outputToSmartDashboard();
+		blender.outputToSmartDashboard();
 	}
 	
 	@Override

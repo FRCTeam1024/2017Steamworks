@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1024.robot.commands.Auto;
+package org.usfirst.frc.team1024.robot.commands.auto;
 import org.usfirst.frc.team1024.robot.commands.DriveForDistance;
 
 import org.usfirst.frc.team1024.robot.commands.DriveForTime;
