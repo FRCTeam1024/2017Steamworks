@@ -1,8 +1,9 @@
 package org.usfirst.frc.team1024.robot.util;
 
 import com.ctre.CANTalon;
+import edu.wpi.first.wpilibj.CANSpeedController;
 
-public class KilaTalon extends CANTalon{
+public class KilaTalon extends CANTalon implements CANSpeedController{
 
 	public KilaTalon(int deviceNumber) {
 		super(deviceNumber);
