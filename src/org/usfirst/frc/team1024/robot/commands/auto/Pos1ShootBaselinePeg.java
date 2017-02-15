@@ -12,9 +12,9 @@ public class Pos1ShootBaselinePeg extends CommandGroup {
 	
 	public Pos1ShootBaselinePeg() {
 		addSequential(new ShootCommand()); // Assumed that we're not only against the wall, but also right in front of the boiler. 
-		addSequential(new TurnCommand()); // After that, we turn a certain distance.
+		addSequential(new TurnCommand(0.5, 45)); // After that, we turn a certain distance.
 		addSequential(new DriveForDistance(0.5, 95.0)); // Set this later.
-		addSequential(new TurnCommand());  // We turn to face the gear.
+		addSequential(new TurnCommand(0.5, 45));  // We turn to face the gear.
 		addSequential(new PushGearCommand(true)); // We push the gear onto the peg.
 		addSequential(new DriveForTime(-0.5, 1.0)); // We retract from the airship.
 
