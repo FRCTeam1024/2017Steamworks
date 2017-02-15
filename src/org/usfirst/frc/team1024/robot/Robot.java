@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -44,6 +45,8 @@ public class Robot extends IterativeRobot {
 		chooser.addDefault("Default Auto", new Pos2GearOnMiddlePeg());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
+		NetworkTable.globalDeleteAll();
+		shooter.initDashboard();
 	}
 	
 	@Override
@@ -108,6 +111,7 @@ public class Robot extends IterativeRobot {
 		// this line or comment it out.
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
+		shooter.shooter.updateTable();
 	}
 	
 	@Override
@@ -128,6 +132,7 @@ public class Robot extends IterativeRobot {
 		if (oi.logi.getRawButton(1) == true) {
 			gear.clamper.set(Value.kOff);
 		}
+		shooter.outputToSmartDashboard();
 	}
 	
 	@Override

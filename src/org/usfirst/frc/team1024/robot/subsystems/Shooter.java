@@ -24,19 +24,22 @@ public class Shooter extends Subsystem implements Subsystem1024 {
     
 	public Shooter() {
 		LiveWindow.addActuator("Shooter", "Shooter Motor", shooter);
-		setMotorConfig(shooter, 0.12, 0.0, 0.0, 0.0);
+		
+		setMotorConfig(shooter, 0.1724137931034483, 0.12, 0.0005, 0.0003);
 		shooterPower = Constants.initShooterPower;
 	}
 	
 	public void setMotorConfig(KilaTalon motor, double f, double p, double i, double d) {
+		motor.reverseOutput(true);
 		motor.enableBrakeMode(false);
 		motor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
 		motor.configEncoderCodesPerRev(360);
 		motor.configNominalOutputVoltage(+0.0f, -0.0f);
-        motor.configPeakOutputVoltage(+12.0f, 0.0f);
+        motor.configPeakOutputVoltage(+12.0f, -12.0f);
         motor.changeControlMode(TalonControlMode.Speed);
 		motor.setPIDSourceType(PIDSourceType.kRate);
 		motor.setPID(p, i, d, f, 0, 0.0, 0);
+		motor.reverseSensor(true);
 	}
 
 	/**
@@ -50,14 +53,14 @@ public class Shooter extends Subsystem implements Subsystem1024 {
 	 * Sets the parameters of shooter
 	 */
     public void shoot(double power) {
-    	shooter.changeControlMode(TalonControlMode.PercentVbus);
-    	shooter.set(-power);
+    	//shooter.changeControlMode(TalonControlMode.PercentVbus);
+    	shooter.set(power);
     }
     
-    public void shootPID(double speed) {
+    /*public void shootPID(double speed) {
     	shooter.changeControlMode(TalonControlMode.Speed);
     	shooter.setSetpoint(speed);
-    }
+    }*/
 
 	/**
 	 * Displays the RPM of the shooter's wheel
@@ -71,7 +74,28 @@ public class Shooter extends Subsystem implements Subsystem1024 {
 	 */
 	@Override
 	public void outputToSmartDashboard() {
-		SmartDashboard.putData("Shooter", shooter);
+		//SmartDashboard.putData("Shooter", shooter);
+		
+		shooter.setP(SmartDashboard.getNumber("P", shooter.getP()));
+		shooter.setI(SmartDashboard.getNumber("I", shooter.getI()));
+		shooter.setD(SmartDashboard.getNumber("D", shooter.getD()));
+		shooter.setSetpoint(SmartDashboard.getNumber("Setpoint", shooter.getSetpoint()));
+		
+		SmartDashboard.putNumber("F", shooter.getF());
+		if (SmartDashboard.getBoolean("GO", false) == true) {
+			shooter.enable();
+		} else {
+			shooter.disable();
+		}
+		SmartDashboard.putNumber("Shooter RPM", shooter.getSpeed());
+	}
+	
+	public void initDashboard() {
+		SmartDashboard.putNumber("P", shooter.getP());
+		SmartDashboard.putNumber("I", shooter.getI());
+		SmartDashboard.putNumber("D", shooter.getD());
+		SmartDashboard.putNumber("Setpoint", shooter.getSetpoint());
+		SmartDashboard.putBoolean("GO", false);
 	}
 	
 	/**

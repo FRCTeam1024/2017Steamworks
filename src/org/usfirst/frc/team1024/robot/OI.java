@@ -1,11 +1,8 @@
 package org.usfirst.frc.team1024.robot;
 
-import org.usfirst.frc.team1024.robot.commands.CloseGearClampCommand;
 import org.usfirst.frc.team1024.robot.commands.GearClampCommand;
 import org.usfirst.frc.team1024.robot.commands.PushGearCommand;
 import org.usfirst.frc.team1024.robot.commands.ShootCommand;
-import org.usfirst.frc.team1024.robot.commands.ShooterSpeedDecreaseCommand;
-import org.usfirst.frc.team1024.robot.commands.ShooterSpeedIncreaseCommand;
 import org.usfirst.frc.team1024.robot.commands.ShooterSpeedResetCommand;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -37,8 +34,6 @@ public class OI {
 		gearPushButton = new JoystickButton(logi, 7);
 		
 		shootButton = new JoystickButton(logi, 8);
-		shooterSpeedIncreaseButton = new JoystickButton(logi, 1);
-		shooterSpeedDecreaseButton = new JoystickButton(logi, 1);
 		speedResetButton = new JoystickButton(logi, 6);
 		
 		
@@ -51,8 +46,6 @@ public class OI {
 		
 		
 		shootButton.whileHeld(new ShootCommand());
-		shooterSpeedIncreaseButton.whileHeld(new ShooterSpeedIncreaseCommand());
-		shooterSpeedDecreaseButton.whileHeld(new ShooterSpeedDecreaseCommand());
 		speedResetButton.whenPressed(new ShooterSpeedResetCommand());
 		
 		
