@@ -33,6 +33,7 @@ public class Robot extends IterativeRobot {
 	public static final Gear gear = new Gear();
 	public static final REVDigitBoard autoChooser = new REVDigitBoard();
 	
+	
 	int position = 0;
 	String peg = "";
 	
@@ -48,8 +49,9 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 
-		/*chooser.addDefault("Default Auto", new GearOnMiddlePeg());
-		chooser.addObject("", new command); */
+		chooser.addDefault("Default Auto", new Pos2GearOnMiddlePeg());
+		chooser.addObject("Position 1, North Peg", new Pos1NorthPeg);
+		chooser.addObject("Position 1, South Peg", new Pos1SouthPeg);
 
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
@@ -88,42 +90,15 @@ public class Robot extends IterativeRobot {
 			autoChooser.display("NULL");
 		}
 		autonomousCommand = new StateAndWorldsAuto(autoSelected, position); */
-	}
-	
-	@Override
-	public void autonomousInit() {
-		//autonomousCommand = chooser.getSelected();
-		autonomousCommand = new Pos2GearOnMiddlePeg();
 
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 
-
-		// schedule the autonomous command (example)
-		if (autonomousCommand != null)
-			autonomousCommand.start();
-		*/
-		
-		
-		SmartDashboard.getNumber("Position:", position);
-		SmartDashboard.getString("Peg", peg);
-		
-	}
-	
-	@SuppressWarnings("deprecation")
-	@Override
-	public void autonomousPeriodic() {
-		Scheduler.getInstance().run();
-		
-		String finalpeg = peg.toUpperCase();
+		/* String finalpeg = peg.toUpperCase();
 		
 		if (position == 1) {
 			if (finalpeg == "N") {
+				
 				// run pos1pegN auto
 			} else if (finalpeg == "S") {
+				
 				// run pos1pegS auto
 			} else if (finalpeg == "W") {
 				// run pos1pegW auto
@@ -136,7 +111,7 @@ public class Robot extends IterativeRobot {
 			} else if (finalpeg == "S") {
 				// run pos2pegS auto
 			} else if (finalpeg == "W") {
-				// run pos2pegW auto
+				
 			} else {
 				
 			}
@@ -150,7 +125,36 @@ public class Robot extends IterativeRobot {
 			} else {
 				
 			}
-		}
+		} */
+	}
+	
+	@Override
+	public void autonomousInit() {
+		//autonomousCommand = chooser.getSelected();
+		//autonomousCommand = new Pos2GearOnMiddlePeg();
+
+		/*
+		 * String autoSelected = SmartDashboard.getString("Auto Selector",
+		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
+		 * = new MyAutoCommand(); break; case "Default Auto": default:
+		 * autonomousCommand = new ExampleCommand(); break; }
+		 */
+
+		// schedule the autonomous command (example)
+		if (autonomousCommand != null)
+			autonomousCommand.start();
+		
+		/* SmartDashboard.getNumber("Position:", position);
+		SmartDashboard.getString("Peg", peg); */
+		
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Override
+	public void autonomousPeriodic() {
+		Scheduler.getInstance().run();
+		
+		
 	}
 
 	@Override
