@@ -77,11 +77,11 @@ public class Shooter extends Subsystem implements Subsystem1024 {
 		
 		
 		SmartDashboard.putNumber("F", shooter.getF());
-		if (SmartDashboard.getBoolean("GO", false) == true) {
-			shooter.setP(SmartDashboard.getNumber("P", shooter.getP()));
-			shooter.setI(SmartDashboard.getNumber("I", shooter.getI()));
-			shooter.setD(SmartDashboard.getNumber("D", shooter.getD()));
-			shooter.setSetpoint(SmartDashboard.getNumber("Setpoint", shooter.getSetpoint()));
+		if (SmartDashboard.getBoolean("Shooter GO", false) == true) {
+			shooter.setP(SmartDashboard.getNumber("Shooter P", shooter.getP()));
+			shooter.setI(SmartDashboard.getNumber("Shooter I", shooter.getI()));
+			shooter.setD(SmartDashboard.getNumber("Shooter D", shooter.getD()));
+			shooter.setSetpoint(SmartDashboard.getNumber("Shooter Setpoint", shooter.getSetpoint()));
 			shooter.enable();
 		} else if (Robot.oi.logi.getRawButton(8) == true){
 		}
@@ -93,11 +93,11 @@ public class Shooter extends Subsystem implements Subsystem1024 {
 	}
 	
 	public void initDashboard() {
-		SmartDashboard.putNumber("P", shooter.getP());
-		SmartDashboard.putNumber("I", shooter.getI());
-		SmartDashboard.putNumber("D", shooter.getD());
-		SmartDashboard.putNumber("Setpoint", shooter.getSetpoint());
-		SmartDashboard.putBoolean("GO", false);
+		SmartDashboard.putNumber("Shooter P", shooter.getP());
+		SmartDashboard.putNumber("Shooter I", shooter.getI());
+		SmartDashboard.putNumber("Shooter D", shooter.getD());
+		SmartDashboard.putNumber("Shooter Setpoint", shooter.getSetpoint());
+		SmartDashboard.putBoolean("Shooter GO", false);
 	}
 	
 	/**

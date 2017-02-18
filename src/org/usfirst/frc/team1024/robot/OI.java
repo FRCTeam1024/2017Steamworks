@@ -1,13 +1,16 @@
 package org.usfirst.frc.team1024.robot;
 
+import org.usfirst.frc.team1024.robot.commands.EmptyCommand;
 import org.usfirst.frc.team1024.robot.commands.GearClampCommand;
 import org.usfirst.frc.team1024.robot.commands.PushGearCommand;
 import org.usfirst.frc.team1024.robot.commands.ShootCommand;
 import org.usfirst.frc.team1024.robot.commands.ShooterSpeedResetCommand;
+import org.usfirst.frc.team1024.robot.util.Constants;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;
 
 public class OI {
 	public Joystick logi;
@@ -38,15 +41,38 @@ public class OI {
 		
 		
 		
-		gearClampOpenButton.whenPressed(new GearClampCommand(1));
-		gearClampCloseButton.whenPressed(new GearClampCommand(-1));
-		gearClampOffButton.whenPressed(new GearClampCommand(0));
-		gearPushButton.whileHeld(new PushGearCommand(true));
-		//gearPushButton.whenReleased(new PushGearCommand(false));
+		gearClampOpenButton.whenPressed(new EmptyCommand() {
+			{ requires(Robot.gear); }
+			protected void execute() { Robot.gear.clamp(1); }
+		});
+		gearClampCloseButton.whenPressed(new EmptyCommand() {
+			{ requires(Robot.gear); }
+			protected void execute() { Robot.gear.clamp(-1); }
+		});
+		gearClampOffButton.whenPressed(new EmptyCommand() {
+			{ requires(Robot.gear); }
+			protected void execute() { Robot.gear.clamp(0); }
+		});
 		
+		gearPushButton.whileHeld(new EmptyCommand() {
+			{ requires(Robot.gear); }
+			protected void execute() { Robot.gear.push(true); }
+			protected void end() { Robot.gear.push(false); }
+		});
 		
-		shootButton.whileHeld(new ShootCommand());
-		speedResetButton.whileHeld(new ShooterSpeedResetCommand());
+		shootButton.whileHeld(new EmptyCommand() {
+			{ requires(Robot.shooter); }
+			protected void execute() {
+				Robot.shooter.shooter.setSetpoint(Robot.shooter.shooterSetSpeed);
+				Robot.shooter.shooter.enable();
+			}
+		});
+		
+		speedResetButton.whileHeld(new EmptyCommand() {
+			protected void execute() { 
+				Robot.shooter.shooterSetSpeed = Constants.INIT_SHOOTER_POWER;
+			}
+		});
 		
 		
 	}
