@@ -20,6 +20,9 @@ import org.usfirst.frc.team1024.robot.subsystems.Climber;
 import org.usfirst.frc.team1024.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team1024.robot.subsystems.Gear;
 import org.usfirst.frc.team1024.robot.subsystems.Shooter;
+
+import com.ctre.CANTalon.TalonControlMode;
+
 import org.usfirst.frc.team1024.robot.subsystems.REVDigitBoard;
 
 /**
@@ -61,6 +64,8 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Auto mode", chooser);
 		NetworkTable.globalDeleteAll();
 		shooter.initDashboard();
+		drivetrain.initDashboard();
+		SmartDashboard.putBoolean("Logi Drive?", false);
 	}
 	
 	@Override
@@ -95,7 +100,22 @@ public class Robot extends IterativeRobot {
 		}
 		autonomousCommand = new StateAndWorldsAuto(autoSelected, position); */
 
-		/* String finalpeg = peg.toUpperCase();
+
+		// schedule the autonomous command (example)
+		if (autonomousCommand != null)
+			autonomousCommand.start();
+		
+		
+		SmartDashboard.getNumber("Position:", position);
+		SmartDashboard.getString("Peg", peg);
+		
+	}
+	
+	@Override
+	public void autonomousPeriodic() {
+		Scheduler.getInstance().run();
+		
+		String finalpeg = peg.toUpperCase();
 		
 		if (position == 1) {
 			if (finalpeg == "N") {
@@ -129,7 +149,7 @@ public class Robot extends IterativeRobot {
 			} else {
 				
 			}
-		} */
+		} 
 	}
 	
 	@Override
@@ -152,14 +172,6 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.getString("Peg", peg); */
 		
 	}
-	
-	//@SuppressWarnings("deprecation")
-	@Override
-	public void autonomousPeriodic() {
-		Scheduler.getInstance().run();
-		
-		
-	}
 
 	@Override
 	public void teleopInit() {
@@ -176,27 +188,33 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		outputTheThings();
-		//Blender
-		blender.blend(oi.logi.getRawAxis(1));
-		//Climber
-		climber.climb(-Math.abs(oi.logi.getRawAxis(3)));
-		//Drivetrain
-		drivetrain.drive(-oi.lJoy.getRawAxis(RobotMap.JOYSTICK_Y_AXIS_NUM),
-						 -oi.rJoy.getRawAxis(RobotMap.JOYSTICK_Y_AXIS_NUM));
-		/*if (oi.logi.getRawButton(4) == true) {
-			gear.push(true);
-		} else if (oi.logi.getRawButton(4) == false) {
-			gear.push(false);
-		}*/
-		if (oi.logi.getRawButton(1) == true) {
-			gear.clamper.set(Value.kOff);
+		// Drivetrain
+		//if (SmartDashboard.getBoolean("Drivetrain GO", false) == true) {
+		//} else {
+			//if (SmartDashboard.getBoolean("Logi Drive?", true) == true) {
+				//drivetrain.drive(-oi.logi.getRawAxis(1), -oi.logi.getRawAxis(3));
+			//} else {
+		drivetrain.frontRightDrive.changeControlMode(TalonControlMode.PercentVbus);
+				drivetrain.drive(-oi.lJoy.getRawAxis(RobotMap.JOYSTICK_Y_AXIS_NUM),
+								 -oi.rJoy.getRawAxis(RobotMap.JOYSTICK_Y_AXIS_NUM));
+				// Blender
+				blender.blend(oi.logi.getRawAxis(1));
+				// Climber
+				climber.climb(-Math.abs(oi.logi.getRawAxis(3)));
+			
+			/*
+			 * if (oi.logi.getRawButton(4) == true) { gear.push(true); } else if
+			 * (oi.logi.getRawButton(4) == false) { gear.push(false); }
+			 */
+			if (oi.logi.getRawButton(1) == true) {
+				gear.clamper.set(Value.kOff);
+			}
+			if (oi.logi.getPOV() == 0) {
+				shooter.shooterSetSpeed += 5.0;
+			} else if (oi.logi.getPOV() == 180) {
+				shooter.shooterSetSpeed -= 5.0;
+			}
 		}
-		if (oi.logi.getPOV() == 0) {
-			shooter.shooterSetSpeed += 5.0;
-		} else if (oi.logi.getPOV() == 180) {
-			shooter.shooterSetSpeed -= 5.0;
-		}
-	}
 	
 	@Override
 	public void testPeriodic() {
@@ -205,8 +223,8 @@ public class Robot extends IterativeRobot {
 	public void outputTheThings() {
 		shooter.outputToSmartDashboard();
 		drivetrain.outputToSmartDashboard();
-		gear.outputToSmartDashboard();
-		climber.outputToSmartDashboard();
-		blender.outputToSmartDashboard();
+		//gear.outputToSmartDashboard();
+		//climber.outputToSmartDashboard();
+		//blender.outputToSmartDashboard();
 	}
 }

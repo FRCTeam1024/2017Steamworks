@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1024.robot.commands.auto;
 
+import org.usfirst.frc.team1024.robot.Robot;
 import org.usfirst.frc.team1024.robot.commands.DriveForDistance;
 import org.usfirst.frc.team1024.robot.commands.PushGearCommand;
 import org.usfirst.frc.team1024.robot.commands.TurnCommand;
@@ -40,17 +41,18 @@ public class Pos1NPeg extends CommandGroup {
 		addSequential(new DriveForDistance(0.5, -90)); //Set this Later
 		
 	}
-
 	@Override
 	protected boolean isFinished() {
 		return false;
 	}
-
+	
 	@Override
 	protected void end() {
+		Robot.gear.push(false);
 	}
-
+	
 	@Override
 	protected void interrupted() {
+		Robot.gear.push(false);
 	}
 }
