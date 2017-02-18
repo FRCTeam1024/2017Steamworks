@@ -11,11 +11,12 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team1024.robot.commands.auto.Pos2GearOnMiddlePeg;
+// import org.usfirst.frc.team1024.robot.commands.auto.Pos2GearOnMiddlePeg;
 import org.usfirst.frc.team1024.robot.subsystems.Blender;
 import org.usfirst.frc.team1024.robot.subsystems.Climber;
 import org.usfirst.frc.team1024.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team1024.robot.subsystems.Gear;
+import org.usfirst.frc.team1024.robot.subsystems.Hopper;
 import org.usfirst.frc.team1024.robot.subsystems.Shooter;
 
 import com.ctre.CANTalon.TalonControlMode;
@@ -34,6 +35,7 @@ public class Robot extends IterativeRobot {
 	public static final Climber climber = new Climber();
 	public static final Blender blender = new Blender();
 	public static final Gear gear = new Gear();
+	public static final Hopper hopper = new Hopper();
 	public static final REVDigitBoard autoChooser = new REVDigitBoard();
 	
 	int position = 0;
@@ -98,7 +100,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		//autonomousCommand = chooser.getSelected();
-		autonomousCommand = new Pos2GearOnMiddlePeg();
+		//autonomousCommand = new Pos2GearOnMiddlePeg();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",

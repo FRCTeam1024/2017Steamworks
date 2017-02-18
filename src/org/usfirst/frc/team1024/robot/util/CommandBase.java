@@ -1,5 +1,4 @@
 package org.usfirst.frc.team1024.robot.util;
-import edu.wpi.first.wpilibj.CANJaguar;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
