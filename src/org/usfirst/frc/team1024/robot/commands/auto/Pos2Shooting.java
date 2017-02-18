@@ -19,7 +19,7 @@ public class Pos2Shooting extends CommandGroup {
 	protected void execute() {
 		
 		//Drive away from wall
-		addSequential(new DriveForDistance(0.5, 1)); //Set this later
+		addSequential(new DriveForDistance(0.5, 10)); //Set this later
 		//Turn to face shooting position
 		addSequential(new TurnCommand(0.5, -90)); //Set this later
 		//Drive to shooting position

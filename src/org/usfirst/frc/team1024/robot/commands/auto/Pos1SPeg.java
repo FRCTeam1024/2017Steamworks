@@ -8,6 +8,15 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class Pos1SPeg extends CommandGroup {
 	
 	public Pos1SPeg() {
+	
+	}
+
+	@Override
+	protected void initialize() {
+	}
+
+	@Override
+	protected void execute() {
 		
 		//Goes to shooting position and shoots
 		addSequential(new Pos1Shooting());
@@ -23,14 +32,7 @@ public class Pos1SPeg extends CommandGroup {
 		addSequential(new PushGearCommand(true)); //Set this later
 		//Drive away from S peg
 		addSequential(new DriveForDistance(0.5, -10)); //Set this later
-	}
-
-	@Override
-	protected void initialize() {
-	}
-
-	@Override
-	protected void execute() {
+		
 	}
 
 	@Override

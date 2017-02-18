@@ -11,6 +11,15 @@ public class Pos1WPeg extends CommandGroup {
 	
 	public Pos1WPeg() {
 		
+	}
+	
+	@Override
+	protected void initialize() {
+	}
+
+	@Override
+	protected void execute() {
+		
 		//Goes to shooting position and shoots
 		addSequential(new Pos1Shooting());
 		//Turn away from shooting position
@@ -24,14 +33,6 @@ public class Pos1WPeg extends CommandGroup {
 		//Drive away from W peg
 		addSequential(new DriveForTime(-0.5, 1.0));  // Set this later.
 
-	}
-	
-	@Override
-	protected void initialize() {
-	}
-
-	@Override
-	protected void execute() {
 	}
 
 	@Override
