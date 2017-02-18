@@ -8,12 +8,16 @@ import org.usfirst.frc.team1024.robot.util.Constants;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class GearOnMiddlePeg extends CommandGroup {
-	public GearOnMiddlePeg() {
-		addSequential(new DriveForDistance(0.5, Constants.DISTANCE_TO_BASELINE - Constants.ROBOT_WIDTH));
-		//addSequential(new GearClampCommand());
-		addSequential(new PushGearCommand(true));
-		addSequential(new DriveForTime(-0.5, 1.0));
+public class Pos2ShootWestPeg extends CommandGroup {
+	
+	
+	public Pos2ShootWestPeg() {
+
+			addSequential(new DriveForDistance(0.5, Constants.DISTANCE_TO_BASELINE - Constants.ROBOT_WIDTH));
+			//addSequential(new GearClampCommand());
+			addSequential(new PushGearCommand(true));
+			addSequential(new DriveForTime(-0.5, 1.0));
+			//make it so that "isFinished" returns True
 	}
 	
 	@Override
