@@ -19,6 +19,8 @@ public class RobotMap {
 		//Climber
 		public static final int LEFT_CLIMBER_PORT = 6;
 		public static final int RIGHT_CLIMBER_PORT = 7;
+		//Agitator
+		public static final int AGITATOR_PORT = 8;
 		
 	//Pneumatics
 		public static final int DRIVETRAIN_SHIFTER_PORT = 0;
@@ -27,6 +29,9 @@ public class RobotMap {
 		public static final int GEAR_CLAMP_PORT_1 = 3;
 		public static final int GEAR_CLAMP_PORT_2 = 4;
 		public static final int GEAR_FLAP_PORT = 5;
+		
+		public static final int HOPPER_FLAP_PORT_1 = 6;
+		public static final int HOPPER_FLAP_PORT_2 = 7;
 		
 	//Analog Sensors
 		public static final int GYRO_PORT = 0;
