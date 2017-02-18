@@ -118,7 +118,6 @@ public class Robot extends IterativeRobot {
 		
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
@@ -179,7 +178,6 @@ public class Robot extends IterativeRobot {
 			//if (SmartDashboard.getBoolean("Logi Drive?", true) == true) {
 				//drivetrain.drive(-oi.logi.getRawAxis(1), -oi.logi.getRawAxis(3));
 			//} else {
-		drivetrain.frontLeftDrive.changeControlMode(TalonControlMode.PercentVbus);
 		drivetrain.frontRightDrive.changeControlMode(TalonControlMode.PercentVbus);
 				drivetrain.drive(-oi.lJoy.getRawAxis(RobotMap.JOYSTICK_Y_AXIS_NUM),
 								 -oi.rJoy.getRawAxis(RobotMap.JOYSTICK_Y_AXIS_NUM));

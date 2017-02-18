@@ -41,38 +41,15 @@ public class OI {
 		
 		
 		
-		gearClampOpenButton.whenPressed(new EmptyCommand() {
-			{ requires(Robot.gear); }
-			protected void execute() { Robot.gear.clamp(1); }
-		});
-		gearClampCloseButton.whenPressed(new EmptyCommand() {
-			{ requires(Robot.gear); }
-			protected void execute() { Robot.gear.clamp(-1); }
-		});
-		gearClampOffButton.whenPressed(new EmptyCommand() {
-			{ requires(Robot.gear); }
-			protected void execute() { Robot.gear.clamp(0); }
-		});
+		gearClampOpenButton.whenPressed(new GearClampCommand(1));
+		gearClampCloseButton.whenPressed(new GearClampCommand(-1));
+		gearClampOffButton.whenPressed(new GearClampCommand(0));
 		
-		gearPushButton.whileHeld(new EmptyCommand() {
-			{ requires(Robot.gear); }
-			protected void execute() { Robot.gear.push(true); }
-			protected void end() { Robot.gear.push(false); }
-		});
+		gearPushButton.whileHeld(new PushGearCommand(true));
 		
-		shootButton.whileHeld(new EmptyCommand() {
-			{ requires(Robot.shooter); }
-			protected void execute() {
-				Robot.shooter.shooter.setSetpoint(Robot.shooter.shooterSetSpeed);
-				Robot.shooter.shooter.enable();
-			}
-		});
+		shootButton.whileHeld(new ShootCommand());
 		
-		speedResetButton.whileHeld(new EmptyCommand() {
-			protected void execute() { 
-				Robot.shooter.shooterSetSpeed = Constants.INIT_SHOOTER_POWER;
-			}
-		});
+		speedResetButton.whileHeld(new ShooterSpeedResetCommand());
 		
 		
 	}
