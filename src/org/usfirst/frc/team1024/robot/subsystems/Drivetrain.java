@@ -127,9 +127,9 @@ public class Drivetrain extends Subsystem implements Subsystem1024 {
 			frontLeftDrive.disable();
 			frontRightDrive.disable();
 		}
-		SmartDashboard.putNumber("Left Drive Distance (in.)", frontLeftDrive.getDistance());
+		/*SmartDashboard.putNumber("Left Drive Distance (in.)", frontLeftDrive.getDistance());
 		SmartDashboard.putNumber("Right Drive Distance (in.)", frontRightDrive.getDistance());
-		SmartDashboard.putNumber("Average Distance (in.)", frontLeftDrive.getDistance() / frontRightDrive.getDistance());
+		SmartDashboard.putNumber("Average Distance (in.)", frontLeftDrive.getDistance() / frontRightDrive.getDistance());*/
 	}
 	
 	/**
@@ -149,8 +149,8 @@ public class Drivetrain extends Subsystem implements Subsystem1024 {
 	 * @param rightpower (-1.0, 1.0)
 	 */
 	public void drive(double leftpower, double rightpower) {
-		frontLeftDrive.changeControlMode(TalonControlMode.PercentVbus);
-		frontRightDrive.changeControlMode(TalonControlMode.PercentVbus);
+		//frontLeftDrive.changeControlMode(TalonControlMode.PercentVbus);
+		//frontRightDrive.changeControlMode(TalonControlMode.PercentVbus);
 		frontLeftDrive.set(leftpower);
 		//rearLeftDrive.set(leftpower);
 		frontRightDrive.set(-rightpower);
