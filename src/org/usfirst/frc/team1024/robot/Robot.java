@@ -11,7 +11,10 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team1024.robot.commands.auto.Pos2GearOnMiddlePeg;
+import org.usfirst.frc.team1024.robot.commands.auto.Pos1NPeg;
+import org.usfirst.frc.team1024.robot.commands.auto.Pos1SPeg;
+import org.usfirst.frc.team1024.robot.commands.auto.Pos1WPeg;
+import org.usfirst.frc.team1024.robot.commands.auto.Pos2WPeg;
 import org.usfirst.frc.team1024.robot.subsystems.Blender;
 import org.usfirst.frc.team1024.robot.subsystems.Climber;
 import org.usfirst.frc.team1024.robot.subsystems.Drivetrain;
@@ -49,10 +52,11 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 
-		chooser.addDefault("Default Auto", new Pos2GearOnMiddlePeg());
-		chooser.addObject("Position 1, North Peg", new Pos1NorthPeg);
-		chooser.addObject("Position 1, South Peg", new Pos1SouthPeg);
-
+		chooser.addObject("Position 1, North Peg", new Pos1NPeg());
+		chooser.addDefault("Position 1, West Peg", new Pos1WPeg());
+		chooser.addObject("Position 1, South Peg", new Pos1SPeg());
+		chooser.addObject("Position 2 West Peg", new Pos2WPeg());
+		
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
 		NetworkTable.globalDeleteAll();
@@ -149,7 +153,7 @@ public class Robot extends IterativeRobot {
 		
 	}
 	
-	@SuppressWarnings("deprecation")
+	//@SuppressWarnings("deprecation")
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
