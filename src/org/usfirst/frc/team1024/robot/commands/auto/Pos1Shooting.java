@@ -15,7 +15,7 @@ public class Pos1Shooting extends CommandGroup {
 	@Override
 	protected void execute() {
 		// Drives a little to align with the boiler.
-		addSequential(new DriveForDistance(0.5, 55)); // Set this later
+		addSequential(new DriveForDistance(0.4, 30)); // Correct this
 		// Shoots the fuel.
 		addSequential(new ShootCommand());
 	}

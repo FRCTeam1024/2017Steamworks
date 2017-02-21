@@ -19,11 +19,11 @@ public class Pos2Shooting extends CommandGroup {
 	protected void execute() {
 		
 		//Drive away from wall
-		addSequential(new DriveForDistance(0.5, 10)); //Set this later
+		addSequential(new DriveForDistance(0.5, 33)); //Set this later
 		//Turn to face shooting position
-		addSequential(new TurnCommand(0.5, -90)); //Set this later
+		addSequential(new TurnCommand(0.5, -90)); 
 		//Drive to shooting position
-		addSequential(new DriveForDistance(0.5, 138.7)); //Set this later
+		addSequential(new DriveForDistance(0.5, 143)); //Set this later
 		//Turn to aim shooter at boiler
 		addSequential(new TurnCommand(0.5, 45)); //Set this later
 		//Shoot until you can't shoot no more

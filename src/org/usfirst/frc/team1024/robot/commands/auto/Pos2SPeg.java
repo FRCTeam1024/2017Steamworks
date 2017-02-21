@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1024.robot.commands.auto;
 
+<<<<<<< HEAD
 import org.usfirst.frc.team1024.robot.commands.DriveForDistance;
 import org.usfirst.frc.team1024.robot.commands.DriveForTime;
 import org.usfirst.frc.team1024.robot.commands.PushGearCommand;
@@ -43,4 +44,8 @@ public class Pos2SPeg extends CommandGroup {
 	@Override
 	protected void interrupted() {
 	}
+=======
+public class Pos2SPeg {
+
+>>>>>>> 9699c08ae4174fdd2f4f156141e913cf3456ca03
 }
