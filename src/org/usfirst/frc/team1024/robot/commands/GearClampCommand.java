@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class GearClampCommand extends Command {
 	int state = 0;
+	boolean isDone;
 	public GearClampCommand(int state) {
 		requires(Robot.gear);
 		this.state = state;
@@ -18,11 +19,12 @@ public class GearClampCommand extends Command {
 	@Override
 	protected void execute() {
 		Robot.gear.clamp(state);
+		isDone = true;
 	}
 	
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return isDone;
 	}
 	
 	@Override

@@ -11,12 +11,13 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team1024.robot.commands.auto.Pos2GearOnMiddlePeg;
 // import org.usfirst.frc.team1024.robot.commands.auto.Pos2GearOnMiddlePeg;
 import org.usfirst.frc.team1024.robot.subsystems.Blender;
 import org.usfirst.frc.team1024.robot.subsystems.Climber;
 import org.usfirst.frc.team1024.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team1024.robot.subsystems.Gear;
-import org.usfirst.frc.team1024.robot.subsystems.Hopper;
+
 import org.usfirst.frc.team1024.robot.subsystems.Shooter;
 
 import com.ctre.CANTalon.TalonControlMode;
@@ -35,7 +36,7 @@ public class Robot extends IterativeRobot {
 	public static final Climber climber = new Climber();
 	public static final Blender blender = new Blender();
 	public static final Gear gear = new Gear();
-	public static final Hopper hopper = new Hopper();
+	//public static final Hopper hopper = new Hopper();
 	public static final REVDigitBoard autoChooser = new REVDigitBoard();
 	
 	int position = 0;
@@ -57,11 +58,13 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("", new command); */
 
 		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", chooser);
+		//SmartDashboard.putData("Auto mode", chooser);
 		NetworkTable.globalDeleteAll();
 		shooter.initDashboard();
 		drivetrain.initDashboard();
 		SmartDashboard.putBoolean("Logi Drive?", false);
+		drivetrain.frontLeftDrive.setEncPosition(0);
+		drivetrain.frontRightDrive.setEncPosition(0);
 	}
 	
 	@Override
@@ -100,23 +103,25 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		//autonomousCommand = chooser.getSelected();
-		//autonomousCommand = new Pos2GearOnMiddlePeg();
+		autonomousCommand = new Pos2GearOnMiddlePeg();
 
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
+		
+//		 String autoSelected = SmartDashboard.getString("Auto Selector",
+//		 "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
+//		 = new MyAutoCommand(); break; case "Default Auto": default:
+//		 autonomousCommand = new ExampleCommand(); break; }
 		 
 
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null)
 			autonomousCommand.start();
-		*/
+		
 		
 		
 		SmartDashboard.getNumber("Position:", position);
 		SmartDashboard.getString("Peg", peg);
+		Robot.drivetrain.frontLeftDrive.changeControlMode(TalonControlMode.Position);
+		Robot.drivetrain.frontRightDrive.changeControlMode(TalonControlMode.Position);
 		
 	}
 	
@@ -168,6 +173,8 @@ public class Robot extends IterativeRobot {
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 		shooter.shooter.updateTable();
+		drivetrain.frontLeftDrive.changeControlMode(TalonControlMode.PercentVbus);
+		drivetrain.frontRightDrive.changeControlMode(TalonControlMode.PercentVbus);
 	}
 	
 	@Override
@@ -180,9 +187,8 @@ public class Robot extends IterativeRobot {
 			//if (SmartDashboard.getBoolean("Logi Drive?", true) == true) {
 				//drivetrain.drive(-oi.logi.getRawAxis(1), -oi.logi.getRawAxis(3));
 			//} else {
-		drivetrain.frontRightDrive.changeControlMode(TalonControlMode.PercentVbus);
-				drivetrain.drive(-oi.lJoy.getRawAxis(RobotMap.JOYSTICK_Y_AXIS_NUM),
-								 -oi.rJoy.getRawAxis(RobotMap.JOYSTICK_Y_AXIS_NUM));
+		//drivetrain.frontRightDrive.changeControlMode(TalonControlMode.PercentVbus);
+				//drivetrain.drive(-oi.lJoy.getRawAxis(RobotMap.JOYSTICK_Y_AXIS_NUM), -oi.rJoy.getRawAxis(RobotMap.JOYSTICK_Y_AXIS_NUM));
 				// Blender
 				blender.blend(oi.logi.getRawAxis(1));
 				// Climber
@@ -199,6 +205,12 @@ public class Robot extends IterativeRobot {
 				shooter.shooterSetSpeed += 5.0;
 			} else if (oi.logi.getPOV() == 180) {
 				shooter.shooterSetSpeed -= 5.0;
+			}
+			if (oi.lJoy.getRawButton(7) || oi.rJoy.getRawButton(7)) {
+				drivetrain.shifter.set(false);
+			} 
+			if (oi.lJoy.getRawButton(10) || oi.rJoy.getRawButton(10)) {
+				drivetrain.shifter.set(true);
 			}
 		}
 	

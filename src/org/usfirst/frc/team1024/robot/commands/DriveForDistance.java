@@ -8,6 +8,7 @@ public class DriveForDistance extends Command{
 	double power;
 	double distance;
 	int type;
+	boolean isDone;
 	
 	/**
 	 * Drives with PID to a distance. Changes the Talon Control Mode to position mode
@@ -37,6 +38,7 @@ public class DriveForDistance extends Command{
 				break;
 			case 1:
 				Robot.drivetrain.driveForDistance(power, distance); //NON-PID
+				isDone = true;
 				break;
 		}
 	}
@@ -44,7 +46,7 @@ public class DriveForDistance extends Command{
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
-		return false;
+		return false; //replace with isDone later
 	}
 	
 	

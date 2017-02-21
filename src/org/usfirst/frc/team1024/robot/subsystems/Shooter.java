@@ -74,13 +74,11 @@ public class Shooter extends Subsystem implements Subsystem1024 {
 	@Override
 	public void outputToSmartDashboard() {
 		//SmartDashboard.putData("Shooter", shooter);
-		
-		
-		SmartDashboard.putNumber("F", shooter.getF());
 		if (SmartDashboard.getBoolean("Shooter GO", false) == true) {
 			shooter.setP(SmartDashboard.getNumber("Shooter P", shooter.getP()));
 			shooter.setI(SmartDashboard.getNumber("Shooter I", shooter.getI()));
 			shooter.setD(SmartDashboard.getNumber("Shooter D", shooter.getD()));
+			shooter.setF(SmartDashboard.getNumber("Shooter F", shooter.getF()));
 			shooter.setSetpoint(SmartDashboard.getNumber("Shooter Setpoint", shooter.getSetpoint()));
 			shooter.enable();
 		} else if (Robot.oi.logi.getRawButton(8) == true){
@@ -96,6 +94,7 @@ public class Shooter extends Subsystem implements Subsystem1024 {
 		SmartDashboard.putNumber("Shooter P", shooter.getP());
 		SmartDashboard.putNumber("Shooter I", shooter.getI());
 		SmartDashboard.putNumber("Shooter D", shooter.getD());
+		SmartDashboard.putNumber("Shooter F", shooter.getF());
 		SmartDashboard.putNumber("Shooter Setpoint", shooter.getSetpoint());
 		SmartDashboard.putBoolean("Shooter GO", false);
 	}

@@ -1,10 +1,13 @@
 package org.usfirst.frc.team1024.robot;
 
+import org.usfirst.frc.team1024.robot.commands.AgitateCommand;
 import org.usfirst.frc.team1024.robot.commands.EmptyCommand;
+import org.usfirst.frc.team1024.robot.commands.FlapCommand;
 import org.usfirst.frc.team1024.robot.commands.GearClampCommand;
 import org.usfirst.frc.team1024.robot.commands.PushGearCommand;
 import org.usfirst.frc.team1024.robot.commands.ShootCommand;
 import org.usfirst.frc.team1024.robot.commands.ShooterSpeedResetCommand;
+import org.usfirst.frc.team1024.robot.commands.shift;
 import org.usfirst.frc.team1024.robot.util.Constants;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -25,7 +28,11 @@ public class OI {
 	public Button shootButton;
 	public Button speedResetButton;
 	public Button hopperFlapButton;
-	public Button agitator;
+	public Button agitatorButton;
+	public Button shiftLowButtonL;
+	public Button shiftHighButtonL;
+	public Button shiftLowButtonR;
+	public Button shiftHighButtonR;
 	
 	public OI() {
 		logi = new Joystick(RobotMap.LOGITECH_PORT);
@@ -42,7 +49,15 @@ public class OI {
 		speedResetButton = new JoystickButton(logi, 6);
 		
 		hopperFlapButton = new JoystickButton(logi, 3);
-		agitator = new JoystickButton(logi, 10);
+		agitatorButton = new JoystickButton(logi, 5);
+		
+		shiftLowButtonL = new JoystickButton(lJoy, 7);
+		shiftHighButtonL = new JoystickButton(lJoy, 10);
+		
+		shiftLowButtonR = new JoystickButton(rJoy, 7);
+		shiftHighButtonR = new JoystickButton(rJoy, 10);
+		
+		
 		
 		
 		
@@ -55,6 +70,15 @@ public class OI {
 		shootButton.whileHeld(new ShootCommand());
 		
 		speedResetButton.whileHeld(new ShooterSpeedResetCommand());
+		
+		agitatorButton.whileHeld(new AgitateCommand());
+		hopperFlapButton.whileHeld(new FlapCommand());
+		
+		/*shiftLowButtonL.whenPressed(new shift("Low"));
+		shiftHighButtonL.whenPressed(new shift("High"));
+		
+		shiftLowButtonR.whenPressed(new shift("Low"));
+		shiftHighButtonR.whenPressed(new shift("High"));*/
 		
 		
 	}

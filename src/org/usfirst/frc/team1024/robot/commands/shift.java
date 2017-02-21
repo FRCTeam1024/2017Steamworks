@@ -2,39 +2,39 @@ package org.usfirst.frc.team1024.robot.commands;
 
 import org.usfirst.frc.team1024.robot.Robot;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class PushGearCommand extends Command {
-	boolean state;
-	boolean isDone;
-	public PushGearCommand(boolean state) {
+public class shift extends Command {
+	String state;
+	public shift(String state) {
 		this.state = state;
 	}
+	
 	@Override
 	protected void initialize() {
 	}
 	
 	@Override
 	protected void execute() {
-		Robot.gear.push(state);
-		Timer.delay(0.1);
-		isDone = true;
+		if (state.equals("Low")) {
+			Robot.drivetrain.shifter.set(false);
+		} else if (state.equals("Low")) {
+			Robot.drivetrain.shifter.set(true);
+		} else {
+			Robot.drivetrain.shifter.set(false);
+		}
 	}
 	
 	@Override
 	protected boolean isFinished() {
-		return isDone;
+		return false;
 	}
 	
 	@Override
 	protected void end() {
-		Robot.gear.push(false);
 	}
 	
 	@Override
 	protected void interrupted() {
-		Robot.gear.push(false);
 	}
-
 }

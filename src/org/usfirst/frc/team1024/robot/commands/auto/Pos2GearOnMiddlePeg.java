@@ -1,23 +1,28 @@
 package org.usfirst.frc.team1024.robot.commands.auto;
+import org.usfirst.frc.team1024.robot.Robot;
 import org.usfirst.frc.team1024.robot.commands.DriveForDistance;
 
 import org.usfirst.frc.team1024.robot.commands.DriveForTime;
 import org.usfirst.frc.team1024.robot.commands.GearClampCommand;
 import org.usfirst.frc.team1024.robot.commands.PushGearCommand;
+import org.usfirst.frc.team1024.robot.commands.WaitForTimeCommand;
 import org.usfirst.frc.team1024.robot.util.Constants;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class Pos2GearOnMiddlePeg extends CommandGroup {
 	
 	
 	public Pos2GearOnMiddlePeg() {
-
-			addSequential(new DriveForDistance(0.5, Constants.DISTANCE_TO_BASELINE - Constants.ROBOT_WIDTH));
-			//addSequential(new GearClampCommand());
-			addSequential(new PushGearCommand(true));
-			addSequential(new DriveForTime(-0.5, 1.0));
-			//make it so that "isFinished" returns True
+			//addSequential(new DriveForDistance(0.5, Constants.DISTANCE_TO_BASELINE - Constants.ROBOT_WIDTH));
+		addSequential(new DriveForDistance(1));
+		//addSequential(new WaitForTimeCommand(2.0));
+		//addSequential(new DriveForTime(0.5, 3));
+		//addSequential(new GearClampCommand(1));
+		//addSequential(new PushGearCommand(true));
+		//addSequential(new DriveForTime(-0.5, 1.0));
+		//make it so that "isFinished" returns True
 	}
 	
 	@Override
@@ -26,6 +31,8 @@ public class Pos2GearOnMiddlePeg extends CommandGroup {
 	
 	@Override
 	protected void execute() {
+		Robot.drivetrain.frontLeftDrive.setSetpoint(1000);
+		Robot.drivetrain.frontRightDrive.setSetpoint(1000);
 	}
 	@Override
 	protected boolean isFinished() {
