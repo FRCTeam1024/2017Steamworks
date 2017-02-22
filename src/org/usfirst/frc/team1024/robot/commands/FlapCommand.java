@@ -5,13 +5,6 @@ import org.usfirst.frc.team1024.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class FlapCommand extends Command {
-
-	@Override
-	protected boolean isFinished() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-/*
 	public FlapCommand() {
 		
 	}
@@ -39,5 +32,5 @@ public class FlapCommand extends Command {
 	@Override
 	protected void interrupted() {
 		Robot.hopper.flap(false);
-	}*/
+	}
 }

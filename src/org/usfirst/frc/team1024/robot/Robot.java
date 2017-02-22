@@ -17,7 +17,7 @@ import org.usfirst.frc.team1024.robot.subsystems.Blender;
 import org.usfirst.frc.team1024.robot.subsystems.Climber;
 import org.usfirst.frc.team1024.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team1024.robot.subsystems.Gear;
-
+import org.usfirst.frc.team1024.robot.subsystems.Hopper;
 import org.usfirst.frc.team1024.robot.subsystems.Shooter;
 
 import com.ctre.CANTalon.TalonControlMode;
@@ -36,7 +36,7 @@ public class Robot extends IterativeRobot {
 	public static final Climber climber = new Climber();
 	public static final Blender blender = new Blender();
 	public static final Gear gear = new Gear();
-	//public static final Hopper hopper = new Hopper();
+	public static final Hopper hopper = new Hopper();
 	public static final REVDigitBoard autoChooser = new REVDigitBoard();
 	
 	int position = 0;
@@ -188,11 +188,13 @@ public class Robot extends IterativeRobot {
 				//drivetrain.drive(-oi.logi.getRawAxis(1), -oi.logi.getRawAxis(3));
 			//} else {
 		//drivetrain.frontRightDrive.changeControlMode(TalonControlMode.PercentVbus);
-				//drivetrain.drive(-oi.lJoy.getRawAxis(RobotMap.JOYSTICK_Y_AXIS_NUM), -oi.rJoy.getRawAxis(RobotMap.JOYSTICK_Y_AXIS_NUM));
+				drivetrain.drive(-oi.lJoy.getRawAxis(RobotMap.JOYSTICK_Y_AXIS_NUM), oi.rJoy.getRawAxis(RobotMap.JOYSTICK_Y_AXIS_NUM));
 				// Blender
 				blender.blend(oi.logi.getRawAxis(1));
+				hopper.agitator.set(oi.logi.getRawAxis(1));
+				hopper.agitate(oi.logi.getRawAxis(1));
 				// Climber
-				climber.climb(-Math.abs(oi.logi.getRawAxis(3)));
+				climber.climb(Math.abs(oi.logi.getRawAxis(3)));
 			
 			/*
 			 * if (oi.logi.getRawButton(4) == true) { gear.push(true); } else if

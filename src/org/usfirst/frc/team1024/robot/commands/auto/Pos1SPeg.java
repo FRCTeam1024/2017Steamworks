@@ -27,7 +27,7 @@ public class Pos1SPeg extends CommandGroup {
 		// Drive towards S peg
 		addSequential(new DriveForDistance(0.5, 45)); // Set this later
 		// Place gear on S peg
-		addSequential(new PushGearCommand(true)); // Set this later
+		addSequential(new PushGearCommand()); // Set this later
 		// Drive away from S peg
 		addSequential(new DriveForDistance(0.5, -10)); // Set this later
 	}

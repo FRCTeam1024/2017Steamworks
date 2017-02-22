@@ -5,13 +5,6 @@ import org.usfirst.frc.team1024.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class AgitateCommand extends Command {
-
-	@Override
-	protected boolean isFinished() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-/*
 	public AgitateCommand() {
 		
 	}
@@ -39,5 +32,5 @@ public class AgitateCommand extends Command {
 	@Override
 	protected void interrupted() {
 		Robot.hopper.agitate(0.0);
-	}*/
+	}
 }

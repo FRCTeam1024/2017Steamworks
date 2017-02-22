@@ -28,7 +28,6 @@ public class OI {
 	public Button shootButton;
 	public Button speedResetButton;
 	public Button hopperFlapButton;
-	public Button agitatorButton;
 	public Button shiftLowButtonL;
 	public Button shiftHighButtonL;
 	public Button shiftLowButtonR;
@@ -49,7 +48,6 @@ public class OI {
 		speedResetButton = new JoystickButton(logi, 6);
 		
 		hopperFlapButton = new JoystickButton(logi, 3);
-		agitatorButton = new JoystickButton(logi, 5);
 		
 		shiftLowButtonL = new JoystickButton(lJoy, 7);
 		shiftHighButtonL = new JoystickButton(lJoy, 10);
@@ -65,13 +63,12 @@ public class OI {
 		gearClampCloseButton.whenPressed(new GearClampCommand(-1));
 		gearClampOffButton.whenPressed(new GearClampCommand(0));
 		
-		gearPushButton.whileHeld(new PushGearCommand(true));
+		gearPushButton.whileHeld(new PushGearCommand());
 		
 		shootButton.whileHeld(new ShootCommand());
 		
 		speedResetButton.whileHeld(new ShooterSpeedResetCommand());
 		
-		agitatorButton.whileHeld(new AgitateCommand());
 		hopperFlapButton.whileHeld(new FlapCommand());
 		
 		/*shiftLowButtonL.whenPressed(new shift("Low"));

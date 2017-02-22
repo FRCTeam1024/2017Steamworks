@@ -26,7 +26,7 @@ public class Pos2WPeg extends CommandGroup {
 		//Drive to W peg
 		addSequential(new DriveForDistance(0.5, 46.95)); //Set this later
 		//Place gear on W peg
-		addSequential(new PushGearCommand(true));
+		addSequential(new PushGearCommand());
 		//Drive back from W peg
 		addSequential(new DriveForDistance(0.5, -46.95)); //Set this later
 

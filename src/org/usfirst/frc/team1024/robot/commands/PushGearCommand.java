@@ -6,10 +6,8 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class PushGearCommand extends Command {
-	boolean state;
 	boolean isDone;
-	public PushGearCommand(boolean state) {
-		this.state = state;
+	public PushGearCommand() {
 	}
 	@Override
 	protected void initialize() {
@@ -17,9 +15,8 @@ public class PushGearCommand extends Command {
 	
 	@Override
 	protected void execute() {
-		Robot.gear.push(state);
-		Timer.delay(0.1);
-		isDone = true;
+		Robot.gear.push(true);
+		//isDone = true;
 	}
 	
 	@Override
