@@ -28,10 +28,7 @@ public class RobotMap {
 		public static final int GEAR_PUSHER_PORT_2 = 2;
 		public static final int GEAR_CLAMP_PORT_1 = 3;
 		public static final int GEAR_CLAMP_PORT_2 = 4;
-		public static final int GEAR_FLAP_PORT = 5;
-		
-		public static final int HOPPER_FLAP_PORT_1 = 6;
-		public static final int HOPPER_FLAP_PORT_2 = 7;
+		public static final int HOPPER_FLAP_PORT = 5;
 		
 	//Analog Sensors
 		public static final int GYRO_PORT = 0;

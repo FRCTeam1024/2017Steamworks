@@ -6,20 +6,19 @@ import org.usfirst.frc.team1024.robot.util.Subsystem1024;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class Hopper implements Subsystem1024 {
+public class Hopper extends Subsystem implements Subsystem1024 {
 
-	public DoubleSolenoid flap = new DoubleSolenoid(RobotMap.HOPPER_FLAP_PORT_1, RobotMap.HOPPER_FLAP_PORT_2);
+	public Solenoid flap = new Solenoid(RobotMap.HOPPER_FLAP_PORT);
 	public KilaTalon agitator = new KilaTalon(RobotMap.AGITATOR_PORT);
 
 	public Hopper() {
 		LiveWindow.addActuator("Hopper", "Flap", flap);
 		LiveWindow.addActuator("Hopper", "Agitator", agitator);
-
-		flap.startLiveWindowMode();
-		agitator.startLiveWindowMode();
 	}
 
 	/**
@@ -38,11 +37,7 @@ public class Hopper implements Subsystem1024 {
 	}
 
 	public void flap(boolean state) {
-		if (state == true) {
-			flap.set(Value.kForward);
-		} else {
-			flap.set(Value.kReverse);
-		}
+		flap.set(state);
 	}
 
 	@Override
@@ -62,5 +57,12 @@ public class Hopper implements Subsystem1024 {
 		// TODO Auto-generated method stub
 
 	}
+
+	@Override
+	protected void initDefaultCommand() {
+		// TODO Auto-generated method stub
+		
+	}
+	
 
 }

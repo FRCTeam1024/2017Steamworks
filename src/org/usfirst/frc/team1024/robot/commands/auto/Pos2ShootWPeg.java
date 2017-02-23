@@ -19,7 +19,7 @@ public class Pos2ShootWPeg extends CommandGroup {
 	protected void execute() {
 		addSequential(new DriveForDistance(0.5, Constants.DISTANCE_TO_BASELINE - Constants.ROBOT_WIDTH));
 		// addSequential(new GearClampCommand());
-		addSequential(new PushGearCommand(true));
+		addSequential(new PushGearCommand());
 		addSequential(new DriveForTime(-0.5, 1.0));
 		// make it so that "isFinished" returns True
 	}
