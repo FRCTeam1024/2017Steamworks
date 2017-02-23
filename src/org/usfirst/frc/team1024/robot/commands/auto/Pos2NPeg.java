@@ -50,4 +50,4 @@ public class Pos2NPeg extends CommandGroup {
 	protected void interrupted() {
 	}
 }
-}
+

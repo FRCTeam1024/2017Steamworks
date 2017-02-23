@@ -19,10 +19,14 @@ import org.usfirst.frc.team1024.robot.commands.auto.Pos2ShootSPeg;
 import org.usfirst.frc.team1024.robot.commands.auto.Pos2ShootWPeg;
 import org.usfirst.frc.team1024.robot.commands.auto.Pos3ShootSPeg;
 import org.usfirst.frc.team1024.robot.commands.auto.Pos3ShootWPeg;
+
+// import org.usfirst.frc.team1024.robot.commands.auto.Pos2GearOnMiddlePeg;
+
 import org.usfirst.frc.team1024.robot.subsystems.Blender;
 import org.usfirst.frc.team1024.robot.subsystems.Climber;
 import org.usfirst.frc.team1024.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team1024.robot.subsystems.Gear;
+import org.usfirst.frc.team1024.robot.subsystems.Hopper;
 import org.usfirst.frc.team1024.robot.subsystems.Shooter;
 
 import com.ctre.CANTalon.TalonControlMode;
@@ -41,6 +45,7 @@ public class Robot extends IterativeRobot {
 	public static final Climber climber = new Climber();
 	public static final Blender blender = new Blender();
 	public static final Gear gear = new Gear();
+	public static final Hopper hopper = new Hopper();
 	public static final REVDigitBoard autoChooser = new REVDigitBoard();
 	
 	
@@ -109,16 +114,8 @@ public class Robot extends IterativeRobot {
 		}
 		autonomousCommand = new StateAndWorldsAuto(autoSelected, position); */
 
-
-		// schedule the autonomous command (example)
-		if (autonomousCommand != null)
-			autonomousCommand.start();
-		
-		
-		SmartDashboard.getNumber("Position:", position);
-		SmartDashboard.getString("Peg", peg);
-		
 	}
+
 	
 	@Override
 	public void autonomousPeriodic() {
@@ -178,7 +175,8 @@ public class Robot extends IterativeRobot {
 			autonomousCommand.start();
 		
 		/* SmartDashboard.getNumber("Position:", position);
-		SmartDashboard.getString("Peg", peg); */
+		SmartDashboard.getNumber("Position:", position);
+		SmartDashboard.getString("Peg", peg);
 		
 	}
 

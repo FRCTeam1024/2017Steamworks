@@ -24,6 +24,8 @@ public class OI {
 	public Button shooterSpeedDecreaseButton;
 	public Button shootButton;
 	public Button speedResetButton;
+	public Button hopperFlapButton;
+	public Button agitator;
 	
 	public OI() {
 		logi = new Joystick(RobotMap.LOGITECH_PORT);
@@ -39,13 +41,16 @@ public class OI {
 		shootButton = new JoystickButton(logi, 8);
 		speedResetButton = new JoystickButton(logi, 6);
 		
+		hopperFlapButton = new JoystickButton(logi, 3);
+		agitator = new JoystickButton(logi, 10);
+		
 		
 		
 		gearClampOpenButton.whenPressed(new GearClampCommand(1));
 		gearClampCloseButton.whenPressed(new GearClampCommand(-1));
 		gearClampOffButton.whenPressed(new GearClampCommand(0));
 		
-		gearPushButton.whileHeld(new PushGearCommand(true));
+		gearPushButton.whileHeld(new PushGearCommand());
 		
 		shootButton.whileHeld(new ShootCommand());
 		

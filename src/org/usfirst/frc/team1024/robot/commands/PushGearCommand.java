@@ -6,8 +6,8 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class PushGearCommand extends Command {
 	boolean state;
-	public PushGearCommand(boolean state) {
-		this.state = state;
+	public PushGearCommand() {
+		// this.state = state;
 	}
 	@Override
 	protected void initialize() {
