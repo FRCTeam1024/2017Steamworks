@@ -2,13 +2,14 @@ package org.usfirst.frc.team1024.robot.subsystems;
 
 import org.usfirst.frc.team1024.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 import org.usfirst.frc.team1024.robot.util.KilaTalon;
 import org.usfirst.frc.team1024.robot.util.Subsystem1024;
 
 import edu.wpi.first.wpilibj.Solenoid;
+
+
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -20,9 +21,6 @@ public class Hopper extends Subsystem implements Subsystem1024 {
 	public Hopper() {
 		LiveWindow.addActuator("Hopper", "Flap", flap);
 		LiveWindow.addActuator("Hopper", "Agitator", agitator);
-
-		flap.startLiveWindowMode();
-		agitator.startLiveWindowMode();
 	}
 
 	/**
@@ -63,5 +61,7 @@ public class Hopper extends Subsystem implements Subsystem1024 {
 	@Override
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub
+
 	}
+
 }

@@ -10,6 +10,7 @@ public class DriveForTime extends Command {
 	double leftPower;
 	double rightPower;
 	int type;
+	boolean isDone;
 	
 	/**
 	 * Drives all drivetrain motors for a given time and powers.
@@ -47,16 +48,18 @@ public class DriveForTime extends Command {
 		switch(type) {
 			case 0:
 				Robot.drivetrain.driveForTime(power, time);
+				isDone = true;
 				break;
 			case 1:
 				Robot.drivetrain.driveForTime(leftPower, rightPower, time);
+				isDone = true;
 				break;
 		}
 	}
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
-		return false;
+		return isDone;
 	}
 
 }

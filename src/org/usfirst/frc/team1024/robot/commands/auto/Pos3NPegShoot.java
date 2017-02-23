@@ -10,9 +10,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class Pos3NPegShoot extends CommandGroup {
 	
 	public Pos3NPegShoot() {
-		
-		
-		
+		//addSequential(new DriveForDistance(0.5, Constants.DISTANCE_TO_BASELINE - Constants.ROBOT_WIDTH));
+		//addSequential(new GearClampCommand());
+		addSequential(new PushGearCommand());
+		addSequential(new DriveForTime(-0.5, 1.0));
 	}
 	
 

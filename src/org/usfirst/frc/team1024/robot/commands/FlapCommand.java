@@ -4,34 +4,33 @@ import org.usfirst.frc.team1024.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class GearClampCommand extends Command {
-	int state = 0;
-	boolean isDone;
-	public GearClampCommand(int state) {
-		requires(Robot.gear);
-		this.state = state;
+public class FlapCommand extends Command {
+	public FlapCommand() {
+		
 	}
 	
 	@Override
 	protected void initialize() {
+		
 	}
 	
 	@Override
 	protected void execute() {
-		Robot.gear.clamp(state);
-		isDone = true;
+		Robot.hopper.flap(true);
 	}
 	
 	@Override
 	protected boolean isFinished() {
-		return isDone;
+		return false;
 	}
 	
 	@Override
 	protected void end() {
+		Robot.hopper.flap(false);
 	}
 	
 	@Override
 	protected void interrupted() {
+		Robot.hopper.flap(false);
 	}
 }

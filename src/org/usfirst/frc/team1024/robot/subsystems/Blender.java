@@ -5,7 +5,7 @@ import org.usfirst.frc.team1024.robot.util.Subsystem1024;
 
 import com.ctre.CANTalon;
 
-
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * 1/28/2017: Added the blend and stop functions
  * 1/30/2017: added javadocs
  */
-public class Blender implements Subsystem1024 {
+public class Blender extends Subsystem implements Subsystem1024 {
 	public final CANTalon blenderMotor = new CANTalon(RobotMap.BLENDER_PORT);
 	
 	public Blender() {
@@ -50,6 +50,12 @@ public class Blender implements Subsystem1024 {
 
 	@Override
 	public void resetSensors() {
+		
+	}
+
+	@Override
+	protected void initDefaultCommand() {
+		// TODO Auto-generated method stub
 		
 	}
 }

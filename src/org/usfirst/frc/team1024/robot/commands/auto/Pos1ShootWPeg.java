@@ -16,12 +16,18 @@ public class Pos1ShootWPeg extends CommandGroup {
 		addSequential(new TurnCommand(0.5, 90));  // Set this later.
 		//Drive toward W peg
 		addSequential(new DriveForDistance(0.5, 95.0)); // Set this later.
+
 		//Turn towards W peg
 		addSequential(new TurnCommand(0.5, -45));   // Set this later.
 		//Place gear on W peg
 		addSequential(new PushGearCommand());  // Set this later.
 		//Drive away from W peg
 		addSequential(new DriveForTime(-0.5, 1.0));  // Set this later.
+
+		addSequential(new TurnCommand(0.5, 45));  // We turn to face the gear.
+		addSequential(new PushGearCommand()); // We push the gear onto the peg.
+		addSequential(new DriveForTime(-0.5, 1.0)); // We retract from the airship.
+
 	}
 	
 	@Override

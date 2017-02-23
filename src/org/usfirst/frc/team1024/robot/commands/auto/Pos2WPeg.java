@@ -27,6 +27,20 @@ public class Pos2WPeg extends CommandGroup {
 	@Override
 	protected void execute() {
 		
+
+		//INCOMPLETE!!!!!!!!
+		addSequential(new TurnCommand(0.5, 135)); //Set this Later
+		//Drives to center, in line with W peg
+		addSequential(new DriveForDistance(0.5, 96.25)); //Set this later
+		//Turns to be facing W peg
+		addSequential(new TurnCommand(0.5, -90)); //Set this later
+		//Drive to W peg
+		addSequential(new DriveForDistance(0.5, 46.95)); //Set this later
+		//Place gear on W peg
+		addSequential(new PushGearCommand());
+		//Drive back from W peg
+		addSequential(new DriveForDistance(0.5, -46.95)); //Set this later
+
 	}
 
 	@Override
