@@ -6,7 +6,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class Pos1Shooting extends CommandGroup {
 	public Pos1Shooting() {
-		
+		// Drives a little to align with the boiler.
+		addSequential(new DriveForDistance(0.4, 30)); // Correct this
+		// Shoots the fuel.
+		addSequential(new ShootCommand());
 	}
 	
 	@Override
@@ -14,10 +17,7 @@ public class Pos1Shooting extends CommandGroup {
 	
 	@Override
 	protected void execute() {
-		// Drives a little to align with the boiler.
-		addSequential(new DriveForDistance(0.4, 30)); // Correct this
-		// Shoots the fuel.
-		addSequential(new ShootCommand());
+		
 	}
 	
 	@Override

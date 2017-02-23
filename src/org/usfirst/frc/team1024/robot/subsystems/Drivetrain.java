@@ -261,7 +261,14 @@ public class Drivetrain extends Subsystem implements Subsystem1024 {
 			System.out.println("Angle cannot be greater than 180 or less than -180, please input the coterminal version of that angle");
 		}
 	}
-	
+	/*
+	public void OneSideTurnLeft(double leftpower, double desiredAngle) {
+		while(gyro.getAngle() <= desiredAngle) {
+			drive(leftpower, 0.0);
+		}
+		stop();
+	}
+	*/
 	public void turnLeft(double power, double desiredAngle) {
 		while(gyro.getAngle() <= desiredAngle) {
 			drive(-power, power);

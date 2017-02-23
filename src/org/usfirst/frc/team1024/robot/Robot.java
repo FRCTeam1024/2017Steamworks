@@ -11,10 +11,14 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team1024.robot.commands.auto.Pos1NPeg;
-import org.usfirst.frc.team1024.robot.commands.auto.Pos1SPeg;
-import org.usfirst.frc.team1024.robot.commands.auto.Pos1WPeg;
-import org.usfirst.frc.team1024.robot.commands.auto.Pos2WPeg;
+import org.usfirst.frc.team1024.robot.commands.auto.Pos1ShootNPeg;
+import org.usfirst.frc.team1024.robot.commands.auto.Pos1ShootSPeg;
+import org.usfirst.frc.team1024.robot.commands.auto.Pos1ShootWPeg;
+import org.usfirst.frc.team1024.robot.commands.auto.Pos2ShootNPeg;
+import org.usfirst.frc.team1024.robot.commands.auto.Pos2ShootSPeg;
+import org.usfirst.frc.team1024.robot.commands.auto.Pos2ShootWPeg;
+import org.usfirst.frc.team1024.robot.commands.auto.Pos3ShootSPeg;
+import org.usfirst.frc.team1024.robot.commands.auto.Pos3ShootWPeg;
 import org.usfirst.frc.team1024.robot.subsystems.Blender;
 import org.usfirst.frc.team1024.robot.subsystems.Climber;
 import org.usfirst.frc.team1024.robot.subsystems.Drivetrain;
@@ -54,11 +58,16 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
-
-		chooser.addObject("Position 1, North Peg", new Pos1NPeg());
-		chooser.addDefault("Position 1, West Peg", new Pos1WPeg());
-		chooser.addObject("Position 1, South Peg", new Pos1SPeg());
-		chooser.addObject("Position 2 West Peg", new Pos2WPeg());
+		
+		//All Auto underneath shoot before executing their auto
+		chooser.addDefault("Position 1, Shoot, West Peg", new Pos1ShootWPeg());
+		chooser.addObject("Position 1, Shoot, North Peg", new Pos1ShootNPeg());
+		chooser.addObject("Position 1, Shoot, South Peg", new Pos1ShootSPeg());
+		chooser.addObject("Position 2, Shoot, West Peg", new Pos2ShootWPeg());
+		chooser.addObject("Position 2, Shoot, North Peg", new Pos2ShootNPeg());
+		chooser.addObject("Position 2, Shoot, South Peg", new Pos2ShootSPeg());
+		chooser.addObject("Position 3, Shoot, West Peg", new Pos3ShootWPeg());
+		chooser.addObject("Position3, Shoot, South Peg", new Pos3ShootSPeg());
 		
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);

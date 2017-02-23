@@ -1,14 +1,26 @@
 package org.usfirst.frc.team1024.robot.commands.auto;
 
+import org.usfirst.frc.team1024.robot.commands.Drive2Inputs;
 import org.usfirst.frc.team1024.robot.commands.DriveForDistance;
 import org.usfirst.frc.team1024.robot.commands.ShootCommand;
 import org.usfirst.frc.team1024.robot.commands.TurnCommand;
-
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class Pos2Shooting extends CommandGroup {
 	
+	
 	public Pos2Shooting() {
+		
+		//Drive away from wall
+		addSequential(new DriveForDistance(0.5, 33)); //Set this later
+		//Turn to face the boiler
+		addSequential(new TurnCommand(0.5, -90)); 
+		//Drive to shooting position
+		addSequential(new DriveForDistance(0.5, 136)); //Set this later
+		//Turn to aim shooter at boiler
+		addSequential(new Drive2Inputs(1.0, 0, 135)); //Takes right and left power, along with desired gyro angle. Check if valid
+		//Shoot
+		addSequential(new ShootCommand());
 		
 	}
 	
@@ -18,17 +30,7 @@ public class Pos2Shooting extends CommandGroup {
 	
 	protected void execute() {
 		
-		//Drive away from wall
-		addSequential(new DriveForDistance(0.5, 33)); //Set this later
-		//Turn to face shooting position
-		addSequential(new TurnCommand(0.5, -90)); 
-		//Drive to shooting position
-		addSequential(new DriveForDistance(0.5, 143)); //Set this later
-		//Turn to aim shooter at boiler
-		addSequential(new TurnCommand(0.5, 45)); //Set this later
-		//Shoot until you can't shoot no more
-		addSequential(new ShootCommand());
-		
+	
 	}
 	
 	protected boolean isFinished() {
