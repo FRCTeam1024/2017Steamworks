@@ -4,11 +4,9 @@ import org.usfirst.frc.team1024.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class GearClampCommand extends Command {
-	int state = 0;
-	boolean isDone;
-	public GearClampCommand(int state) {
-		requires(Robot.gear);
+public class shift extends Command {
+	String state;
+	public shift(String state) {
 		this.state = state;
 	}
 	
@@ -18,13 +16,18 @@ public class GearClampCommand extends Command {
 	
 	@Override
 	protected void execute() {
-		Robot.gear.clamp(state);
-		isDone = true;
+		if (state.equals("Low")) {
+			Robot.drivetrain.shifter.set(false);
+		} else if (state.equals("Low")) {
+			Robot.drivetrain.shifter.set(true);
+		} else {
+			Robot.drivetrain.shifter.set(false);
+		}
 	}
 	
 	@Override
 	protected boolean isFinished() {
-		return isDone;
+		return false;
 	}
 	
 	@Override

@@ -1,6 +1,8 @@
 package org.usfirst.frc.team1024.robot.util;
 
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.TalonControlMode;
+
 import edu.wpi.first.wpilibj.CANSpeedController;
 
 public class KilaTalon extends CANTalon implements CANSpeedController{
@@ -15,7 +17,13 @@ public class KilaTalon extends CANTalon implements CANSpeedController{
 	 * Note: This constant is the: tickrate/gear ratio * wheel circumference
 	 * @returns Encoder distance traveled (inches)
 	 */
-	public double getDistance() {
-		return getEncPosition() / Constants.ENCODER_CONSTANT_INCHES;
+	public double getDistanceInInches() {
+		return (getEncPosition() * Constants.WHEEL_CIRCUMFERENCE) / Constants.ENCOER_TICKS_PER_WHEEL_REV;
+	}
+	
+	public void goDistanceInInches(double distance) {
+		changeControlMode(TalonControlMode.Position);
+		set((distance / 3) / Constants.WHEEL_CIRCUMFERENCE);
+		enable();
 	}
 }

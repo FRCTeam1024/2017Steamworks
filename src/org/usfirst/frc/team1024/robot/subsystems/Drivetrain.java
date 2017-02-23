@@ -43,15 +43,19 @@ public class Drivetrain extends Subsystem implements Subsystem1024 {
 		LiveWindow.addActuator("Drivetrain", "RearLeft Motor",    rearLeftDrive);
 		LiveWindow.addActuator("Drivetrain", "FrontRight Motor",  frontRightDrive);
 		LiveWindow.addActuator("Drivetrain", "RearRight Motor",   rearRightDrive);
-		
+		LiveWindow.addActuator("Drivetrain", "Shifter", shifter);
 		LiveWindow.addSensor("Sensors", "Gyro", 			   gyro);
 		
-		setMotorConfig(frontLeftDrive, 0.0, 0.0, 0.0);
-		setMotorConfig(frontRightDrive, 0.0, 0.0, 0.0);
+		setMotorConfig(frontLeftDrive, 0.2, 0.00003, 0.0);
+		setMotorConfig(frontRightDrive, 0.2, 0.00003, 0.0);
 		rearLeftDrive.changeControlMode(TalonControlMode.Follower);
 		rearLeftDrive.set(42);
 		rearRightDrive.changeControlMode(TalonControlMode.Follower);
 		rearRightDrive.set(2);
+		frontRightDrive.reverseOutput(true);
+		frontRightDrive.reverseSensor(true);
+		frontLeftDrive.enableBrakeMode(true);
+		frontRightDrive.enableBrakeMode(true);
 		//setFollowerMode(frontRightDrive, rearRightDrive);
 	}
 	
@@ -97,39 +101,43 @@ public class Drivetrain extends Subsystem implements Subsystem1024 {
 	/**
 	 * Outputs motor properties to SmartDashboard.
 	 */
+	
+	boolean isDone = false;
 	@Override
 	public void outputToSmartDashboard() {
-		/*SmartDashboard.putData("Front Left Drive",   frontLeftDrive);
-		SmartDashboard.putData("Rear Left Drive",    rearLeftDrive);
-		SmartDashboard.putData("Front Right Drive",  frontRightDrive);
-		SmartDashboard.putData("Rear Right Drive",   rearRightDrive); */
+		//SmartDashboard.putData("Front Left Drive",   frontLeftDrive);
+		//SmartDashboard.putData("Rear Left Drive",    rearLeftDrive);
+		//SmartDashboard.putData("Front Right Drive",  frontRightDrive);
+		//SmartDashboard.putData("Rear Right Drive",   rearRightDrive); 
 		if (SmartDashboard.getBoolean("Reset Encoders", false) == true) {
 			frontLeftDrive.setEncPosition(0);
 			frontRightDrive.setEncPosition(0);
 		}
-		if (SmartDashboard.getBoolean("Drivetrain GO", false) == true) {
-			frontLeftDrive.changeControlMode(TalonControlMode.Position);
+		if (SmartDashboard.getBoolean("Drivetrain GO", false) == true && isDone != true) {
 			frontLeftDrive.setP(SmartDashboard.getNumber("Left Drive P", frontLeftDrive.getP()));
 			frontLeftDrive.setI(SmartDashboard.getNumber("Left Drive I", frontLeftDrive.getI()));
 			frontLeftDrive.setD(SmartDashboard.getNumber("Left Drive D", frontLeftDrive.getD()));
-			frontLeftDrive.setSetpoint(SmartDashboard.getNumber("Left Drive Setpoint", frontLeftDrive.getSetpoint()));
-			frontLeftDrive.enable();
+			frontLeftDrive.goDistanceInInches(SmartDashboard.getNumber("Left Drive Setpoint", 10));
 			
-			frontRightDrive.changeControlMode(TalonControlMode.Position);
 			frontRightDrive.setP(SmartDashboard.getNumber("Right Drive P", frontRightDrive.getP()));
 			frontRightDrive.setI(SmartDashboard.getNumber("Right Drive I", frontRightDrive.getI()));
 			frontRightDrive.setD(SmartDashboard.getNumber("Right Drive D", frontRightDrive.getD()));
-			frontRightDrive.setSetpoint(SmartDashboard.getNumber("Right Drive Setpoint", frontRightDrive.getSetpoint()));
-			frontRightDrive.enable();
+			frontRightDrive.goDistanceInInches(SmartDashboard.getNumber("Right Drive Setpoint", 10));
+			isDone = true;
+			Timer.delay(10);
 		} else if (Robot.oi.lJoy.getRawAxis(1) != 0.0 || Robot.oi.rJoy.getRawAxis(1) != 0.0){
 		}
 		else {
-			frontLeftDrive.disable();
-			frontRightDrive.disable();
 		}
+
 		/*SmartDashboard.putNumber("Left Drive Distance (in.)", frontLeftDrive.getDistance());
 		SmartDashboard.putNumber("Right Drive Distance (in.)", frontRightDrive.getDistance());
 		SmartDashboard.putNumber("Average Distance (in.)", frontLeftDrive.getDistance() / frontRightDrive.getDistance());*/
+
+		SmartDashboard.putNumber("Left Encoder Distance (in.)", frontLeftDrive.getDistanceInInches());
+		SmartDashboard.putNumber("Right Encoder Distance (in.)", frontRightDrive.getDistanceInInches());
+		SmartDashboard.putNumber("Average Distance (in.)", frontLeftDrive.getDistanceInInches() / frontRightDrive.getDistanceInInches());
+	
 	}
 	
 	/**
@@ -138,9 +146,7 @@ public class Drivetrain extends Subsystem implements Subsystem1024 {
 	 */
 	public void drive(double power) {
 		frontLeftDrive.set(power);
-		rearLeftDrive.set(power);
-		frontRightDrive.set(-power);
-		rearRightDrive.set(-power);
+		frontRightDrive.set(power);
 	}
 	
 	/**
@@ -149,23 +155,20 @@ public class Drivetrain extends Subsystem implements Subsystem1024 {
 	 * @param rightpower (-1.0, 1.0)
 	 */
 	public void drive(double leftpower, double rightpower) {
+
 		//frontLeftDrive.changeControlMode(TalonControlMode.PercentVbus);
 		//frontRightDrive.changeControlMode(TalonControlMode.PercentVbus);
+
 		frontLeftDrive.set(leftpower);
-		//rearLeftDrive.set(leftpower);
-		frontRightDrive.set(-rightpower);
-		//rearRightDrive.set(-rightpower);
-		
+		frontRightDrive.set(rightpower);
 	}
 	
 	/**
 	 * Stops all drivetrain motors.
 	 */
 	public void stop() {
-		frontLeftDrive.set(0.0);
-		rearLeftDrive.set(0.0);
-		frontRightDrive.set(0.0);
-		rearRightDrive.set(0.0);
+		frontLeftDrive.disable();
+		frontRightDrive.disable();
 	}
 	/**
 	 * Drives all drivetrain motors for a given time and powers.
@@ -203,7 +206,7 @@ public class Drivetrain extends Subsystem implements Subsystem1024 {
 	 * @returns the average position of the drive encoders.
 	 */
 	public double getAverageEncoderDistance() {
-		return (frontLeftDrive.getDistance() + frontRightDrive.getDistance()) / 2;
+		return (frontLeftDrive.getDistanceInInches() + frontRightDrive.getDistanceInInches()) / 2;
 	}
 	
 	/**
@@ -215,6 +218,7 @@ public class Drivetrain extends Subsystem implements Subsystem1024 {
 		while (getAverageEncoderDistance() < distance) {
 			drive(power);
 		}
+		stop();
 	}
 	
 	/**
@@ -222,10 +226,8 @@ public class Drivetrain extends Subsystem implements Subsystem1024 {
 	 * @param distance (inches)
 	 */
 	public void driveToDistance(double distance) {
-		frontLeftDrive.setSetpoint(distance * Constants.ENCODER_CONSTANT_INCHES);
-		frontRightDrive.setSetpoint(distance * Constants.ENCODER_CONSTANT_INCHES);
-		frontLeftDrive.enable();
-		frontRightDrive.enable();
+		frontLeftDrive.goDistanceInInches(distance);
+		frontRightDrive.goDistanceInInches(distance);
 	}
 	
 	/**

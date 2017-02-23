@@ -20,7 +20,7 @@ public class Pos1NPeg extends CommandGroup {
 	@Override
 	protected void execute() {
 		//Goes to shooting position and shoots
-		addSequential(new Pos1Shooting());
+		addSequential(new Pos1Shoot());
 		//Turns from the original position
 		addSequential(new TurnCommand(0.4, 135)); //Set this Later
 		//Drives a certain distance
@@ -32,7 +32,7 @@ public class Pos1NPeg extends CommandGroup {
 		//Turns so that the gear can be accurately placed upon the peg
 		addSequential(new TurnCommand(0.4, -35)); //Set this Later
 		//Places the gear
-		addSequential(new PushGearCommand(true));
+		addSequential(new PushGearCommand());
 		//Turns back to its previous position
 		addSequential(new TurnCommand(0.4, 35)); //Set this Later
 		//Retracts

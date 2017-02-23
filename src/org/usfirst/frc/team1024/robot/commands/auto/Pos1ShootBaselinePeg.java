@@ -15,7 +15,7 @@ public class Pos1ShootBaselinePeg extends CommandGroup {
 		addSequential(new TurnCommand(0.5, 45)); // After that, we turn a certain distance.
 		addSequential(new DriveForDistance(0.5, 95.0)); // Set this later.
 		addSequential(new TurnCommand(0.5, 45));  // We turn to face the gear.
-		addSequential(new PushGearCommand(true)); // We push the gear onto the peg.
+		addSequential(new PushGearCommand()); // We push the gear onto the peg.
 		addSequential(new DriveForTime(-0.5, 1.0)); // We retract from the airship.
 
 	}
