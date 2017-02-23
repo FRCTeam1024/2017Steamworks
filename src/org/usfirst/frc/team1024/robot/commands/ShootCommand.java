@@ -2,13 +2,23 @@ package org.usfirst.frc.team1024.robot.commands;
 
 import org.usfirst.frc.team1024.robot.Robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class ShootCommand extends Command {
-	boolean hasDone;
+	boolean isDone = false;
+	int type;
+	double time;
 	public ShootCommand() {
 		requires(Robot.shooter);
-		hasDone = false;
+		type = 0;
+	}
+	
+	public ShootCommand(double time) {
+		requires(Robot.shooter);
+		this.time = time;
+		type = 1;
 	}
 
 	@Override
@@ -17,13 +27,24 @@ public class ShootCommand extends Command {
 	
 	@Override
 	protected void execute() {
-		Robot.shooter.shooter.setSetpoint(Robot.shooter.shooterSetSpeed);
-		Robot.shooter.shooter.enable();
+		switch (type) {
+			case 0:
+				Robot.shooter.shooter.setSetpoint(Robot.shooter.shooterSetSpeed);
+				Robot.shooter.shooter.enable();
+				break;
+			case 1:
+				Robot.shooter.shooter.setSetpoint(Robot.shooter.shooterSetSpeed);
+				Robot.shooter.shooter.enable();
+				Timer.delay(time);
+				isDone = true;
+				break;
+		}
+		
 	}
 	
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return isDone;
 	}
 	
 	@Override

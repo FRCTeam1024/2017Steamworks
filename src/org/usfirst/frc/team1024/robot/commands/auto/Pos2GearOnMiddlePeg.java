@@ -15,13 +15,14 @@ public class Pos2GearOnMiddlePeg extends CommandGroup {
 	
 	
 	public Pos2GearOnMiddlePeg() {
-			//addSequential(new DriveForDistance(0.5, Constants.DISTANCE_TO_BASELINE - Constants.ROBOT_WIDTH));
-		addSequential(new DriveForDistance(1));
-		//addSequential(new WaitForTimeCommand(2.0));
+		addSequential(new GearClampCommand(0));
+		addSequential(new DriveForDistance(Constants.DISTANCE_TO_BASELINE - Constants.ROBOT_LENGTH, 3f));
+		addSequential(new WaitForTimeCommand(2.0));
 		//addSequential(new DriveForTime(0.5, 3));
-		//addSequential(new GearClampCommand(1));
-		//addSequential(new PushGearCommand(true));
-		//addSequential(new DriveForTime(-0.5, 1.0));
+		addSequential(new GearClampCommand(1));
+		addSequential(new WaitForTimeCommand(0.5));
+		addSequential(new PushGearCommand());
+		addSequential(new DriveForTime(-0.5, 0.5));
 		//make it so that "isFinished" returns True
 	}
 	
@@ -31,8 +32,6 @@ public class Pos2GearOnMiddlePeg extends CommandGroup {
 	
 	@Override
 	protected void execute() {
-		Robot.drivetrain.frontLeftDrive.setSetpoint(1000);
-		Robot.drivetrain.frontRightDrive.setSetpoint(1000);
 	}
 	@Override
 	protected boolean isFinished() {

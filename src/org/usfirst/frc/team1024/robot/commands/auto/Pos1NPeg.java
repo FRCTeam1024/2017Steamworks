@@ -20,7 +20,7 @@ public class Pos1NPeg extends CommandGroup {
 	@Override
 	protected void execute() {
 		//Goes to shooting position and shoots
-		addSequential(new Pos1Shooting());
+		addSequential(new Pos1Shoot());
 		//Turns from the original position
 		addSequential(new TurnCommand(0.4, 135)); //Set this Later
 		//Drives a certain distance

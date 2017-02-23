@@ -2,11 +2,19 @@ package org.usfirst.frc.team1024.robot.commands;
 
 import org.usfirst.frc.team1024.robot.Robot;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class AgitateCommand extends Command {
+	int type;
+	double time;
+	boolean isDone = false;
 	public AgitateCommand() {
-		
+		type = 0;
+	}
+	public AgitateCommand(double time) {
+		this.time = time;
+		type = 1;
 	}
 	
 	@Override
@@ -16,12 +24,22 @@ public class AgitateCommand extends Command {
 	
 	@Override
 	protected void execute() {
-		Robot.hopper.agitate();
+		switch (type) {
+			case 0:
+				Robot.hopper.agitate(1.0);
+				break;
+			case 1:
+				Robot.hopper.agitate(1.0);
+				Timer.delay(time);
+				isDone = true;
+				break;
+		}
+		
 	}
 	
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return isDone;
 	}
 	
 	@Override

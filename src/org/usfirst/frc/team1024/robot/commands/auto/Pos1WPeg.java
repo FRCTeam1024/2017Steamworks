@@ -18,7 +18,7 @@ public class Pos1WPeg extends CommandGroup {
 	@Override
 	protected void execute() {
 		// Goes to shooting position and shoots
-		addSequential(new Pos1Shooting());
+		addSequential(new Pos1Shoot());
 		// Turn away from shooting position
 		addSequential(new TurnCommand(0.5, 90)); // Set this later.
 		// Drive toward W peg

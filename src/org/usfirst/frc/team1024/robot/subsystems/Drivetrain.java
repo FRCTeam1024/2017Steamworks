@@ -46,15 +46,16 @@ public class Drivetrain extends Subsystem implements Subsystem1024 {
 		LiveWindow.addActuator("Drivetrain", "Shifter", shifter);
 		LiveWindow.addSensor("Sensors", "Gyro", 			   gyro);
 		
-		setMotorConfig(frontLeftDrive, 0.1, 0.0, 0.0);
-		setMotorConfig(frontRightDrive, 0.1, 0.0, 0.0);
+		setMotorConfig(frontLeftDrive, 0.2, 0.00003, 0.0);
+		setMotorConfig(frontRightDrive, 0.2, 0.00003, 0.0);
 		rearLeftDrive.changeControlMode(TalonControlMode.Follower);
 		rearLeftDrive.set(42);
 		rearRightDrive.changeControlMode(TalonControlMode.Follower);
 		rearRightDrive.set(2);
 		frontRightDrive.reverseOutput(true);
 		frontRightDrive.reverseSensor(true);
-		
+		frontLeftDrive.enableBrakeMode(true);
+		frontRightDrive.enableBrakeMode(true);
 		//setFollowerMode(frontRightDrive, rearRightDrive);
 	}
 	
