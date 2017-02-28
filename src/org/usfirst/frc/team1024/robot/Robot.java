@@ -2,6 +2,8 @@
 package org.usfirst.frc.team1024.robot;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.DigitalOutput;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
@@ -20,6 +22,11 @@ import org.usfirst.frc.team1024.robot.commands.auto.Pos2ShootWPeg;
 import org.usfirst.frc.team1024.robot.commands.auto.Pos3ShootSPeg;
 import org.usfirst.frc.team1024.robot.commands.auto.Pos3ShootWPeg;
 
+import java.util.List;
+
+import org.usfirst.frc.team1024.Pixy.PixyI2C;
+import org.usfirst.frc.team1024.Pixy.PixyObject;
+import org.usfirst.frc.team1024.Pixy.PixyPacket;
 import org.usfirst.frc.team1024.robot.commands.auto.Pos1Shoot;
 
 // import org.usfirst.frc.team1024.robot.commands.auto.Pos2GearOnMiddlePeg;
@@ -50,6 +57,10 @@ public class Robot extends IterativeRobot {
 	public static final Hopper hopper = new Hopper();
 	public static final REVDigitBoard autoChooser = new REVDigitBoard();
 	
+	public PixyI2C pixy;
+	public PixyPacket test;
+	public DigitalOutput pixyPower;
+	public static int[] pixyValues;
 	
 	int position = 0;
 	String peg = "";
@@ -84,6 +95,11 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putBoolean("Logi Drive?", false);
 		drivetrain.frontLeftDrive.setEncPosition(0);
 		drivetrain.frontRightDrive.setEncPosition(0);
+		
+		pixyPower = new DigitalOutput(4);
+		pixyPower.set(true);
+		pixy = new PixyI2C();
+		pixyValues = new int[10];
 	}
 	
 	@Override
@@ -265,6 +281,36 @@ public class Robot extends IterativeRobot {
 				drivetrain.shifter.set(true);
 			}
 
+		}
+		
+		List<PixyObject> pixyObjectList = getPixyObjects();
+		if (pixyObjectList != null) {
+			printPixyStuff(pixyObjectList);
+			System.out.println("Got " + pixyObjectList.size() + " objects from the pixy");
+			//for (int i = 0; i < pixyObjectList.size(); i++) {
+			//	DriverStation.reportError(pixyObjectList.get(i).toString(), false);
+			//}
+		}
+	}
+	
+	public List<PixyObject> getPixyObjects() {
+		//pixy values are saved and read like PixyPacket.(x,y,width,height)
+		try {
+			return pixy.readFrame(1);
+		} catch ( Exception e) {
+			DriverStation.reportError(e.getMessage(), true);
+			// e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public static void printPixyStuff(List<PixyObject> pol){
+		for(int i = 0; i < pol.size(); i++) {
+		PixyObject po1 = pol.get(i);
+		SmartDashboard.putNumber(String.format("Pixy %1$d X", i), po1.getX());
+		SmartDashboard.putNumber(String.format("Pixy %1$d Y", i), po1.getY());
+		SmartDashboard.putNumber(String.format("Pixy %1$d Width", i), po1.getWidth());
+		SmartDashboard.putNumber(String.format("Pixy %1$d Height", i), po1.getHeight());
 		}
 	}
 	
