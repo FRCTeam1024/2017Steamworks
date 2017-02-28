@@ -1,14 +1,12 @@
 package org.usfirst.frc.team1024.robot.commands.auto;
-import org.usfirst.frc.team1024.robot.Robot;
 import org.usfirst.frc.team1024.robot.commands.DriveForDistance;
 
-import org.usfirst.frc.team1024.robot.commands.DriveForTime;
 import org.usfirst.frc.team1024.robot.commands.GearClampCommand;
 import org.usfirst.frc.team1024.robot.commands.PushGearCommand;
+import org.usfirst.frc.team1024.robot.commands.TurnCommand;
 import org.usfirst.frc.team1024.robot.commands.WaitForTimeCommand;
 import org.usfirst.frc.team1024.robot.util.Constants;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class Pos2WPeg extends CommandGroup {
@@ -32,6 +30,20 @@ public class Pos2WPeg extends CommandGroup {
 	
 	@Override
 	protected void execute() {
+		
+		//INCOMPLETE!!!!!!!!
+		addSequential(new TurnCommand(0.5, 135)); //Set this Later
+		//Drives to center, in line with W peg
+		addSequential(new DriveForDistance(0.5, 96.25)); //Set this later
+		//Turns to be facing W peg
+		addSequential(new TurnCommand(0.5, -90)); //Set this later
+		//Drive to W peg
+		addSequential(new DriveForDistance(0.5, 46.95)); //Set this later
+		//Place gear on W peg
+		addSequential(new PushGearCommand());
+		//Drive back from W peg
+		addSequential(new DriveForDistance(0.5, -46.95)); //Set this later
+
 	}
 	@Override
 	protected boolean isFinished() {

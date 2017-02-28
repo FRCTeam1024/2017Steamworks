@@ -129,6 +129,11 @@ public class Drivetrain extends Subsystem implements Subsystem1024 {
 		}
 		else {
 		}
+
+		/*SmartDashboard.putNumber("Left Drive Distance (in.)", frontLeftDrive.getDistance());
+		SmartDashboard.putNumber("Right Drive Distance (in.)", frontRightDrive.getDistance());
+		SmartDashboard.putNumber("Average Distance (in.)", frontLeftDrive.getDistance() / frontRightDrive.getDistance());*/
+
 		SmartDashboard.putNumber("Left Encoder Distance (in.)", frontLeftDrive.getDistanceInInches());
 		SmartDashboard.putNumber("Right Encoder Distance (in.)", frontRightDrive.getDistanceInInches());
 		SmartDashboard.putNumber("Average Distance (in.)", frontLeftDrive.getDistanceInInches() / frontRightDrive.getDistanceInInches());
@@ -150,6 +155,10 @@ public class Drivetrain extends Subsystem implements Subsystem1024 {
 	 * @param rightpower (-1.0, 1.0)
 	 */
 	public void drive(double leftpower, double rightpower) {
+
+		//frontLeftDrive.changeControlMode(TalonControlMode.PercentVbus);
+		//frontRightDrive.changeControlMode(TalonControlMode.PercentVbus);
+
 		frontLeftDrive.set(leftpower);
 		frontRightDrive.set(rightpower);
 	}

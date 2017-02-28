@@ -1,19 +1,22 @@
 package org.usfirst.frc.team1024.robot;
 
+
 import org.usfirst.frc.team1024.robot.commands.AgitateCommand;
 import org.usfirst.frc.team1024.robot.commands.EmptyCommand;
 import org.usfirst.frc.team1024.robot.commands.FlapCommand;
+
 import org.usfirst.frc.team1024.robot.commands.GearClampCommand;
 import org.usfirst.frc.team1024.robot.commands.PushGearCommand;
 import org.usfirst.frc.team1024.robot.commands.ShootCommand;
 import org.usfirst.frc.team1024.robot.commands.ShooterSpeedResetCommand;
+
 import org.usfirst.frc.team1024.robot.commands.shift;
 import org.usfirst.frc.team1024.robot.util.Constants;
+
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.command.Command;
 
 public class OI {
 	public Joystick logi;
@@ -58,7 +61,6 @@ public class OI {
 		
 		
 		
-		
 		gearClampOpenButton.whenPressed(new GearClampCommand(1));
 		gearClampCloseButton.whenPressed(new GearClampCommand(-1));
 		gearClampOffButton.whenPressed(new GearClampCommand(0));
@@ -69,6 +71,7 @@ public class OI {
 		
 		speedResetButton.whileHeld(new ShooterSpeedResetCommand());
 		
+
 		hopperFlapButton.whileHeld(new FlapCommand());
 		
 		/*shiftLowButtonL.whenPressed(new shift("Low"));
@@ -76,8 +79,7 @@ public class OI {
 		
 		shiftLowButtonR.whenPressed(new shift("Low"));
 		shiftHighButtonR.whenPressed(new shift("High"));*/
-		
-		
+
 	}
 	
 	/**
