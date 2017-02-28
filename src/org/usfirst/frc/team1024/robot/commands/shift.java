@@ -18,10 +18,10 @@ public class shift extends Command {
 	protected void execute() {
 		if (state.equals("Low")) {
 			Robot.drivetrain.shifter.set(false);
-		} else if (state.equals("Low")) {
+		} else if (state.equals("High")) {
 			Robot.drivetrain.shifter.set(true);
 		} else {
-			Robot.drivetrain.shifter.set(false);
+			Robot.drivetrain.shifter.set(true);
 		}
 	}
 	

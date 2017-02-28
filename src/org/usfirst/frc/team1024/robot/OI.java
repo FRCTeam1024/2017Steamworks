@@ -4,6 +4,7 @@ import org.usfirst.frc.team1024.robot.commands.AgitateCommand;
 import org.usfirst.frc.team1024.robot.commands.EmptyCommand;
 import org.usfirst.frc.team1024.robot.commands.FlapCommand;
 import org.usfirst.frc.team1024.robot.commands.GearClampCommand;
+import org.usfirst.frc.team1024.robot.commands.OpenClampPushGearCommand;
 import org.usfirst.frc.team1024.robot.commands.PushGearCommand;
 import org.usfirst.frc.team1024.robot.commands.ShootCommand;
 import org.usfirst.frc.team1024.robot.commands.ShooterSpeedResetCommand;
@@ -63,7 +64,7 @@ public class OI {
 		gearClampCloseButton.whenPressed(new GearClampCommand(-1));
 		gearClampOffButton.whenPressed(new GearClampCommand(0));
 		
-		gearPushButton.whileHeld(new PushGearCommand());
+		gearPushButton.whileHeld(new OpenClampPushGearCommand());
 		
 		shootButton.whileHeld(new ShootCommand());
 		
@@ -71,11 +72,11 @@ public class OI {
 		
 		hopperFlapButton.whileHeld(new FlapCommand());
 		
-		/*shiftLowButtonL.whenPressed(new shift("Low"));
+		shiftLowButtonL.whenPressed(new shift("Low"));
 		shiftHighButtonL.whenPressed(new shift("High"));
 		
 		shiftLowButtonR.whenPressed(new shift("Low"));
-		shiftHighButtonR.whenPressed(new shift("High"));*/
+		shiftHighButtonR.whenPressed(new shift("High"));
 		
 		
 	}

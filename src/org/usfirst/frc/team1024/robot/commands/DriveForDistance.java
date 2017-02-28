@@ -50,7 +50,6 @@ public class DriveForDistance extends Command{
 					SmartDashboard.putNumber("Time", time.get());
 				}
 				time.reset();
-				Robot.drivetrain.driveToDistance(distance); //PID
 				isDone = true;
 				break;
 			case 1:

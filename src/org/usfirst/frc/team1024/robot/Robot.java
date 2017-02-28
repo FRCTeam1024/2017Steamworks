@@ -66,11 +66,12 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putBoolean("Logi Drive?", false);
 		drivetrain.frontLeftDrive.setEncPosition(0);
 		drivetrain.frontRightDrive.setEncPosition(0);
+		autoSelected = 0;
 	}
 	
 	@Override
 	public void disabledInit() {
-		autoChooser.display("1024");
+		autoChooser.display("00");
 	}
 
 	@Override
@@ -81,24 +82,19 @@ public class Robot extends IterativeRobot {
 			autoSelected++;
 			Timer.delay(.2);
 			while(!autoChooser.getButtonA());
-			if(autoSelected > 9) autoSelected = 0;
+			if(autoSelected > 9) autoSelected = 9;
 		}
 		if(!autoChooser.getButtonB()){
-			/*position++;
-			Timer.delay(.2);
+			autoSelected--;
+			Timer.delay(0.2);
 			while(!autoChooser.getButtonB());
-			if(position > 5) position = 0;*/
+			if(autoSelected < 0) autoSelected = 0;
+			
 		}
-		//Wrap around vvv
-		/*
-		if(autoSelected < 10){
-			autoChooser.display("" + autoDelay + position + "0" + autoSelected);
-		}else if(autoSelected >= 10){
-			autoChooser.display("" + autoDelay + position + autoSelected);
-		}else{
-			autoChooser.display("NULL");
-		}
-		autonomousCommand = new StateAndWorldsAuto(autoSelected, position); */
+		
+		autoChooser.display("000" + autoSelected);
+		
+		// autonomousCommand = new StateAndWorldsAuto(autoSelected, position); 
 	}
 	
 	@Override

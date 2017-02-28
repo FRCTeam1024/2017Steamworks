@@ -1,7 +1,7 @@
 package org.usfirst.frc.team1024.robot.util;
 
 public class Constants {
-	public static final double INIT_SHOOTER_POWER = 2500; //best as of 2/21/17: 2275 //preset shooter power 
+	public static final double INIT_SHOOTER_POWER = 2045; //best as of 2/21/17: 2275 //preset shooter power 
 	public static final double MAX_SHOOTER_SPEED = 2900.0;
 	//Field Constants:
 	public static final double DISTANCE_TO_BASELINE = 93.3; //distance to baseline from alliance station wall in inches
@@ -17,9 +17,13 @@ public class Constants {
 	//PID CONSTANTS vvv
 	public static final double SHOOTER_kU = 0.6; //number found when tuning for stead oscillations
 	//public static final double SHOOTER_kP = 0.198; //for some overshoot
+	public static final double SHOOTER_kP = 2.0; //for no overshoot
+	public static final double SHOOTER_kI = 0.0; 
+	public static final double SHOOTER_kD = 1.0;
+	public static final double SHOOTER_kF = 0.15;
+	/*
 	public static final double SHOOTER_kP = 0.1; //for no overshoot
 	public static final double SHOOTER_kI = 0.0; 
 	public static final double SHOOTER_kD = 50;
-	public static final double SHOOTER_kF = 0.14;
-	
+	public static final double SHOOTER_kF = 0.14;*/
 }
