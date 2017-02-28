@@ -16,6 +16,7 @@ public class Pos3NPeg extends CommandGroup{
 
 	@Override
 	protected void initialize() {
+		
 	}
 
 	@Override
@@ -30,10 +31,12 @@ public class Pos3NPeg extends CommandGroup{
 
 	@Override
 	protected void end() {
+		
 	}
 
 	@Override
 	protected void interrupted() {
+		
 	}
 
 }

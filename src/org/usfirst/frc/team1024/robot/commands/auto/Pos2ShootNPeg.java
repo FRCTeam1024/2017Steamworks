@@ -22,7 +22,7 @@ public class Pos2ShootNPeg extends CommandGroup {
 		// Turns so that the gear can be accurately placed upon the peg
 		addSequential(new TurnCommand(0.4, -35)); // Set this Later
 		// Places the gear
-		addSequential(new PushGearCommand());//?!?!?!?!
+		addSequential(new PushGearCommand());
 		// Turns back to its previous position
 		addSequential(new TurnCommand(0.4, 35)); // Set this Later
 		// Retracts

@@ -16,7 +16,7 @@ public class Pos2Shooting extends CommandGroup {
 		//Turn to face the boiler
 		addSequential(new TurnCommand(0.5, -90)); 
 		//Drive to shooting position
-		addSequential(new DriveForDistance(0.5, 136)); //Set this later
+		addSequential(new DriveForDistance(0.5, 95)); //Set this later
 		//Turn to aim shooter at boiler
 		addSequential(new Drive2Inputs(1.0, 0, 135)); //Takes right and left power, along with desired gyro angle. Check if valid
 		//Shoot

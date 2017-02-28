@@ -1,3 +1,4 @@
+//This class or Pos1Shooting? Or shall they be merged?
 package org.usfirst.frc.team1024.robot.commands.auto;
 
 import org.usfirst.frc.team1024.robot.Robot;

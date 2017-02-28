@@ -12,13 +12,12 @@ public class Pos1WPeg extends CommandGroup{
 	public Pos1WPeg() {
 		//Set all later
 		
-		addSequential(new TurnCommand(0.6, 45));
+		//Drives toward the 2nd position.
+		addSequential(new DriveForDistance(0.7, 50));
+		//Turns toward the peg.
+		addSequential(new TurnCommand(0.6, -90));
 		//Drives towards the south peg from position 1
 		addSequential(new DriveForDistance(0.8, 95));
-		//Turns toward the south peg
-		addSequential(new TurnCommand(0.6, 45));
-		//Drives a bit further
-		addSequential(new DriveForDistance(0.3, 20)); //Necessary?
 		//Pushes the gear onto the peg
 		addSequential(new PushGearCommand()); //FILL IN PLEASE!!!!!!!!
 		//Retracts
