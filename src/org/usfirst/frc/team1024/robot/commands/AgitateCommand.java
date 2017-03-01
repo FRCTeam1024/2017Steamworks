@@ -39,7 +39,7 @@ public class AgitateCommand extends Command {
 	
 	@Override
 	protected boolean isFinished() {
-		return isDone;
+		return false; //We always want this to run forever until the command is canceled
 	}
 	
 	@Override

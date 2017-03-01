@@ -1,13 +1,25 @@
 package org.usfirst.frc.team1024.robot.util;
 
 public class Constants {
-	public static final double INIT_SHOOTER_POWER = 2045; //best as of 2/21/17: 2275 //preset shooter power 
+	public static final double INIT_SHOOTER_POWER = 1980.0; //best as of 2/21/17: 2275 //preset shooter power 
 	public static final double MAX_SHOOTER_SPEED = 2900.0;
 	//Field Constants:
 	public static final double DISTANCE_TO_BASELINE = 93.3; //distance to baseline from alliance station wall in inches
+	public static final double DISTANCE_TO_W_PEG = 114.3; //109.0 from allison, 114.3 from re-looking at diagrams
+	public static final double DISTANCE_TO_BOILER_HOPPER = 78.5;
+	public static final double DISTANCE_TO_BOILER_HOPPER_SWITCH = 78.5 + 26.5; // This is probs the distance we want to go
+	public static final double DISTANCE_TO_BOILER_HOPPER_SWITCH_CENTER = 78.5 + 26.5 + 15.0;
 	//Robot Constants:
+	/**
+	 * Measured from left to right (inches).
+	 */
 	public static final double ROBOT_WIDTH = 0.0; //measured from left to right
-	public static final double ROBOT_LENGTH = 28.375; //measured from front to back
+	
+	/**
+	 * Measured from front to back (inches).
+	 */
+	public static final double ROBOT_LENGTH = 35; //measured from front to back
+	
 	
 	public static final double WHEEL_RADIUS = 3.125;
 	public static final double WHEEL_CIRCUMFERENCE = 19.6349540849; //2 * Math.PI * WHEEL_RADIUS

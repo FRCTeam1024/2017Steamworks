@@ -71,7 +71,7 @@ public class Robot extends IterativeRobot {
 	
 	@Override
 	public void disabledInit() {
-		autoChooser.display("00");
+		autoChooser.display("1024");
 	}
 
 	@Override
@@ -93,14 +93,20 @@ public class Robot extends IterativeRobot {
 		}
 		
 		autoChooser.display("000" + autoSelected);
-		
-		// autonomousCommand = new StateAndWorldsAuto(autoSelected, position); 
+		switch(autoSelected) {
+			case 0:
+				break;
+			case 1:
+				autonomousCommand = new Pos2GearOnMiddlePeg();
+				break;
+		}
+		//autonomousCommand = new StateAndWorldsAuto(autoSelected, position); 
 	}
 	
 	@Override
 	public void autonomousInit() {
 		//autonomousCommand = chooser.getSelected();
-		autonomousCommand = new Pos1Shoot();
+		//autonomousCommand = new Pos1Shoot();
 
 		
 //		 String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -172,39 +178,14 @@ public class Robot extends IterativeRobot {
 		shooter.shooter.updateTable();
 		drivetrain.frontLeftDrive.changeControlMode(TalonControlMode.PercentVbus);
 		drivetrain.frontRightDrive.changeControlMode(TalonControlMode.PercentVbus);
+		drivetrain.frontLeftDrive.enable();
+		drivetrain.frontRightDrive.enable();
 	}
 	
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		//outputTheThings();
-		// Drivetrain
-
-		// if (SmartDashboard.getBoolean("Drivetrain GO", false) == true) {
-		// } else {
-		// if (SmartDashboard.getBoolean("Logi Drive?", true) == true) {
-		// drivetrain.drive(-oi.logi.getRawAxis(1), -oi.logi.getRawAxis(3));
-		// } else {
-		//drivetrain.frontRightDrive.changeControlMode(TalonControlMode.PercentVbus);
-		drivetrain.drive(-oi.lJoy.getRawAxis(RobotMap.JOYSTICK_Y_AXIS_NUM),
-						 -oi.rJoy.getRawAxis(RobotMap.JOYSTICK_Y_AXIS_NUM));
-		// Blender
-		blender.blend(oi.logi.getRawAxis(1));
-		// Climber
-		climber.climb(Math.abs(oi.logi.getRawAxis(3)));
-
-		/*
-		 * if (oi.logi.getRawButton(4) == true) { gear.push(true); } else if
-		 * (oi.logi.getRawButton(4) == false) { gear.push(false); }
-		 */
-		if (oi.logi.getRawButton(1) == true) {
-			gear.clamper.set(Value.kOff);
-		}
-		if (oi.logi.getPOV() == 0) {
-			shooter.shooterSetSpeed += 5.0;
-		} else if (oi.logi.getPOV() == 180) {
-			shooter.shooterSetSpeed -= 5.0;
-
+		outputTheThings();
 		//if (SmartDashboard.getBoolean("Drivetrain GO", false) == true) {
 		//} else {
 			//if (SmartDashboard.getBoolean("Logi Drive?", true) == true) {
@@ -213,11 +194,11 @@ public class Robot extends IterativeRobot {
 		//drivetrain.frontRightDrive.changeControlMode(TalonControlMode.PercentVbus);
 				drivetrain.drive(-oi.lJoy.getRawAxis(RobotMap.JOYSTICK_Y_AXIS_NUM), oi.rJoy.getRawAxis(RobotMap.JOYSTICK_Y_AXIS_NUM));
 				// Blender
-				blender.blend(oi.logi.getRawAxis(1));
-				hopper.agitator.set(oi.logi.getRawAxis(1));
-				hopper.agitate(oi.logi.getRawAxis(1));
+				blender.blend(oi.logi.getRawAxis(3));
+				hopper.agitator.set(oi.logi.getRawAxis(3));
+				hopper.agitate(oi.logi.getRawAxis(3));
 				// Climber
-				climber.climb(Math.abs(oi.logi.getRawAxis(3)));
+				climber.climb(Math.abs(oi.logi.getRawAxis(1)));
 			
 			/*
 			 * if (oi.logi.getRawButton(4) == true) { gear.push(true); } else if
@@ -239,7 +220,6 @@ public class Robot extends IterativeRobot {
 			}
 
 		}
-	}
 	
 	@Override
 	public void testPeriodic() {

@@ -79,14 +79,10 @@ public class OI {
 		shiftHighButtonL.whenPressed(new shift("High"));
 		
 		shiftLowButtonR.whenPressed(new shift("Low"));
-<<<<<<< HEAD
 		shiftHighButtonR.whenPressed(new shift("High"));
 		
 		
-=======
-		shiftHighButtonR.whenPressed(new shift("High"));*/
 
->>>>>>> origin/master
 	}
 	
 	/**
