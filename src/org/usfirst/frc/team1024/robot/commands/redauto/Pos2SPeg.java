@@ -1,6 +1,7 @@
-package org.usfirst.frc.team1024.robot.commands.auto;
+package org.usfirst.frc.team1024.robot.commands.redauto;
 
 import org.usfirst.frc.team1024.robot.commands.DriveForDistance;
+import org.usfirst.frc.team1024.robot.commands.DriveForTime;
 import org.usfirst.frc.team1024.robot.commands.PushGearCommand;
 import org.usfirst.frc.team1024.robot.commands.TurnCommand;
 
@@ -11,20 +12,20 @@ public class Pos2SPeg extends CommandGroup {
 	public Pos2SPeg() {
 		//Set all later
 		
-		//Drives towards the north peg from position 2
-		addSequential(new DriveForDistance(0.7, 70));
-		//Turns toward the north peg
-		addSequential(new TurnCommand(0.6, 90));
+		//Drives from pos 2 to pos 1
+		addSequential(new DriveForDistance(0.7, 70)); 
+		//Turns toward the south peg
+		addSequential(new TurnCommand(0.5, 90));
+		//Drives to south peg
+		addSequential(new DriveForDistance(0.7, 96));
+		//Turns to face the peg
+		addSequential(new TurnCommand(0.5, 45));
 		//Drives a bit further
-		addSequential(new DriveForDistance(0.3, 90));
-		//Turns to actually face the peg
-		addSequential(new TurnCommand(0.5, 40));
-		//Drives a bit forward
-		addSequential(new DriveForDistance(0.2, 12));
+		addSequential(new DriveForDistance(0.4, 3));
 		//Pushes the gear onto the peg
-		addSequential(new PushGearCommand()); //FILL IN PLEASE!!!!!!!!
+		addSequential(new PushGearCommand());
 		//Retracts
-		addSequential(new DriveForDistance(0.5, -30));
+		addSequential(new DriveForTime(-0.7, 3.0));
 	
 	}
 

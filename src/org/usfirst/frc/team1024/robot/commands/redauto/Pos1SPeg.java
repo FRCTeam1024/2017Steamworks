@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1024.robot.commands.auto;
+package org.usfirst.frc.team1024.robot.commands.redauto;
 
 import org.usfirst.frc.team1024.robot.commands.DriveForDistance;
 import org.usfirst.frc.team1024.robot.commands.DriveForTime;
@@ -12,7 +12,7 @@ public class Pos1SPeg extends CommandGroup{
 	public Pos1SPeg() {
 		//Set all later
 		//Drives towards the south peg from position 1
-		addSequential(new DriveForDistance(0.8, 110));
+		addSequential(new DriveForDistance(0.8, 96));
 		//Turns toward the south peg
 		addSequential(new TurnCommand(0.6, 45));
 		//Drives a bit further

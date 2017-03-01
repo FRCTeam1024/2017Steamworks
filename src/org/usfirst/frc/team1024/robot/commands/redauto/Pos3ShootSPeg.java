@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1024.robot.commands.auto;
+package org.usfirst.frc.team1024.robot.commands.redauto;
 
 import org.usfirst.frc.team1024.robot.commands.DriveForDistance;
 import org.usfirst.frc.team1024.robot.commands.DriveForTime;
@@ -7,33 +7,10 @@ import org.usfirst.frc.team1024.robot.commands.TurnCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class Pos1WPeg extends CommandGroup{
-	
-	public Pos1WPeg() {
-		//Set all later
-		
-		//Drives toward the 2nd position.
-		addSequential(new DriveForDistance(0.7, 50));
-		//Turns toward the peg.
-		addSequential(new TurnCommand(0.6, -90));
-		//Drives towards the south peg from position 1
-		addSequential(new DriveForDistance(0.8, 95));
-		//Pushes the gear onto the peg
-		addSequential(new PushGearCommand()); //FILL IN PLEASE!!!!!!!!
-		//Retracts
-		addSequential(new DriveForDistance(0.5, -30));
-		
-	}
-
-	@Override
-	protected void initialize() {
-	}
-
-	@Override
-	protected void execute() {
-
+public class Pos3ShootSPeg extends CommandGroup {
+	public Pos3ShootSPeg() {
 		// Goes to shooting position and shoots
-		addSequential(new Pos1Shoot());
+		addSequential(new Pos3Shooting());
 		// Turn away from shooting position
 		addSequential(new TurnCommand(0.5, 90)); // Set this later.
 		// Drive toward W peg
@@ -44,7 +21,16 @@ public class Pos1WPeg extends CommandGroup{
 		addSequential(new PushGearCommand()); // Set this later.
 		// Drive away from W peg
 		addSequential(new DriveForTime(-0.5, 1.0)); // Set this later.
+	}
+	
 
+	@Override
+	protected void initialize() {
+	}
+
+	@Override
+	protected void execute() {
+		
 	}
 
 	@Override
@@ -59,5 +45,4 @@ public class Pos1WPeg extends CommandGroup{
 	@Override
 	protected void interrupted() {
 	}
-
 }

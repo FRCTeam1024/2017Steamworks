@@ -1,5 +1,5 @@
 //This class or Pos1Shooting? Or shall they be merged?
-package org.usfirst.frc.team1024.robot.commands.auto;
+package org.usfirst.frc.team1024.robot.commands.redauto;
 
 import org.usfirst.frc.team1024.robot.Robot;
 import org.usfirst.frc.team1024.robot.commands.AgitateCommand;
