@@ -19,26 +19,30 @@ public class Pos1Shoot extends CommandGroup {
 		//addParallel(new ShootCommand(10.0));
 		//addParallel(new BlendCommand(10.0));
 		//addParallel(new AgitateCommand(10.0));
+		addParallel(new ShootCommand());
+		addParallel(new BlendCommand());
+		addParallel(new AgitateCommand());
 	}
 	
 	@Override
 	protected void initialize() {}
 	
 	@Override
-	protected void execute() {
+	protected void execute() {/*
 		if (hasDone != true) {
 			Robot.shooter.shooter.setSetpoint(Robot.shooter.shooterSetSpeed);
 			Timer.delay(0.5); //for the shooter to get up to speed
 			hasDone = true;
 		}
 		Robot.blender.blend(-1.0);
-		Robot.hopper.agitate(1.0);
+		Robot.hopper.agitate(1.0);*/
 	}
 	
 	@Override
 	protected boolean isFinished() { return false; }
 	@Override
 	protected void end() {
+		//Might have to set stuff to turn off later.
 	}
 	@Override
 	protected void interrupted() {}

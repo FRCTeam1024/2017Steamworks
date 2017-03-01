@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
  *
@@ -14,6 +15,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Gear extends Subsystem implements Subsystem1024 {
 	public Solenoid pusher = new Solenoid(RobotMap.GEAR_PUSHER_PORT_1);
 	public DoubleSolenoid clamper = new DoubleSolenoid(RobotMap.GEAR_CLAMP_PORT_1, RobotMap.GEAR_CLAMP_PORT_2);
+	
+	
 	
 	public void clamp(int clamp) {
 		if (clamp == 1) {

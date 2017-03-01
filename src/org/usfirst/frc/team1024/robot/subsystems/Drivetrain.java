@@ -155,12 +155,13 @@ public class Drivetrain extends Subsystem implements Subsystem1024 {
 	 * @param rightpower (-1.0, 1.0)
 	 */
 	public void drive(double leftpower, double rightpower) {
-
-		//frontLeftDrive.changeControlMode(TalonControlMode.PercentVbus);
-		//frontRightDrive.changeControlMode(TalonControlMode.PercentVbus);
+		frontLeftDrive.changeControlMode(TalonControlMode.PercentVbus);
+		frontRightDrive.changeControlMode(TalonControlMode.PercentVbus);
 
 		frontLeftDrive.set(leftpower);
 		frontRightDrive.set(rightpower);
+		frontLeftDrive.enable();
+		frontRightDrive.enable();
 	}
 	
 	/**
@@ -233,7 +234,7 @@ public class Drivetrain extends Subsystem implements Subsystem1024 {
 	/**
 	 * Turns the robot to an angle relative to where it is facing at the time that the function is executed
 	 * @param power (-1.0, 1.0)
-	 * @param angleChange (0, 360) Relative to where the robot is facing at that moment
+	 * @param angleChange (-180, 180) Relative to where the robot is facing at that moment
 	 */
 	public void turnRelative(double power, double angleChange) {
 		gyro.reset();

@@ -84,7 +84,7 @@ public class Shooter extends Subsystem implements Subsystem1024 {
 		} else if (Robot.oi.logi.getRawButton(8) == true){
 		}
 		else {
-			shooter.disable();
+			//shooter.disable();
 		}
 		SmartDashboard.putNumber("Shooter RPM", shooter.getSpeed());
 		SmartDashboard.putNumber("Shooter SetSpeed", shooterSetSpeed);
