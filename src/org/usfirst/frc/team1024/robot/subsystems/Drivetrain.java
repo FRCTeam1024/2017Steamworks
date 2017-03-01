@@ -6,7 +6,7 @@ import org.usfirst.frc.team1024.robot.util.Constants;
 import org.usfirst.frc.team1024.robot.util.KilaTalon;
 import org.usfirst.frc.team1024.robot.util.Subsystem1024;
 
-import com.ctre.CANTalon;
+//import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
 
@@ -264,7 +264,14 @@ public class Drivetrain extends Subsystem implements Subsystem1024 {
 			System.out.println("Angle cannot be greater than 180 or less than -180, please input the coterminal version of that angle");
 		}
 	}
-	
+	/*
+	public void OneSideTurnLeft(double leftpower, double desiredAngle) {
+		while(gyro.getAngle() <= desiredAngle) {
+			drive(leftpower, 0.0);
+		}
+		stop();
+	}
+	*/
 	public void turnLeft(double power, double desiredAngle) {
 		while(gyro.getAngle() <= desiredAngle) {
 			drive(-power, power);

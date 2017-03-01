@@ -1,19 +1,15 @@
 package org.usfirst.frc.team1024.robot.commands.auto;
+
 import org.usfirst.frc.team1024.robot.commands.DriveForDistance;
-import org.usfirst.frc.team1024.robot.commands.DriveForTime;
 import org.usfirst.frc.team1024.robot.commands.PushGearCommand;
 import org.usfirst.frc.team1024.robot.commands.TurnCommand;
-import org.usfirst.frc.team1024.robot.util.Constants;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-
-public class Pos2ShootWPeg extends CommandGroup {
-	
-	
-	public Pos2ShootWPeg() {
+public class Pos3ShootWPeg extends CommandGroup {
+	public Pos3ShootWPeg() {
 		//Goes through the protocol for Position 2 Shooting.
-		addSequential(new Pos2Shooting());
+		addSequential(new Pos3Shooting());
 		//Turns a certain amount.
 		addSequential(new TurnCommand(0.5, 135)); //Set this Later
 		//Drives forward so that, by turning, it's in line with W peg.
@@ -23,7 +19,7 @@ public class Pos2ShootWPeg extends CommandGroup {
 		//Drives to W peg.
 		addSequential(new DriveForDistance(0.5, 46.95)); //Set this later
 		//Place gear on W peg.
-		addSequential(new PushGearCommand());//?!?!?!??!?!
+		addSequential(new PushGearCommand()); //?!?!??!?!?
 		//Drive back from W peg.
 		addSequential(new DriveForDistance(0.5, -46.95)); //Set this later
 	}
@@ -34,13 +30,9 @@ public class Pos2ShootWPeg extends CommandGroup {
 	
 	@Override
 	protected void execute() {
-
-		addSequential(new DriveForDistance(0.5, Constants.DISTANCE_TO_BASELINE - Constants.ROBOT_WIDTH));
-		// addSequential(new GearClampCommand());
-		addSequential(new PushGearCommand());
-		addSequential(new DriveForTime(-0.5, 1.0));
-		// make it so that "isFinished" returns True
-
+		
+		
+		
 	}
 	@Override
 	protected boolean isFinished() {

@@ -6,8 +6,12 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class PushGearCommand extends Command {
+
+	boolean state;
+
 	boolean isDone;
 	public PushGearCommand() {
+
 	}
 	@Override
 	protected void initialize() {
