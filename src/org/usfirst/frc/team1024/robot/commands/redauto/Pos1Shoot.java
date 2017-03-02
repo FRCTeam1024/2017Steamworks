@@ -28,7 +28,9 @@ public class Pos1Shoot extends CommandGroup {
 	protected void initialize() {}
 	
 	@Override
-	protected void execute() {/*
+	protected void execute() {
+		System.out.println("IN shoot");
+		/*
 		if (hasDone != true) {
 			Robot.shooter.shooter.setSetpoint(Robot.shooter.shooterSetSpeed);
 			Timer.delay(0.5); //for the shooter to get up to speed

@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 import org.usfirst.frc.team1024.robot.commands.redauto.*;
+import org.usfirst.frc.team1024.robot.commands.auto.HopperShoot;
 import org.usfirst.frc.team1024.robot.commands.auto.Pos2GearOnMiddlePeg;
 import org.usfirst.frc.team1024.robot.commands.blueauto.*;
 
@@ -35,6 +36,7 @@ import org.usfirst.frc.team1024.robot.subsystems.Hopper;
 import org.usfirst.frc.team1024.robot.subsystems.Shooter;
 
 import com.ctre.CANTalon.TalonControlMode;
+import com.kauailabs.navx.frc.AHRS;
 
 import org.usfirst.frc.team1024.robot.subsystems.REVDigitBoard;
 
@@ -129,6 +131,8 @@ public class Robot extends IterativeRobot {
 		pixyValues = new int[10];
 
 		autoSelected = 0;
+
+        drivetrain.navx.zeroYaw();
 	}
 
 
@@ -166,15 +170,36 @@ public class Robot extends IterativeRobot {
 		case 1:
 			autonomousCommand = new Pos2GearOnMiddlePeg();
 			break;
+		case 2:
+			//shoot 10sec
+			//cross baseline
+		case 3:
+			//shoot 5sec
+			//cross baseline
+		case 4:
+			//delay 5sec
+			//move
+			//shoot 5sec
+			//cross baseline
+		case 5:
+			//pos1 S Peg
+			autonomousCommand = new Pos1SPeg();
+		case 6:
+			autonomousCommand = new Pos3NPeg();
+			//pos3 N Peg
+		case 7:
+			//hopper shoot
+			autonomousCommand = new HopperShoot();
+		case 8:
+			//just cross baseline
 		}
-
 	}
 
 	@Override
 	public void autonomousInit() {
 
 		//autonomousCommand = chooser.getSelected();
-		autonomousCommand = new Pos1Shooting();
+		//autonomousCommand = new Pos1Shooting();
 
 		// autonomousCommand = chooser.getSelected();
 		// autonomousCommand = new Pos1Shoot();
@@ -194,6 +219,7 @@ public class Robot extends IterativeRobot {
 		Robot.drivetrain.frontLeftDrive.changeControlMode(TalonControlMode.Position);
 		Robot.drivetrain.frontRightDrive.changeControlMode(TalonControlMode.Position);
 
+        drivetrain.navx.zeroYaw();
 	}
 
 	@Override
@@ -259,6 +285,7 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		outputTheThings();
+		printGyro();
 		// if (SmartDashboard.getBoolean("Drivetrain GO", false) == true) {
 		// } else {
 		// if (SmartDashboard.getBoolean("Logi Drive?", true) == true) {
@@ -338,4 +365,90 @@ public class Robot extends IterativeRobot {
 		// climber.outputToSmartDashboard();
 		// blender.outputToSmartDashboard();
 	}
+	public static void printGyro() {
+
+        
+        Timer.delay(0.020);		/* wait for one motor update time period (50Hz)     */
+        
+
+
+        /* Display 6-axis Processed Angle Data                                      */
+        SmartDashboard.putBoolean(  "IMU_Connected",        drivetrain.navx.isConnected());
+        SmartDashboard.putBoolean(  "IMU_IsCalibrating",    drivetrain.navx.isCalibrating());
+        SmartDashboard.putNumber(   "IMU_Yaw",              drivetrain.navx.getYaw());
+        SmartDashboard.putNumber(   "IMU_Pitch",            drivetrain.navx.getPitch());
+        SmartDashboard.putNumber(   "IMU_Roll",             drivetrain.navx.getRoll());
+        
+        /* Display tilt-corrected, Magnetometer-based heading (requires             */
+        /* magnetometer calibration to be useful)                                   */
+        
+        SmartDashboard.putNumber(   "IMU_CompassHeading",   drivetrain.navx.getCompassHeading());
+        
+        /* Display 9-axis Heading (requires magnetometer calibration to be useful)  */
+        SmartDashboard.putNumber(   "IMU_FusedHeading",     drivetrain.navx.getFusedHeading());
+
+        /* These functions are compatible w/the WPI Gyro Class, providing a simple  */
+        /* path for upgrading from the Kit-of-Parts gyro to the navx MXP            */
+        
+        SmartDashboard.putNumber(   "IMU_TotalYaw",         drivetrain.navx.getAngle());
+        SmartDashboard.putNumber(   "IMU_YawRateDPS",       drivetrain.navx.getRate());
+
+        /* Display Processed Acceleration Data (Linear Acceleration, Motion Detect) */
+        
+        SmartDashboard.putNumber(   "IMU_Accel_X",          drivetrain.navx.getWorldLinearAccelX());
+        SmartDashboard.putNumber(   "IMU_Accel_Y",          drivetrain.navx.getWorldLinearAccelY());
+        SmartDashboard.putBoolean(  "IMU_IsMoving",         drivetrain.navx.isMoving());
+        SmartDashboard.putBoolean(  "IMU_IsRotating",       drivetrain.navx.isRotating());
+
+        /* Display estimates of velocity/displacement.  Note that these values are  */
+        /* not expected to be accurate enough for estimating robot position on a    */
+        /* FIRST FRC Robotics Field, due to accelerometer noise and the compounding */
+        /* of these errors due to single (velocity) integration and especially      */
+        /* double (displacement) integration.                                       */
+        
+        SmartDashboard.putNumber(   "Velocity_X",           drivetrain.navx.getVelocityX());
+        SmartDashboard.putNumber(   "Velocity_Y",           drivetrain.navx.getVelocityY());
+        SmartDashboard.putNumber(   "Displacement_X",       drivetrain.navx.getDisplacementX());
+        SmartDashboard.putNumber(   "Displacement_Y",       drivetrain.navx.getDisplacementY());
+        
+        /* Display Raw Gyro/Accelerometer/Magnetometer Values                       */
+        /* NOTE:  These values are not normally necessary, but are made available   */
+        /* for advanced users.  Before using this data, please consider whether     */
+        /* the processed data (see above) will suit your needs.                     */
+        
+        SmartDashboard.putNumber(   "RawGyro_X",            drivetrain.navx.getRawGyroX());
+        SmartDashboard.putNumber(   "RawGyro_Y",            drivetrain.navx.getRawGyroY());
+        SmartDashboard.putNumber(   "RawGyro_Z",            drivetrain.navx.getRawGyroZ());
+        SmartDashboard.putNumber(   "RawAccel_X",           drivetrain.navx.getRawAccelX());
+        SmartDashboard.putNumber(   "RawAccel_Y",           drivetrain.navx.getRawAccelY());
+        SmartDashboard.putNumber(   "RawAccel_Z",           drivetrain.navx.getRawAccelZ());
+        SmartDashboard.putNumber(   "RawMag_X",             drivetrain.navx.getRawMagX());
+        SmartDashboard.putNumber(   "RawMag_Y",             drivetrain.navx.getRawMagY());
+        SmartDashboard.putNumber(   "RawMag_Z",             drivetrain.navx.getRawMagZ());
+        SmartDashboard.putNumber(   "IMU_Temp_C",           drivetrain.navx.getTempC());
+        SmartDashboard.putNumber(   "IMU_Timestamp",        drivetrain.navx.getLastSensorTimestamp());
+        
+        /* Omnimount Yaw Axis Information                                           */
+        /* For more info, see http://navx-mxp.kauailabs.com/installation/omnimount  */
+        AHRS.BoardYawAxis yaw_axis = drivetrain.navx.getBoardYawAxis();
+        SmartDashboard.putString(   "YawAxisDirection",     yaw_axis.up ? "Up" : "Down" );
+        SmartDashboard.putNumber(   "YawAxis",              yaw_axis.board_axis.getValue() );
+        
+        /* Sensor Board Information                                                 */
+        SmartDashboard.putString(   "FirmwareVersion",      drivetrain.navx.getFirmwareVersion());
+        
+        /* Quaternion Data                                                          */
+        /* Quaternions are fascinating, and are the most compact representation of  */
+        /* orientation data.  All of the Yaw, Pitch and Roll Values can be derived  */
+        /* from the Quaternions.  If interested in motion processing, knowledge of  */
+        /* Quaternions is highly recommended.                                       */
+        SmartDashboard.putNumber(   "QuaternionW",          drivetrain.navx.getQuaternionW());
+        SmartDashboard.putNumber(   "QuaternionX",          drivetrain.navx.getQuaternionX());
+        SmartDashboard.putNumber(   "QuaternionY",          drivetrain.navx.getQuaternionY());
+        SmartDashboard.putNumber(   "QuaternionZ",          drivetrain.navx.getQuaternionZ());
+        
+        /* Connectivity Debugging Support                                           */
+        SmartDashboard.putNumber(   "IMU_Byte_Count",       drivetrain.navx.getByteCount());
+        SmartDashboard.putNumber(   "IMU_Update_Count",     drivetrain.navx.getUpdateCount());
+    }
 }
