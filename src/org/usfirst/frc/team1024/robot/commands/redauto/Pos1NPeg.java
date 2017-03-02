@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1024.robot.commands.auto;
+package org.usfirst.frc.team1024.robot.commands.redauto;
 
 import org.usfirst.frc.team1024.robot.commands.DriveForDistance;
 import org.usfirst.frc.team1024.robot.commands.PushGearCommand;
@@ -6,21 +6,19 @@ import org.usfirst.frc.team1024.robot.commands.TurnCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class Pos2NPeg extends CommandGroup {
+public class Pos1NPeg extends CommandGroup {
 	
-	public Pos2NPeg() {
+	public Pos1NPeg() {
 		//Set all later
 		
-		//Drives towards the north peg from position 2
-		addSequential(new DriveForDistance(0.7, 70));
+		//Drives towards the north peg from position 1
+		addSequential(new DriveForDistance(0.8, 160));
 		//Turns toward the north peg
 		addSequential(new TurnCommand(0.6, -90));
-		//Drives a bit further
-		addSequential(new DriveForDistance(0.3, 90));
-		//Turns to actually face the peg
-		addSequential(new TurnCommand(0.5, -40));
-		//Drives a bit forward
-		addSequential(new DriveForDistance(0.2, 12));
+		//Drives to reach the peg
+		addSequential(new DriveForDistance(0.3, 98));
+		//Turns to FACE the peg
+		addSequential(new TurnCommand(0.5, -15));
 		//Pushes the gear onto the peg
 		addSequential(new PushGearCommand()); //FILL IN PLEASE!!!!!!!!
 		//Retracts
@@ -34,7 +32,7 @@ public class Pos2NPeg extends CommandGroup {
 
 	@Override
 	protected void execute() {
-		
+
 	}
 
 	@Override
@@ -50,4 +48,3 @@ public class Pos2NPeg extends CommandGroup {
 	protected void interrupted() {
 	}
 }
-

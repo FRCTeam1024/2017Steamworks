@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1024.robot.commands.auto;
+package org.usfirst.frc.team1024.robot.commands.redauto;
 
 import org.usfirst.frc.team1024.robot.commands.DriveForDistance;
 import org.usfirst.frc.team1024.robot.commands.DriveForTime;
@@ -7,10 +7,10 @@ import org.usfirst.frc.team1024.robot.commands.TurnCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class Pos3ShootSPeg extends CommandGroup {
-	public Pos3ShootSPeg() {
+public class Pos2ShootSPeg extends CommandGroup {
+	public Pos2ShootSPeg() {
 		// Goes to shooting position and shoots
-		addSequential(new Pos3Shooting());
+		addSequential(new Pos2Shooting());
 		// Turn away from shooting position
 		addSequential(new TurnCommand(0.5, 90)); // Set this later.
 		// Drive toward W peg

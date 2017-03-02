@@ -12,22 +12,18 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team1024.robot.commands.auto.Pos1ShootNPeg;
-import org.usfirst.frc.team1024.robot.commands.auto.Pos1ShootSPeg;
-import org.usfirst.frc.team1024.robot.commands.auto.Pos1ShootWPeg;
+
+import org.usfirst.frc.team1024.robot.commands.redauto.*;
 import org.usfirst.frc.team1024.robot.commands.auto.Pos2GearOnMiddlePeg;
-import org.usfirst.frc.team1024.robot.commands.auto.Pos2ShootNPeg;
-import org.usfirst.frc.team1024.robot.commands.auto.Pos2ShootSPeg;
-import org.usfirst.frc.team1024.robot.commands.auto.Pos2ShootWPeg;
-import org.usfirst.frc.team1024.robot.commands.auto.Pos3ShootSPeg;
-import org.usfirst.frc.team1024.robot.commands.auto.Pos3ShootWPeg;
+import org.usfirst.frc.team1024.robot.commands.blueauto.*;
+
 
 import java.util.List;
 
 import org.usfirst.frc.team1024.Pixy.PixyI2C;
 import org.usfirst.frc.team1024.Pixy.PixyObject;
 import org.usfirst.frc.team1024.Pixy.PixyPacket;
-import org.usfirst.frc.team1024.robot.commands.auto.Pos1Shoot;
+
 
 // import org.usfirst.frc.team1024.robot.commands.auto.Pos2GearOnMiddlePeg;
 
@@ -75,6 +71,38 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
+		
+		//All Auto underneath are on the red side of le field before executing their auto
+		chooser.addObject("RED Position 1, Shoot, West Peg", new Pos1ShootWPeg());
+		chooser.addObject("RED Position 1, Shoot, North Peg", new Pos1ShootNPeg());
+		chooser.addObject("RED Position 1, Shoot, South Peg", new Pos1ShootSPeg());
+		chooser.addObject("RED Position 2, Shoot, West Peg", new Pos2ShootWPeg());
+		chooser.addObject("RED Position 2, Shoot, North Peg", new Pos2ShootNPeg());
+		chooser.addObject("RED Position 2, Shoot, South Peg", new Pos2ShootSPeg());
+		chooser.addObject("RED Position 3, Shoot, West Peg", new Pos3ShootWPeg());
+		chooser.addObject("RED Position 3, Shoot, South Peg", new Pos3ShootSPeg());
+		chooser.addObject("RED Position 3, Shoot, North Peg", new Pos3NPegShoot());
+		chooser.addObject("RED Position 1, West Peg", new Pos1WPeg());
+		chooser.addObject("RED Position 1, North Peg", new Pos1NPeg());
+		chooser.addObject("RED Position 1, South Peg", new Pos1SPeg());
+		chooser.addObject("RED Position 2, West Peg", new Pos2WPeg());
+		chooser.addObject("RED Position 2, North Peg", new Pos2NPeg());
+		chooser.addObject("RED Position 2, South Peg", new Pos2SPeg());
+		chooser.addObject("RED Position 3, West Peg", new Pos3WPeg());
+		chooser.addObject("RED Position 3, North Peg", new Pos3NPeg());
+		chooser.addObject("RED Position 3, South Peg", new Pos3SPeg());
+		chooser.addDefault("RED Position 1, Shooting", new Pos1Shooting());  // DEFAULT!!!!!
+		chooser.addObject("RED Position 2, Shooting", new Pos2Shooting());
+		chooser.addObject("RED Position 3, Shooting", new Pos3Shooting());
+		
+		
+		chooser.addObject("BLUE Position 1, Position 1, Shooting", new BluePos1Shooting());
+		
+		
+
+		
+		// chooser.addObject("BLUE Position 1, Shoot , East Peg", object);
+		
 
 		// All Auto underneath shoot before executing their auto
 		chooser.addDefault("Position 1, Shoot, West Peg", new Pos1ShootWPeg());
@@ -102,6 +130,7 @@ public class Robot extends IterativeRobot {
 
 		autoSelected = 0;
 	}
+
 
 	@Override
 	public void disabledInit() {
@@ -143,8 +172,13 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void autonomousInit() {
+
+		//autonomousCommand = chooser.getSelected();
+		autonomousCommand = new Pos1Shooting();
+
 		// autonomousCommand = chooser.getSelected();
 		// autonomousCommand = new Pos1Shoot();
+
 
 		// String autoSelected = SmartDashboard.getString("Auto Selector",
 		// "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
@@ -165,6 +199,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+
 
 		String finalpeg = peg.toUpperCase();
 
@@ -200,7 +235,9 @@ public class Robot extends IterativeRobot {
 			} else {
 
 			}
-		}
+
+		} 
+
 	}
 
 	@Override

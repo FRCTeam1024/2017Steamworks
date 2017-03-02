@@ -10,6 +10,7 @@ import org.usfirst.frc.team1024.robot.commands.PushGearCommand;
 import org.usfirst.frc.team1024.robot.commands.ShootCommand;
 import org.usfirst.frc.team1024.robot.commands.TurnCommand;
 import org.usfirst.frc.team1024.robot.commands.WaitForTimeCommand;
+import org.usfirst.frc.team1024.robot.commands.redauto.Pos1Shoot;
 import org.usfirst.frc.team1024.robot.util.Constants;
 
 import edu.wpi.first.wpilibj.DriverStation;

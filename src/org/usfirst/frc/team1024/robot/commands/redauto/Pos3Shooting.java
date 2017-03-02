@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1024.robot.commands.auto;
+package org.usfirst.frc.team1024.robot.commands.redauto;
 
 import org.usfirst.frc.team1024.robot.Robot;
 import org.usfirst.frc.team1024.robot.commands.Drive2Inputs;
