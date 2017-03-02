@@ -8,6 +8,11 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="lib" path="lib/CTRLib.jar"/>
 	<classpathentry kind="lib" path="lib/Logitech.jar"/>
+	<classpathentry kind="lib" path="lib/navx_frc.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Users/team1024/navx-mxp/java/docs/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="var" path="USERLIBS_DIR/CTRLib.jar"/>
 	<classpathentry kind="var" path="USERLIBS_DIR/navx_frc.jar"/>
 	<classpathentry kind="output" path="bin"/>

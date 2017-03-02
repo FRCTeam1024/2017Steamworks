@@ -7,20 +7,29 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Drive2Inputs extends Command {
 	double leftPower;
 	double rightPower;
-	double desiredangle;
+	double desiredAngle;
 	boolean isDone = false;
 	public Drive2Inputs(double leftPower, double rightPower, double desiredangle) { 
 		this.leftPower = leftPower;
 		this.rightPower = rightPower;
-		this.desiredangle = desiredangle;
+		this.desiredAngle = desiredangle;
 	}
 	@Override
-	protected void initialize() {}
+	protected void initialize() {
+		Robot.drivetrain.navx.reset();
+	}
 	@Override
 	protected void execute() {
-		while (Robot.drivetrain.gyro.getAngle() < desiredangle) {
-			Robot.drivetrain.drive(leftPower, rightPower);
-			isDone = true;
+		if (desiredAngle > 0) {
+			while (Robot.drivetrain.navx.getYaw() < desiredAngle) {
+				Robot.drivetrain.drive(-leftPower, rightPower);
+				isDone = true;
+			}
+		} else if (desiredAngle < 0) {
+			while(Robot.drivetrain.navx.getYaw() > desiredAngle) {
+				Robot.drivetrain.drive(leftPower, -rightPower);
+				isDone = true;
+			}
 		}
 	}
 	@Override

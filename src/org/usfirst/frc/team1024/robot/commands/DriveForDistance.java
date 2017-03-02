@@ -49,6 +49,7 @@ public class DriveForDistance extends Command{
 				Robot.drivetrain.driveToDistance(distance); //PID
 				while (time.get() < startTime + timeToWait) {
 					SmartDashboard.putNumber("Time", time.get());
+					System.out.println("IN Drive to distance");
 				}
 				time.reset();
 				isDone = true;

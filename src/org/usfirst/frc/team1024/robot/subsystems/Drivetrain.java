@@ -9,8 +9,11 @@ import org.usfirst.frc.team1024.robot.util.Subsystem1024;
 //import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
+import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Timer;
@@ -36,16 +39,15 @@ public class Drivetrain extends Subsystem implements Subsystem1024 {
 	
 	public final Solenoid shifter 		   		= new Solenoid(RobotMap.DRIVETRAIN_SHIFTER_PORT);
 	
-	public final AnalogGyro gyro 				= new AnalogGyro(RobotMap.GYRO_PORT);
-	
+	public AHRS navx;
+
 	public Drivetrain() {
-		LiveWindow.addActuator("Drivetrain", "FrontLeft Motor",   frontLeftDrive);
-		LiveWindow.addActuator("Drivetrain", "RearLeft Motor",    rearLeftDrive);
-		LiveWindow.addActuator("Drivetrain", "FrontRight Motor",  frontRightDrive);
-		LiveWindow.addActuator("Drivetrain", "RearRight Motor",   rearRightDrive);
+		LiveWindow.addActuator("Drivetrain", "FrontLeft Motor", frontLeftDrive);
+		LiveWindow.addActuator("Drivetrain", "RearLeft Motor", rearLeftDrive);
+		LiveWindow.addActuator("Drivetrain", "FrontRight Motor", frontRightDrive);
+		LiveWindow.addActuator("Drivetrain", "RearRight Motor", rearRightDrive);
 		LiveWindow.addActuator("Drivetrain", "Shifter", shifter);
-		LiveWindow.addSensor("Sensors", "Gyro", 			   gyro);
-		
+
 		setMotorConfig(frontLeftDrive, 0.2, 0.00003, 0.0);
 		setMotorConfig(frontRightDrive, 0.2, 0.00003, 0.0);
 		rearLeftDrive.changeControlMode(TalonControlMode.Follower);
@@ -56,7 +58,12 @@ public class Drivetrain extends Subsystem implements Subsystem1024 {
 		frontRightDrive.reverseSensor(true);
 		frontLeftDrive.enableBrakeMode(true);
 		frontRightDrive.enableBrakeMode(true);
-		//setFollowerMode(frontRightDrive, rearRightDrive);
+		// setFollowerMode(frontRightDrive, rearRightDrive);
+		try {
+			navx = new AHRS(I2C.Port.kOnboard);
+		} catch (RuntimeException ex) {
+			DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
+		}
 	}
 	
 	/**
@@ -199,7 +206,7 @@ public class Drivetrain extends Subsystem implements Subsystem1024 {
 	 */
 	@Override
 	public void resetSensors() {
-    	gyro.reset();
+    	navx.reset();
 	}
 	
 	/**
@@ -237,26 +244,26 @@ public class Drivetrain extends Subsystem implements Subsystem1024 {
 	 * @param angleChange (-180, 180) Relative to where the robot is facing at that moment
 	 */
 	public void turnRelative(double power, double angleChange) {
-		gyro.reset();
+		navx.reset();
 		if (angleChange < 180 && angleChange > -180) {
 			if (angleChange >= 0) { // Turn left desiredAngle
-				while (gyro.getAngle() < angleChange) {
+				while (navx.getAngle() < angleChange) {
 					drive(-power, power);
 				}
 				stop();
 			} else if (angleChange < 0){ // Turn right desiredAngle
-				while (gyro.getAngle() > angleChange) {
+				while (navx.getAngle() > angleChange) {
 					drive(power, -power);
 				}
 				stop();
 			}
 		} else if (angleChange == 180) { // Turn left 180
-			while (gyro.getAngle() < 180) {
+			while (navx.getAngle() < 180) {
 				drive(-power, power);
 			}
 			stop();
 		} else if (angleChange == -180) { // Turn right 180
-			while (gyro.getAngle() > -180) {
+			while (navx.getAngle() > -180) {
 				drive(power, -power);
 			}
 			stop();
@@ -266,21 +273,21 @@ public class Drivetrain extends Subsystem implements Subsystem1024 {
 	}
 	/*
 	public void OneSideTurnLeft(double leftpower, double desiredAngle) {
-		while(gyro.getAngle() <= desiredAngle) {
+		while(navx.getAngle() <= desiredAngle) {
 			drive(leftpower, 0.0);
 		}
 		stop();
 	}
 	*/
 	public void turnLeft(double power, double desiredAngle) {
-		while(gyro.getAngle() <= desiredAngle) {
+		while(navx.getAngle() <= desiredAngle) {
 			drive(-power, power);
 		}
 		stop();
 	}
 	
 	public void turnRight(double power, double desiredAngle) {
-		while(gyro.getAngle() >= desiredAngle) {
+		while(navx.getAngle() >= desiredAngle) {
 			drive(power, -power);
 		}
 		stop();

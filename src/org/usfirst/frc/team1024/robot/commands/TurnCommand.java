@@ -15,6 +15,7 @@ public class TurnCommand extends CommandGroup {
 	
 	@Override
 	protected void execute() {
+		System.out.println("IN Turn");
 		Robot.drivetrain.turnRelative(power, angleChange); //Set this later
 	}
 	

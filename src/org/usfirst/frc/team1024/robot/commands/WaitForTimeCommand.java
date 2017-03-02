@@ -13,7 +13,9 @@ public class WaitForTimeCommand extends Command{
 		
 	}
 	protected void execute() {
+		System.out.println("IN WAIT");
 		Timer.delay(seconds);
+		
 		isDone = true;
 	}
 	protected boolean isFinished() { 
