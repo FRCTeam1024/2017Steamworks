@@ -1,7 +1,7 @@
 package org.usfirst.frc.team1024.robot.util;
 
 public class Constants {
-	public static final double INIT_SHOOTER_POWER = 1980.0; //best as of 2/21/17: 2275 //preset shooter power 
+	public static final double INIT_SHOOTER_POWER = 2000.0; //best as of 2/21/17: 2275 //preset shooter power 
 	public static final double MAX_SHOOTER_SPEED = 2900.0;
 	//Field Constants:
 	public static final double DISTANCE_TO_BASELINE = 93.3; //distance to baseline from alliance station wall in inches

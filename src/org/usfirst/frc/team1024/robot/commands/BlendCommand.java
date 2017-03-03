@@ -22,7 +22,7 @@ public class BlendCommand extends Command {
 	
 	@Override
 	protected void execute() {
-		Robot.blender.blend(1.0);
+		Robot.blender.blend(-1.0);
 	}
 	
 	@Override

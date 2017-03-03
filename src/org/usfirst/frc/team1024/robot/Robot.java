@@ -171,6 +171,8 @@ public class Robot extends IterativeRobot {
 			autonomousCommand = new Pos2GearOnMiddlePeg();
 			break;
 		case 2:
+			autonomousCommand = new Pos1Shoot();
+			break;
 			//shoot 10sec
 			//cross baseline
 		case 3:
@@ -184,14 +186,20 @@ public class Robot extends IterativeRobot {
 		case 5:
 			//pos1 S Peg
 			autonomousCommand = new Pos1SPeg();
+			break;
 		case 6:
 			autonomousCommand = new Pos3NPeg();
+			break;
 			//pos3 N Peg
 		case 7:
 			//hopper shoot
 			autonomousCommand = new HopperShoot();
+			break;
 		case 8:
 			//just cross baseline
+		case 9:
+			autonomousCommand = new CrossBaselinePower();
+			break;
 		}
 	}
 
