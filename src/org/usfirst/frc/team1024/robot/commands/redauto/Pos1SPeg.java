@@ -29,20 +29,6 @@ public class Pos1SPeg extends CommandGroup{
 
 	@Override
 	protected void execute() {
-		// Goes to shooting position and shoots
-		addSequential(new Pos1Shoot());
-		// Turn to move towards S peg
-		addSequential(new TurnCommand(0.5, 45)); // Set this later
-		// Drive towards S peg
-		addSequential(new DriveForDistance(0.5, 46.95)); // Set this later
-		// Turn to face S peg
-		addSequential(new TurnCommand(0.5, 60)); // Set this later
-		// Drive towards S peg
-		addSequential(new DriveForDistance(0.5, 45)); // Set this later
-		// Place gear on S peg
-		addSequential(new PushGearCommand()); // Set this later
-		// Drive away from S peg
-		addSequential(new DriveForDistance(0.5, -10)); // Set this later
 	}
 
 	@Override

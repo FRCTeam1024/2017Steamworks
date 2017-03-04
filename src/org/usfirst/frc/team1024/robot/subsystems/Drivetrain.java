@@ -223,7 +223,7 @@ public class Drivetrain extends Subsystem implements Subsystem1024 {
 	 * @param distance (inches)
 	 */
 	public void driveForDistance(double power, double distance) {
-		while (getAverageEncoderDistance() < distance) {
+		while (getAverageEncoderDistance() < distance && Robot.oi.getBreakButton() == false) {
 			drive(power);
 		}
 		stop();
@@ -247,23 +247,23 @@ public class Drivetrain extends Subsystem implements Subsystem1024 {
 		navx.reset();
 		if (angleChange < 180 && angleChange > -180) {
 			if (angleChange >= 0) { // Turn left desiredAngle
-				while (navx.getAngle() < angleChange) {
+				while (navx.getAngle() < angleChange && Robot.oi.getBreakButton() == false) {
 					drive(-power, power);
 				}
 				stop();
 			} else if (angleChange < 0){ // Turn right desiredAngle
-				while (navx.getAngle() > angleChange) {
+				while (navx.getAngle() > angleChange && Robot.oi.getBreakButton() == false) {
 					drive(power, -power);
 				}
 				stop();
 			}
 		} else if (angleChange == 180) { // Turn left 180
-			while (navx.getAngle() < 180) {
+			while (navx.getAngle() < 180 && Robot.oi.getBreakButton() == false) {
 				drive(-power, power);
 			}
 			stop();
 		} else if (angleChange == -180) { // Turn right 180
-			while (navx.getAngle() > -180) {
+			while (navx.getAngle() > -180 && Robot.oi.getBreakButton() == false) {
 				drive(power, -power);
 			}
 			stop();
@@ -280,14 +280,14 @@ public class Drivetrain extends Subsystem implements Subsystem1024 {
 	}
 	*/
 	public void turnLeft(double power, double desiredAngle) {
-		while(navx.getAngle() <= desiredAngle) {
+		while(navx.getAngle() <= desiredAngle && Robot.oi.getBreakButton() == false) {
 			drive(-power, power);
 		}
 		stop();
 	}
 	
 	public void turnRight(double power, double desiredAngle) {
-		while(navx.getAngle() >= desiredAngle) {
+		while(navx.getAngle() >= desiredAngle && Robot.oi.getBreakButton() == false) {
 			drive(power, -power);
 		}
 		stop();

@@ -164,6 +164,9 @@ public class Robot extends IterativeRobot {
 		}
 
 		autoChooser.display("000" + autoSelected);
+		/**
+		 * BEFORE YOU ADD AN AUTO...NO WHILE LOOPS!!!
+		 */
 		switch (autoSelected) {
 		case 0:
 			break;

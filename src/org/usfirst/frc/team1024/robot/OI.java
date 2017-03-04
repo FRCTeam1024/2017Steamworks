@@ -91,6 +91,11 @@ public class OI {
 	public void outputToSmartDashboard() {
 		
 	}
+
+	public boolean getBreakButton() {
+		// TODO Auto-generated method stub
+		return logi.getRawButton(9);
+	}
 	
 //	/**
 //	 * 

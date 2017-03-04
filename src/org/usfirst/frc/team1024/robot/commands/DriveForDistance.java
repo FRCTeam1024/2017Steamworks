@@ -47,7 +47,7 @@ public class DriveForDistance extends Command{
 				Robot.drivetrain.frontLeftDrive.setEncPosition(0); //Reset encoders
 				Robot.drivetrain.frontRightDrive.setEncPosition(0);
 				Robot.drivetrain.driveToDistance(distance); //PID
-				while (time.get() < startTime + timeToWait) {
+				while (time.get() < startTime + timeToWait && Robot.oi.getBreakButton() == false) {
 					SmartDashboard.putNumber("Time", time.get());
 					System.out.println("IN Drive to distance");
 				}
