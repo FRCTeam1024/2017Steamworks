@@ -52,13 +52,13 @@ public class OI {
 		speedResetButton = new JoystickButton(logi, 6);
 		
 		hopperFlapButton = new JoystickButton(logi, 3);
-		
+		/*
 		shiftLowButtonL = new JoystickButton(lJoy, 7);
 		shiftHighButtonL = new JoystickButton(lJoy, 10);
 		
 		shiftLowButtonR = new JoystickButton(rJoy, 7);
 		shiftHighButtonR = new JoystickButton(rJoy, 10);
-		
+		*/
 		
 		
 		
@@ -74,13 +74,13 @@ public class OI {
 		
 
 		hopperFlapButton.whileHeld(new FlapCommand());
-		
+		/*
 		shiftLowButtonL.whenPressed(new shift("Low"));
 		shiftHighButtonL.whenPressed(new shift("High"));
 		
 		shiftLowButtonR.whenPressed(new shift("Low"));
 		shiftHighButtonR.whenPressed(new shift("High"));
-		
+		*/
 		
 
 	}

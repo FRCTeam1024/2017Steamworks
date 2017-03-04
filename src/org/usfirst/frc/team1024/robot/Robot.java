@@ -119,7 +119,7 @@ public class Robot extends IterativeRobot {
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		// SmartDashboard.putData("Auto mode", chooser);
 		NetworkTable.globalDeleteAll();
-		// shooter.initDashboard();
+		shooter.initDashboard();
 		// drivetrain.initDashboard();
 		SmartDashboard.putBoolean("Logi Drive?", false);
 		drivetrain.frontLeftDrive.setEncPosition(0);
@@ -176,6 +176,8 @@ public class Robot extends IterativeRobot {
 			//shoot 10sec
 			//cross baseline
 		case 3:
+			autonomousCommand = new RedPos1ShootCross();
+			break;
 			//shoot 5sec
 			//cross baseline
 		case 4:
@@ -183,6 +185,7 @@ public class Robot extends IterativeRobot {
 			//move
 			//shoot 5sec
 			//cross baseline
+			break;
 		case 5:
 			//pos1 S Peg
 			autonomousCommand = new Pos1SPeg();
@@ -233,7 +236,6 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
-
 
 		String finalpeg = peg.toUpperCase();
 
@@ -293,7 +295,7 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		outputTheThings();
-		printGyro();
+		//printGyro();
 		// if (SmartDashboard.getBoolean("Drivetrain GO", false) == true) {
 		// } else {
 		// if (SmartDashboard.getBoolean("Logi Drive?", true) == true) {
@@ -326,6 +328,9 @@ public class Robot extends IterativeRobot {
 		}
 		if (oi.lJoy.getRawButton(10) || oi.rJoy.getRawButton(10)) {
 			drivetrain.shifter.set(true);
+		}
+		if (oi.logi.getRawButton(9)) {
+			autonomousCommand.cancel();
 		}
 
 
