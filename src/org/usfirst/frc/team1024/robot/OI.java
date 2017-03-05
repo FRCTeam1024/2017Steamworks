@@ -65,6 +65,7 @@ public class OI {
 		gearClampOpenButton.whenPressed(new GearClampCommand(1));
 		gearClampCloseButton.whenPressed(new GearClampCommand(-1));
 		gearClampOffButton.whenPressed(new GearClampCommand(0));
+		gearClampCloseButton.whenReleased(new GearClampCommand(0));
 		
 		gearPushButton.whileHeld(new OpenClampPushGearCommand());
 		
@@ -96,7 +97,6 @@ public class OI {
 		// TODO Auto-generated method stub
 		return logi.getRawButton(9);
 	}
-	
 //	/**
 //	 * 
 //	 * @return state of the left bumper

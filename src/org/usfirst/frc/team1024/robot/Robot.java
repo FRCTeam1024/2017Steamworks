@@ -16,6 +16,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team1024.robot.commands.redauto.*;
 import org.usfirst.frc.team1024.robot.commands.auto.HopperShoot;
 import org.usfirst.frc.team1024.robot.commands.auto.Pos2GearOnMiddlePeg;
+import org.usfirst.frc.team1024.robot.commands.auto.RedPos1ShootCrossArc;
+import org.usfirst.frc.team1024.robot.commands.auto.BluePos1ShootCrossArc;
 import org.usfirst.frc.team1024.robot.commands.blueauto.*;
 
 
@@ -184,14 +186,22 @@ public class Robot extends IterativeRobot {
 			//shoot 5sec
 			//cross baseline
 		case 4:
+			
+			//shoot, cross, arc
+			//square up
+			//set to 35% inside, 50% outside
+			//1 second
+			autonomousCommand = new BluePos1ShootCrossArc();
+			
+			
+			
 			//delay 5sec
 			//move
 			//shoot 5sec
 			//cross baseline
 			break;
 		case 5:
-			//pos1 S Peg
-			autonomousCommand = new Pos1SPeg();
+			autonomousCommand = new RedPos1ShootCrossArc();
 			break;
 		case 6:
 			autonomousCommand = new Pos3NPeg();

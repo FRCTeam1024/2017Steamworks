@@ -42,7 +42,7 @@ public class Pos1Shoot extends CommandGroup {
 	@Override
 	protected void execute() {
 		if (hasDone != true) {
-			Robot.shooter.shooter.setSetpoint(Robot.shooter.shooterSetSpeed);
+			Robot.shooter.shooter.setSetpoint(Robot.shooter.shooterSetSpeed + 400);
 			Robot.shooter.shooter.enable();
 			Timer.delay(2.5); // for the shooter to get up to speed
 			Robot.hopper.flap(true);

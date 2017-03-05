@@ -19,17 +19,18 @@ public class Pos2GearOnMiddlePeg extends CommandGroup {
 	
 	public Pos2GearOnMiddlePeg() {
 		addSequential(new GearClampCommand(0));
-		addSequential(new DriveForDistance(/*Constants.DISTANCE_TO_BASELINE*/ 109 - Constants.ROBOT_LENGTH, 3f));
-		addSequential(new WaitForTimeCommand(2.0));
+		addSequential(new DriveForDistance(/*Constants.DISTANCE_TO_BASELINE*/ 114 - Constants.ROBOT_LENGTH, 3f));
+		addSequential(new WaitForTimeCommand(0.5));
 		//addSequential(new DriveForTime(0.5, 3));
 		addSequential(new GearClampCommand(1));
-		addSequential(new AutoFlapCommand());
+		//addSequential(new AutoFlapCommand());
 		addSequential(new WaitForTimeCommand(0.5));
+		/*
 		addSequential(new PushGearCommand());
 		addSequential(new DriveForTime(-0.5, 0.5));
 		addSequential(new FlapCommand());
 		addSequential(new GearClampCommand(0));
-		
+		*/
 		//make it so that "isFinished" returns True
 	}
 	
