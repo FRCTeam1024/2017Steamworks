@@ -350,8 +350,8 @@ public class Robot extends IterativeRobot {
 		List<PixyObject> pixyObjectList = getPixyObjects();
 		if(pixyObjectList!=null)
 		{
-			printPixyStuff(pixyObjectList);
-			System.out.println("Got " + pixyObjectList.size() + " objects from the pixy");
+			//printPixyStuff(pixyObjectList);
+			//System.out.println("Got " + pixyObjectList.size() + " objects from the pixy");
 			// for (int i = 0; i < pixyObjectList.size(); i++) {
 			// DriverStation.reportError(pixyObjectList.get(i).toString(), false);
 			// }

@@ -140,11 +140,11 @@ public class Drivetrain extends Subsystem implements Subsystem1024 {
 		/*SmartDashboard.putNumber("Left Drive Distance (in.)", frontLeftDrive.getDistance());
 		SmartDashboard.putNumber("Right Drive Distance (in.)", frontRightDrive.getDistance());
 		SmartDashboard.putNumber("Average Distance (in.)", frontLeftDrive.getDistance() / frontRightDrive.getDistance());*/
-
+/*
 		SmartDashboard.putNumber("Left Encoder Distance (in.)", frontLeftDrive.getDistanceInInches());
 		SmartDashboard.putNumber("Right Encoder Distance (in.)", frontRightDrive.getDistanceInInches());
 		SmartDashboard.putNumber("Average Distance (in.)", frontLeftDrive.getDistanceInInches() / frontRightDrive.getDistanceInInches());
-	
+	*/
 	}
 	
 	/**
@@ -213,21 +213,23 @@ public class Drivetrain extends Subsystem implements Subsystem1024 {
 	 * Gets the average of the encoder positions on the left and right side of the drivetrain.
 	 * @returns the average position of the drive encoders.
 	 */
+	/*
 	public double getAverageEncoderDistance() {
 		return (frontLeftDrive.getDistanceInInches() + frontRightDrive.getDistanceInInches()) / 2;
 	}
-	
+	*/
 	/**
 	 * Drives the drivetrain motors for a specified distance and power.
 	 * @param power (-1.0, 1.0)
 	 * @param distance (inches)
 	 */
+	/*
 	public void driveForDistance(double power, double distance) {
 		while (getAverageEncoderDistance() < distance && Robot.oi.getBreakButton() == false) {
 			drive(power);
 		}
 		stop();
-	}
+	}*/
 	
 	/**
 	 * Drives with PID to a distance. Changes the Talon Control Mode to position mode

@@ -17,9 +17,11 @@ public class KilaTalon extends CANTalon implements CANSpeedController{
 	 * Note: This constant is the: tickrate/gear ratio * wheel circumference
 	 * @returns Encoder distance traveled (inches)
 	 */
+	/*
 	public double getDistanceInInches() {
 		return (getEncPosition() * Constants.WHEEL_CIRCUMFERENCE) / Constants.ENCOER_TICKS_PER_WHEEL_REV;
-	}
+		
+	}*/
 	
 	public void goDistanceInInches(double distance) {
 		changeControlMode(TalonControlMode.Position);

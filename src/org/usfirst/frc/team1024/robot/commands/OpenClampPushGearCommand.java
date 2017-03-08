@@ -17,7 +17,6 @@ public class OpenClampPushGearCommand extends Command {
 	
 	@Override
 	protected void execute() {
-		
 		if (Robot.oi.logi.getRawButton(7)) {
 			Robot.hopper.flap(true);
 			Timer.delay(0.2);

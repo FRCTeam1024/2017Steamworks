@@ -44,34 +44,34 @@ public class PixyI2C{
 		try{
 			pixy.readOnly(rawData, BYTES_TO_READ);
 			RawPixyData rpd = new RawPixyData(rawData);
-			System.out.println("Raw Data: " + rpd.toString());
+			//System.out.println("Raw Data: " + rpd.toString());
 		} catch (RuntimeException e){
 			throw new PixyException("pixy read failure");
 		}
 		if(rawData.length < BYTES_TO_READ){
-			DriverStation.reportError("pixy stream to small", false);
+			//DriverStation.reportError("pixy stream to small", false);
 			throw new PixyException("pixy stream to small ???");
 		}
 		for (int i = 0; i <= BYTES_TO_READ - 13; i++) {
 			int firstWord = doubleByteToInt(rawData[i+1], rawData[i+0]); //Parse first 2 bytes
-			System.out.println("first word: " + firstWord + " at i = " + Integer.toString(i));
+			//System.out.println("first word: " + firstWord + " at i = " + Integer.toString(i));
 			if (firstWord == SYNCWORD) {
-				System.out.println("found SyncWord");
+				//System.out.println("found SyncWord");
 				int secondWord = doubleByteToInt(rawData[i+3], rawData[i+2]); //Parse next 2 bytes
 				int pixyObjectStart = i + 2;
 				int pixyObjectEnd = i + 14;
 				if (secondWord == SYNCWORD) {
-					System.out.println("found SyncWord #2");
+					//System.out.println("found SyncWord #2");
 					pixyObjectStart += 2;
 					pixyObjectEnd += 2;
 				}
 				PixyObject pixyObject = new PixyObject(Arrays.copyOfRange(rawData, pixyObjectStart, pixyObjectEnd));
-			    System.out.println("pixyObject created: " + pixyObject);
+			    //System.out.println("pixyObject created: " + pixyObject);
 	
 				if(pixyObject.isValid() ) {
-					System.out.println("pixyObject is valid");
+					//System.out.println("pixyObject is valid");
 					if(pixyObject.signature == signature) {
-						System.out.println("pixyObject is the right signature");
+						//System.out.println("pixyObject is the right signature");
 						pixyObjectList.add(pixyObject);
 						i += 15; //was 16 changed because we get 1 more at the end of the loop
 					}
