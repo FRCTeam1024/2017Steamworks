@@ -2,16 +2,13 @@ package org.usfirst.frc.team1024.robot.subsystems;
 
 import org.usfirst.frc.team1024.robot.Robot;
 import org.usfirst.frc.team1024.robot.RobotMap;
-import org.usfirst.frc.team1024.robot.util.Constants;
 import org.usfirst.frc.team1024.robot.util.KilaTalon;
 import org.usfirst.frc.team1024.robot.util.Subsystem1024;
 
-//import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
 import com.kauailabs.navx.frc.AHRS;
 
-import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.PIDSourceType;
@@ -112,10 +109,6 @@ public class Drivetrain extends Subsystem implements Subsystem1024 {
 	boolean isDone = false;
 	@Override
 	public void outputToSmartDashboard() {
-		//SmartDashboard.putData("Front Left Drive",   frontLeftDrive);
-		//SmartDashboard.putData("Rear Left Drive",    rearLeftDrive);
-		//SmartDashboard.putData("Front Right Drive",  frontRightDrive);
-		//SmartDashboard.putData("Rear Right Drive",   rearRightDrive); 
 		if (SmartDashboard.getBoolean("Reset Encoders", false) == true) {
 			frontLeftDrive.setEncPosition(0);
 			frontRightDrive.setEncPosition(0);
@@ -210,28 +203,6 @@ public class Drivetrain extends Subsystem implements Subsystem1024 {
 	}
 	
 	/**
-	 * Gets the average of the encoder positions on the left and right side of the drivetrain.
-	 * @returns the average position of the drive encoders.
-	 */
-	/*
-	public double getAverageEncoderDistance() {
-		return (frontLeftDrive.getDistanceInInches() + frontRightDrive.getDistanceInInches()) / 2;
-	}
-	*/
-	/**
-	 * Drives the drivetrain motors for a specified distance and power.
-	 * @param power (-1.0, 1.0)
-	 * @param distance (inches)
-	 */
-	/*
-	public void driveForDistance(double power, double distance) {
-		while (getAverageEncoderDistance() < distance && Robot.oi.getBreakButton() == false) {
-			drive(power);
-		}
-		stop();
-	}*/
-	
-	/**
 	 * Drives with PID to a distance. Changes the Talon Control Mode to position mode
 	 * @param distance (inches)
 	 */
@@ -273,14 +244,7 @@ public class Drivetrain extends Subsystem implements Subsystem1024 {
 			System.out.println("Angle cannot be greater than 180 or less than -180, please input the coterminal version of that angle");
 		}
 	}
-	/*
-	public void OneSideTurnLeft(double leftpower, double desiredAngle) {
-		while(navx.getAngle() <= desiredAngle) {
-			drive(leftpower, 0.0);
-		}
-		stop();
-	}
-	*/
+	
 	public void turnLeft(double power, double desiredAngle) {
 		while(navx.getAngle() <= desiredAngle && Robot.oi.getBreakButton() == false) {
 			drive(-power, power);

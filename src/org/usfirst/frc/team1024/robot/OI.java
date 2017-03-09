@@ -1,19 +1,12 @@
 package org.usfirst.frc.team1024.robot;
 
 
-import org.usfirst.frc.team1024.robot.commands.AgitateCommand;
-import org.usfirst.frc.team1024.robot.commands.EmptyCommand;
 import org.usfirst.frc.team1024.robot.commands.FlapCommand;
 
 import org.usfirst.frc.team1024.robot.commands.GearClampCommand;
 import org.usfirst.frc.team1024.robot.commands.OpenClampPushGearCommand;
-import org.usfirst.frc.team1024.robot.commands.PushGearCommand;
 import org.usfirst.frc.team1024.robot.commands.ShootCommand;
 import org.usfirst.frc.team1024.robot.commands.ShooterSpeedResetCommand;
-
-import org.usfirst.frc.team1024.robot.commands.shift;
-import org.usfirst.frc.team1024.robot.util.Constants;
-
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
