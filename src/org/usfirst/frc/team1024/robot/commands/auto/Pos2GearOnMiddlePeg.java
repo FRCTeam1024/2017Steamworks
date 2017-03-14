@@ -19,7 +19,8 @@ public class Pos2GearOnMiddlePeg extends CommandGroup {
 	
 	public Pos2GearOnMiddlePeg() {
 		addSequential(new GearClampCommand(0));
-		addSequential(new DriveForDistance(/*Constants.DISTANCE_TO_BASELINE*/ 114 - Constants.ROBOT_LENGTH, 3f));
+		//addSequential(new DriveForDistance(/*Constants.DISTANCE_TO_BASELINE*/ 114 - Constants.ROBOT_LENGTH, 3f));
+		addSequential(new DriveForTime(0.5, 0.5, 1.0)); // drive at half speed for 1 second
 		addSequential(new WaitForTimeCommand(0.5));
 		//addSequential(new DriveForTime(0.5, 3));
 		addSequential(new GearClampCommand(1));

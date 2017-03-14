@@ -14,9 +14,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team1024.robot.commands.redauto.*;
 import org.usfirst.frc.team1024.robot.commands.auto.HopperShoot;
+import org.usfirst.frc.team1024.robot.commands.auto.Pos1Shoot;
 import org.usfirst.frc.team1024.robot.commands.auto.Pos2GearOnMiddlePeg;
 import org.usfirst.frc.team1024.robot.commands.auto.RedPos1ShootCrossArc;
+import org.usfirst.frc.team1024.robot.commands.auto.RedPos1ShootCrossArcOppositeSide;
 import org.usfirst.frc.team1024.robot.commands.auto.BluePos1ShootCrossArc;
+import org.usfirst.frc.team1024.robot.commands.auto.CrossBaselinePower;
+
 import java.util.List;
 
 import org.usfirst.frc.team1024.Pixy.PixyI2C;
@@ -130,6 +134,7 @@ public class Robot extends IterativeRobot {
 		// shoot 10sec
 		// cross baseline
 		case 3:
+			//not used!!!
 			autonomousCommand = new RedPos1ShootCross();
 			break;
 		// shoot 5sec
@@ -151,15 +156,18 @@ public class Robot extends IterativeRobot {
 			autonomousCommand = new RedPos1ShootCrossArc();
 			break;
 		case 6:
+			//NOT USED
 			autonomousCommand = new Pos3NPeg();
 			break;
 		// pos3 N Peg
 		case 7:
+			//not used!!!
 			// hopper shoot
 			autonomousCommand = new HopperShoot();
 			break;
 		case 8:
 			// just cross baseline
+			autonomousCommand = new RedPos1ShootCrossArcOppositeSide();
 		case 9:
 			autonomousCommand = new CrossBaselinePower();
 			break;
@@ -213,7 +221,7 @@ public class Robot extends IterativeRobot {
 		} else if (oi.logi.getPOV() == 180) {
 			shooter.shooterSetSpeed -= 5.0;
 		}
-		if (oi.lJoy.getRawButton(7) || oi.rJoy.getRawButton(7)) {
+		if (oi.lJoy.getRawButton(7) || oi.rJoy.getRawButton(7) || oi.lJoy.getRawButton(5)) {
 			drivetrain.shifter.set(false);
 		}
 		if (oi.lJoy.getRawButton(10) || oi.rJoy.getRawButton(10)) {

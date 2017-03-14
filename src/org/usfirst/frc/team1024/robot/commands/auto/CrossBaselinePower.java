@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1024.robot.commands.redauto;
+package org.usfirst.frc.team1024.robot.commands.auto;
 
 import org.usfirst.frc.team1024.robot.Robot;
 import org.usfirst.frc.team1024.robot.commands.DriveForDistance;
