@@ -18,12 +18,10 @@ public class OpenClampPushGearCommand extends Command {
 	@Override
 	protected void execute() {
 		if (Robot.oi.logi.getRawButton(7)) {
-			Robot.hopper.flap(true);
 			Timer.delay(0.2);
 			Robot.gear.push(true);
 			Robot.gear.clamp(1);
 		} else {
-			Robot.hopper.flap(false);
 			Robot.gear.push(false);
 			Robot.gear.clamp(0);
 		}
@@ -36,14 +34,12 @@ public class OpenClampPushGearCommand extends Command {
 	
 	@Override
 	protected void end() {
-		Robot.hopper.flap(false);
 		Robot.gear.clamp(0);
 		Robot.gear.push(false);
 	}
 	
 	@Override
 	protected void interrupted() {
-		Robot.hopper.flap(false);
 		Robot.gear.clamp(0);
 		Robot.gear.push(false);
 	}

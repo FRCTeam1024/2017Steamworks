@@ -41,20 +41,21 @@ public class RedPos1ShootCrossArc extends CommandGroup {
 			if (hasShot != true) {
 				Robot.shooter.shooter.setSetpoint(Robot.shooter.shooterSetSpeed + 400);
 				Robot.shooter.shooter.enable();
-				Timer.delay(2.5); // for the shooter to get up to speed
-				Robot.hopper.flap(true);
+				Timer.delay(1.0); // for the shooter to get up to speed
 				hasDone = true;
 			}
 			Robot.blender.blend(-1.0);
 			Robot.hopper.agitate(1.0);
-			Timer.delay(10);
+			
+			
+			Timer.delay(5);
 			Robot.blender.stop();
 			Robot.hopper.agitator.set(0.0);
 			Robot.shooter.stop();
 
 			Robot.drivetrain.drive(0.5, 0.0);
 			Timer.delay(1);
-			Robot.drivetrain.drive(-0.5, 0.8);
+			Robot.drivetrain.drive(-0.4, 0.8);
 			Timer.delay(1);
 			Robot.drivetrain.stop();
 			isDone = true;

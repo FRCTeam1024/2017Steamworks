@@ -17,10 +17,12 @@ import org.usfirst.frc.team1024.robot.commands.auto.HopperShoot;
 import org.usfirst.frc.team1024.robot.commands.auto.Pos1Shoot;
 import org.usfirst.frc.team1024.robot.commands.auto.Pos2GearOnMiddlePeg;
 import org.usfirst.frc.team1024.robot.commands.auto.RedPos1ShootCrossArc;
+import org.usfirst.frc.team1024.robot.commands.auto.RedPos1ShootCrossArcGear;
 import org.usfirst.frc.team1024.robot.commands.auto.RedPos1ShootCrossArcOppositeSide;
 import org.usfirst.frc.team1024.robot.commands.auto.BluePos1ShootCrossArc;
 import org.usfirst.frc.team1024.robot.commands.auto.CrossBaselinePower;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.usfirst.frc.team1024.Pixy.PixyI2C;
@@ -36,6 +38,7 @@ import org.usfirst.frc.team1024.robot.subsystems.Gear;
 import org.usfirst.frc.team1024.robot.subsystems.Hopper;
 import org.usfirst.frc.team1024.robot.subsystems.Shooter;
 
+
 import com.ctre.CANTalon.TalonControlMode;
 import com.kauailabs.navx.frc.AHRS;
 
@@ -45,6 +48,8 @@ import org.usfirst.frc.team1024.robot.subsystems.REVDigitBoard;
  * @author team1024 Change Log 1/26/17:
  */
 public class Robot extends IterativeRobot {
+	public static boolean hasRun = false;
+	//public static Logger logger;
 	public static final Drivetrain drivetrain = new Drivetrain();
 	public static final Shooter shooter = new Shooter();
 	public static final Climber climber = new Climber();
@@ -75,7 +80,7 @@ public class Robot extends IterativeRobot {
 		NetworkTable.globalDeleteAll();
 		shooter.initDashboard();
 		drivetrain.initDashboard();
-		
+		//logger = new Logger();
 		drivetrain.frontLeftDrive.setEncPosition(0);
 		drivetrain.frontRightDrive.setEncPosition(0);
 
@@ -94,6 +99,16 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void disabledInit() {
 		autoChooser.display("1024");
+		if (hasRun == true) {
+			/*try {
+				logger.workbook.write(logger.out);
+				logger.out.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}*/
+			hasRun = false;
+		}
 	}
 
 	@Override
@@ -163,11 +178,12 @@ public class Robot extends IterativeRobot {
 		case 7:
 			//not used!!!
 			// hopper shoot
-			autonomousCommand = new HopperShoot();
+			autonomousCommand = new RedPos1ShootCrossArcGear();
 			break;
 		case 8:
 			// just cross baseline
 			autonomousCommand = new RedPos1ShootCrossArcOppositeSide();
+			break;
 		case 9:
 			autonomousCommand = new CrossBaselinePower();
 			break;
@@ -203,6 +219,8 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		hasRun = true;
+		//logger.logAll();
 		outputTheThings();
 		// printGyro();
 		drivetrain.drive(-oi.lJoy.getRawAxis(RobotMap.JOYSTICK_Y_AXIS_NUM),

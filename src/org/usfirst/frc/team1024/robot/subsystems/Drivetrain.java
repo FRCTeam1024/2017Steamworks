@@ -157,11 +157,17 @@ public class Drivetrain extends Subsystem implements Subsystem1024 {
 	public void drive(double leftpower, double rightpower) {
 		frontLeftDrive.changeControlMode(TalonControlMode.PercentVbus);
 		frontRightDrive.changeControlMode(TalonControlMode.PercentVbus);
+		rearLeftDrive.changeControlMode(TalonControlMode.PercentVbus);
+		rearRightDrive.changeControlMode(TalonControlMode.PercentVbus);
 
 		frontLeftDrive.set(leftpower);
 		frontRightDrive.set(rightpower);
+		rearLeftDrive.set(leftpower);
+		rearRightDrive.set(rightpower);
 		frontLeftDrive.enable();
 		frontRightDrive.enable();
+		rearLeftDrive.enable();
+		rearRightDrive.enable();
 	}
 	
 	/**
@@ -171,6 +177,7 @@ public class Drivetrain extends Subsystem implements Subsystem1024 {
 		frontLeftDrive.disable();
 		frontRightDrive.disable();
 	}
+	
 	/**
 	 * Drives all drivetrain motors for a given time and powers.
 	 * @param power
