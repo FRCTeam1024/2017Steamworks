@@ -223,6 +223,7 @@ public class Robot extends IterativeRobot {
 		//logger.logAll();
 		outputTheThings();
 		// printGyro();
+		gear.setLED();
 		drivetrain.drive(-oi.lJoy.getRawAxis(RobotMap.JOYSTICK_Y_AXIS_NUM),
 				oi.rJoy.getRawAxis(RobotMap.JOYSTICK_Y_AXIS_NUM));
 

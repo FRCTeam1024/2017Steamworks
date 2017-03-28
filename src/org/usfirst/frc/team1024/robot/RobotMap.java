@@ -54,6 +54,11 @@ public class RobotMap {
 		public static final int SHOOTER_ENCODER_PORT_A = 1;
 		public static final int SHOOTER_ENCODER_PORT_B = 2;
 		
+		//Gear
+		
+		public static final int GEAR_DETECTOR_PORT = 0;
+		public static final int GEAR_LED_PORT = 1;
+		
 	//Controls
 		
 		public static final int LOGITECH_PORT = 0;
@@ -61,5 +66,6 @@ public class RobotMap {
 		public static final int RIGHT_JOYSTICK_PORT = 2;
 		
 		public static final int JOYSTICK_Y_AXIS_NUM = 1;
+		
 		
 }
