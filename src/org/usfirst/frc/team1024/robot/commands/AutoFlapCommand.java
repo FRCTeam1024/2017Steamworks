@@ -17,7 +17,7 @@ public class AutoFlapCommand extends Command {
 
 	@Override
 	protected void execute() {
-		Robot.hopper.flap(true);
+		Robot.hopper.flip(true);
 		System.out.println("IN FLAP");
 		isDone = true;
 	}

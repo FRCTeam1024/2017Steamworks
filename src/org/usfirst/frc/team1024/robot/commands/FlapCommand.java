@@ -16,7 +16,7 @@ public class FlapCommand extends Command {
 	
 	@Override
 	protected void execute() {
-		Robot.hopper.flap(true);
+		Robot.hopper.flip(true);
 	}
 	
 	@Override
@@ -26,11 +26,11 @@ public class FlapCommand extends Command {
 	
 	@Override
 	protected void end() {
-		Robot.hopper.flap(false);
+		Robot.hopper.flip(false);
 	}
 	
 	@Override
 	protected void interrupted() {
-		Robot.hopper.flap(false);
+		Robot.hopper.flip(false);
 	}
 }

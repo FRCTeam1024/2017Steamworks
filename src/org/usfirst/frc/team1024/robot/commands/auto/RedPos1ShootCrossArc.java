@@ -67,7 +67,7 @@ public class RedPos1ShootCrossArc extends CommandGroup {
 	@Override
 	protected void end() {
 		Robot.shooter.stop();
-		Robot.hopper.flap(false);
+		Robot.hopper.flip(false);
 		// Might have to set stuff to turn off later.
 	}
 

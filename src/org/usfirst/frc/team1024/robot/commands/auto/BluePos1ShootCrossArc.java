@@ -43,7 +43,7 @@ public class BluePos1ShootCrossArc extends CommandGroup {
 				Robot.shooter.shooter.setSetpoint(Robot.shooter.shooterSetSpeed + 400);
 				Robot.shooter.shooter.enable();
 				Timer.delay(2.5); // for the shooter to get up to speed
-				Robot.hopper.flap(true);
+				Robot.hopper.flip(true);
 				hasDone = true;
 			}
 			Robot.blender.blend(-1.0);
@@ -67,7 +67,7 @@ public class BluePos1ShootCrossArc extends CommandGroup {
 	@Override
 	protected void end() {
 		Robot.shooter.stop();
-		Robot.hopper.flap(false);
+		Robot.hopper.flip(false);
 		// Might have to set stuff to turn off later.
 	}
 

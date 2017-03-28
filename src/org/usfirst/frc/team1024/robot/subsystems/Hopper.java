@@ -15,11 +15,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Hopper extends Subsystem implements Subsystem1024 {
 
-	public Solenoid flap = new Solenoid(RobotMap.HOPPER_FLAP_PORT);
+	public Solenoid bird = new Solenoid(RobotMap.HOPPER_FLAP_PORT);
 	public KilaTalon agitator = new KilaTalon(RobotMap.AGITATOR_PORT);
 
 	public Hopper() {
-		LiveWindow.addActuator("Hopper", "Flap", flap);
+		LiveWindow.addActuator("Hopper", "Bird", bird);
 		LiveWindow.addActuator("Hopper", "Agitator", agitator);
 	}
 
@@ -38,13 +38,13 @@ public class Hopper extends Subsystem implements Subsystem1024 {
 		agitator.set(power);
 	}
 
-	public void flap(boolean state) {
-		flap.set(state);
+	public void flip(boolean state) {
+		bird.set(state);
 	}
 
 	@Override
 	public void outputToSmartDashboard() {
-		SmartDashboard.putData("Flap", flap);
+		SmartDashboard.putData("Bird", bird);
 		SmartDashboard.putData("Agitator", agitator);
 	}
 
