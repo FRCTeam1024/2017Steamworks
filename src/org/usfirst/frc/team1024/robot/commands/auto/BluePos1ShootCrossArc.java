@@ -3,7 +3,6 @@ package org.usfirst.frc.team1024.robot.commands.auto;
 import org.usfirst.frc.team1024.robot.Robot;
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class BluePos1ShootCrossArc extends CommandGroup {

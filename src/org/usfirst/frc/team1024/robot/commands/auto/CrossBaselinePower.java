@@ -1,10 +1,6 @@
 package org.usfirst.frc.team1024.robot.commands.auto;
 
 import org.usfirst.frc.team1024.robot.Robot;
-import org.usfirst.frc.team1024.robot.commands.DriveForDistance;
-import org.usfirst.frc.team1024.robot.commands.PushGearCommand;
-import org.usfirst.frc.team1024.robot.commands.TurnCommand;
-
 import com.ctre.CANTalon.TalonControlMode;
 
 import edu.wpi.first.wpilibj.Timer;

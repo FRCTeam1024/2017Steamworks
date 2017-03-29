@@ -2,16 +2,8 @@
 package org.usfirst.frc.team1024.robot.commands.auto;
 
 import org.usfirst.frc.team1024.robot.Robot;
-import org.usfirst.frc.team1024.robot.commands.AgitateCommand;
-import org.usfirst.frc.team1024.robot.commands.AutoFlapCommand;
-import org.usfirst.frc.team1024.robot.commands.BlendCommand;
-import org.usfirst.frc.team1024.robot.commands.DriveForDistance;
-import org.usfirst.frc.team1024.robot.commands.ShootCommand;
-import org.usfirst.frc.team1024.robot.commands.WaitForTimeCommand;
-
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * GEAR AUTO UNINTENTIONALLY!!!!!!!!!!!!! PogChamp
  * @author team1024

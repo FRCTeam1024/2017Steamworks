@@ -1,7 +1,6 @@
 package org.usfirst.frc.team1024.robot.commands.redauto;
 
 import org.usfirst.frc.team1024.robot.commands.DriveForDistance;
-import org.usfirst.frc.team1024.robot.commands.DriveForTime;
 import org.usfirst.frc.team1024.robot.commands.PushGearCommand;
 import org.usfirst.frc.team1024.robot.commands.TurnCommand;
 
