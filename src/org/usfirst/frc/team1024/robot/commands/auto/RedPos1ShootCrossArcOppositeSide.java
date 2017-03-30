@@ -24,14 +24,14 @@ public class RedPos1ShootCrossArcOppositeSide extends CommandGroup {
 	protected void execute() {
 		if (isDone != true) {
 			if (hasShot != true) {
-				Robot.shooter.shooter.setSetpoint(Robot.shooter.shooterSetSpeed + 400); // have to add more
+				Robot.shooter.shooter.setSetpoint(Robot.shooter.shooterSetSpeed + 200); // have to add more
 																						// because we are further away than anticipated
 				Robot.shooter.shooter.enable();
 				Timer.delay(2.5); // for the shooter to get up to speed
 				Robot.hopper.flap(true);
 				hasDone = true;
 			}
-			Robot.blender.blend(-1.0);
+			Robot.blender.blend(-0.5);
 			Robot.hopper.agitate(1.0);
 			Timer.delay(10);
 			Robot.blender.stop();
