@@ -176,6 +176,8 @@ public class Drivetrain extends Subsystem implements Subsystem1024 {
 	public void stop() {
 		frontLeftDrive.disable();
 		frontRightDrive.disable();
+		rearLeftDrive.disable();
+		rearRightDrive.disable();
 	}
 	
 	/**

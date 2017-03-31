@@ -3,6 +3,8 @@ package org.usfirst.frc.team1024.robot;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
@@ -14,6 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team1024.robot.commands.redauto.*;
 import org.usfirst.frc.team1024.robot.commands.auto.HopperShoot;
+import org.usfirst.frc.team1024.robot.commands.auto.LineUpAndShoot;
 import org.usfirst.frc.team1024.robot.commands.auto.Pos1Shoot;
 import org.usfirst.frc.team1024.robot.commands.auto.Pos2GearOnMiddlePeg;
 import org.usfirst.frc.team1024.robot.commands.auto.RedPos1ShootCrossArc;
@@ -58,7 +61,8 @@ public class Robot extends IterativeRobot {
 	public static final Hopper hopper = new Hopper();
 	public static final REVDigitBoard autoChooser = new REVDigitBoard();
 
-	public PixyI2C pixy;
+	public static PixyI2C pixy;
+	public static I2C pixyI2C;
 	public PixyPacket test;
 	public DigitalOutput pixyPower;
 	public static int[] pixyValues;
@@ -78,13 +82,14 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		NetworkTable.globalDeleteAll();
+		pixyI2C = new I2C(Port.kMXP, 0x54);
 		shooter.initDashboard();
 		drivetrain.initDashboard();
 		//logger = new Logger();
 		drivetrain.frontLeftDrive.setEncPosition(0);
 		drivetrain.frontRightDrive.setEncPosition(0);
 
-		pixyPower = new DigitalOutput(4);
+		pixyPower = new DigitalOutput(2);
 		pixyPower.set(true);
 		
 		pixy = new PixyI2C();
@@ -172,7 +177,7 @@ public class Robot extends IterativeRobot {
 			break;
 		case 6:
 			//NOT USED
-			autonomousCommand = new Pos3NPeg();
+			autonomousCommand = new LineUpAndShoot();
 			break;
 		// pos3 N Peg
 		case 7:
@@ -224,10 +229,12 @@ public class Robot extends IterativeRobot {
 		outputTheThings();
 		// printGyro();
 		gear.setLED();
+		SmartDashboard.putBoolean("Break", gear.gearDetector.get());
+		gear.gearTransmitter.set(true);
 		drivetrain.drive(-oi.lJoy.getRawAxis(RobotMap.JOYSTICK_Y_AXIS_NUM),
 				oi.rJoy.getRawAxis(RobotMap.JOYSTICK_Y_AXIS_NUM));
 
-		blender.blend(oi.logi.getRawAxis(3));// Blender
+		blender.blend(0.5 * oi.logi.getRawAxis(3));// Blender
 		hopper.agitator.set(oi.logi.getRawAxis(3));
 		hopper.agitate(oi.logi.getRawAxis(3));
 		climber.climb(Math.abs(oi.logi.getRawAxis(1)));// Climber

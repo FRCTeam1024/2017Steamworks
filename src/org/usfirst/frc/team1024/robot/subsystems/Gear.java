@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -18,7 +19,8 @@ public class Gear extends Subsystem implements Subsystem1024 {
 	public Solenoid pusher = new Solenoid(RobotMap.GEAR_PUSHER_PORT_1);
 	public DoubleSolenoid clamper = new DoubleSolenoid(RobotMap.GEAR_CLAMP_PORT_1, RobotMap.GEAR_CLAMP_PORT_2);
 	public DigitalInput gearDetector = new DigitalInput(RobotMap.GEAR_DETECTOR_PORT);
-	public DigitalOutput gearIndicator = new DigitalOutput(RobotMap.GEAR_LED_PORT);
+	public DigitalOutput gearTransmitter = new DigitalOutput(RobotMap.GEAR_TRANSMITTER_PORT);
+	public Relay gearIndicator = new Relay(RobotMap.GEAR_LED_PORT);
 	
 	
 	/**
@@ -72,7 +74,11 @@ public class Gear extends Subsystem implements Subsystem1024 {
 	 * @param state
 	 */
 	public void setLED(boolean state) {
-		gearIndicator.set(state);
+		if (state == true) {
+			gearIndicator.set(Relay.Value.kOn);
+		} else {
+			gearIndicator.set(Relay.Value.kOff);
+		}
 	}
 	
 	@Override
