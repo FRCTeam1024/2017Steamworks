@@ -1,102 +1,20 @@
 package org.usfirst.frc.team1024.robot.commands.auto;
 
+import java.util.List;
+
+import org.usfirst.frc.team1024.Pixy.PixyObject;
 import org.usfirst.frc.team1024.robot.Robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.RobotState;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class LineUpAndShoot extends Command {
-
+	boolean hasDone = false;
+	
 	public LineUpAndShoot() {
-		int pos = 0;
-		int[] xPositionArray = new int[10];
-		int maxPos = 1;
-		int aveCount = 0;
-		int samples = 0;
-		int xPositionAve = 0;
-		int turnDir = 0; // negative is left turn. positive is right turn. zero
-							// is stop.
-		int lowerBound = 120;
-		int upperBound = 140;
-		char xPosition = 0;
-		boolean target = false;
-		while (!target && !Robot.oi.getBreakButton()) {
-			if (turnDir > 0) { // Set pivot direction (positive = right,
-								// negative =
-								// left, zero = stop)
-				Robot.drivetrain.drive(0, 0.3);
-			} else if (turnDir < 0) {
-				Robot.drivetrain.drive(0.3, 0);
-			} else {
-				Robot.drivetrain.drive(0, 0);
-			}
-			byte[] pixyValues = new byte[64];
-			pixyValues[0] = (byte) 0b01010101;
-			pixyValues[1] = (byte) 0b10101010;
-
-			Robot.pixyI2C.readOnly(pixyValues, 64); // get camera
-														// frame
-														// data
-			if (pixyValues != null) {// parse camera frame data
-				int i = 0;
-				while ((!(pixyValues[i] == 85 && pixyValues[i + 1] == -86) && i < 50)
-						&& !Robot.oi.getBreakButton() && RobotState.isAutonomous()) {
-					i++;
-				}
-				i++;
-				if (i > 50 && !Robot.oi.getBreakButton())
-					i = 49;
-				while ((!(pixyValues[i] == 85 && pixyValues[i + 1] == -86) && i < 50)
-						&& !Robot.oi.getBreakButton() && RobotState.isAutonomous()) {
-					i++;
-				}
-
-				// Calculate xPosition using running average
-				xPosition = (char) (((pixyValues[i + 7] & 0xff) << 8) | (pixyValues[i + 6] & 0xff));
-				char yPosition = (char) ((pixyValues[i + 9] & 0xff << 8) | pixyValues[i + 8] & 0xff);
-				char width = (char) ((pixyValues[i + 11] & 0xff << 8) | pixyValues[i + 10] & 0xff);
-				char height = (char) ((pixyValues[i + 13] & 0xff << 8) | pixyValues[i + 12] & 0xff);
-				DriverStation.reportError("xposition: " + xPosition, true);
-				if (xPosition < 300 && xPosition > 1 && (width > 20 && width < 45)) {
-					xPositionArray[pos] = xPosition;
-					pos++;
-					samples++;
-					if (pos > maxPos) {
-						pos = 0;
-					}
-				}
-				xPositionAve = 0;
-				for (aveCount = 0; aveCount <= maxPos; aveCount++) {
-					xPositionAve += xPositionArray[aveCount];
-				}
-				xPositionAve = xPositionAve / (maxPos + 1);
-
-				if ((xPositionAve > lowerBound && xPositionAve < upperBound)) { // Determine
-					// if we
-					// have a
-					// target
-					target = true;
-				}
-				if (samples > maxPos) { // Don't
-																			// adjust
-																			// turn
-																			// direction
-																			// until
-					// there is a full average
-					if (xPositionAve < lowerBound) {
-						turnDir = -1;
-					} else if (xPositionAve > upperBound) {
-						turnDir = 1;
-					} else {
-						turnDir = 0;
-					}
-					samples = maxPos + 1; // Don't let samples grow
-											// uncontrollably
-				}
-			}
-		}
 	}
 
 	@Override
@@ -105,12 +23,57 @@ public class LineUpAndShoot extends Command {
 
 	@Override
 	protected void execute() {
+		List<PixyObject> pixyObjectList = Robot.getPixyObjects();
+		Robot.drivetrain.drive(-0.2, -0.2);
+		if (pixyObjectList != null ) {
+			Robot.printPixyStuff(pixyObjectList);
+			System.out.println("Got " + pixyObjectList.size() + " objects from the pixy");
+			for (int i = 0; i < pixyObjectList.size(); i++) {
+				DriverStation.reportError(pixyObjectList.get(i).toString(), false);
+			}
+			
+			// get first object
+			if (pixyObjectList.size() > 0) {
+				SmartDashboard.putNumber("Drive Multiplier", Robot.driveMultiplier);
+				PixyObject pixyObject = pixyObjectList.get(0);
+				Robot.pixyX = pixyObject.getX();
+				if (Robot.pixyX > 170) {
+					Robot.drivetrain.drive(Robot.driveMultiplier * 0.2, Robot.driveMultiplier * 0.2); // turn left
+				} else if (Robot.pixyX < 150) {
+					Robot.drivetrain.drive(Robot.driveMultiplier * -0.2, Robot.driveMultiplier * -0.2); // turn right
+				} else {
+					Robot.driveMultiplier *= 0.8;
+					Robot.drivetrain.stop();
+					Robot.times++;
+					SmartDashboard.putNumber("Times", Robot.times);
+					Robot.shooter.shooter.setSetpoint(Robot.shooter.shooterSetSpeed + 1000);
+					Robot.shooter.shooter.enable();
+					if (Robot.times > 5) {
+						if (hasDone != true) {
+							
+							//Timer.delay(1.0); // for the shooter to get up to speed
+							Robot.hopper.flip(true);
+							hasDone = true;
+						}
+						Robot.blender.blend(-0.5);
+						Robot.hopper.agitate(1.0);
+						Timer.delay(10);
+						end();
+					}
+				}
+			}
+		}
+		
+		
 	}
 	@Override
 	protected boolean isFinished() { return false; }
 
 	@Override
 	protected void end() {
+		Robot.shooter.stop();
+		Robot.hopper.flip(false);
+		Robot.blender.stop();
 	}
 
 	@Override

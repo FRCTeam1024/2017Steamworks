@@ -40,7 +40,7 @@ public class Blender extends Subsystem implements Subsystem1024 {
 	 * Stops the blender
 	 */
 	public void stop() {
-		blenderMotor.set(0.0);
+		blenderMotor.disable();
 	}
 
 	@Override

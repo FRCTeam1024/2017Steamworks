@@ -40,7 +40,6 @@ import org.usfirst.frc.team1024.robot.subsystems.Gear;
 import org.usfirst.frc.team1024.robot.subsystems.Hopper;
 import org.usfirst.frc.team1024.robot.subsystems.Shooter;
 
-
 import com.ctre.CANTalon.TalonControlMode;
 import com.kauailabs.navx.frc.AHRS;
 
@@ -59,6 +58,11 @@ public class Robot extends IterativeRobot {
 	public static final Gear gear = new Gear();
 	public static final Hopper hopper = new Hopper();
 	public static final REVDigitBoard autoChooser = new REVDigitBoard();
+	
+	public static int pixyX = 0;
+	public static int targetX = 163;
+	public static double driveMultiplier = 1.0;
+	public static int times = 0;
 
 	public static PixyI2C pixy;
 	public static I2C pixyI2C;
@@ -255,20 +259,18 @@ public class Robot extends IterativeRobot {
 		if (oi.logi.getRawButton(9)) {
 			autonomousCommand.cancel();
 		}
-
+		
 		List<PixyObject> pixyObjectList = getPixyObjects();
 		if (pixyObjectList != null) {
-			// printPixyStuff(pixyObjectList);
-			// System.out.println("Got " + pixyObjectList.size() + " objects
-			// from the pixy");
-			// for (int i = 0; i < pixyObjectList.size(); i++) {
-			// DriverStation.reportError(pixyObjectList.get(i).toString(),
-			// false);
-			// }
+			printPixyStuff(pixyObjectList);
+			System.out.println("Got " + pixyObjectList.size() + " objects from the pixy");
+			for (int i = 0; i < pixyObjectList.size(); i++) {
+				DriverStation.reportError(pixyObjectList.get(i).toString(), false);
+			}
 		}
 	}
 
-	public List<PixyObject> getPixyObjects() {
+	public static List<PixyObject> getPixyObjects() {
 		// pixy values are saved and read like PixyPacket.(x,y,width,height)
 		try {
 			return pixy.readFrame(1);
@@ -419,5 +421,34 @@ public class Robot extends IterativeRobot {
 		/* Connectivity Debugging Support */
 		SmartDashboard.putNumber("IMU_Byte_Count", drivetrain.navx.getByteCount());
 		SmartDashboard.putNumber("IMU_Update_Count", drivetrain.navx.getUpdateCount());
+	}
+	
+	public static void printPixyStuff(){
+		byte[] pixyValues = new byte[64];
+		pixyValues[0] = (byte) 0b01010101;
+		pixyValues[1] = (byte) 0b10101010;
+
+		pixyI2C.readOnly(pixyValues, 64);
+		if (pixyValues != null) {
+			int i = 0;
+			while (!(pixyValues[i] == 85 && pixyValues[i + 1] == -86) && i < 50) {
+				i++;
+			}
+			i++;
+			if (i > 50)
+				i = 49;
+			while (!(pixyValues[i] == 85 && pixyValues[i + 1] == -86) && i < 50) {
+				i++;
+			}
+			char xPosition = (char) (((pixyValues[i + 7] & 0xff) << 8) | (pixyValues[i + 6] & 0xff));
+			char yPosition = (char) ((pixyValues[i + 9] & 0xff << 8) | pixyValues[i + 8] & 0xff);
+			char width = (char) ((pixyValues[i + 11] & 0xff << 8) | pixyValues[i + 10] & 0xff);
+			char height = (char) ((pixyValues[i + 13] & 0xff << 8) | pixyValues[i + 12] & 0xff);
+			SmartDashboard.putNumber("xPosition", xPosition);
+			SmartDashboard.putNumber("yPosition", yPosition);
+			SmartDashboard.putNumber("width", width);
+			SmartDashboard.putNumber("height", height);
+			SmartDashboard.putNumber("Raw 5", pixyValues[5]);
+		}
 	}
 }
