@@ -15,11 +15,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team1024.robot.commands.redauto.*;
-<<<<<<< HEAD
-=======
 import org.usfirst.frc.team1024.robot.commands.auto.HopperShoot;
 import org.usfirst.frc.team1024.robot.commands.auto.LineUpAndShoot;
->>>>>>> origin/master
 import org.usfirst.frc.team1024.robot.commands.auto.Pos1Shoot;
 import org.usfirst.frc.team1024.robot.commands.auto.Pos2GearOnMiddlePeg;
 import org.usfirst.frc.team1024.robot.commands.auto.RedPos1ShootCrossArc;
