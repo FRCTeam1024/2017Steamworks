@@ -164,6 +164,7 @@ public class Drivetrain extends Subsystem implements Subsystem1024 {
 		frontRightDrive.set(rightpower);
 		rearLeftDrive.set(leftpower);
 		rearRightDrive.set(rightpower);
+		
 		frontLeftDrive.enable();
 		frontRightDrive.enable();
 		rearLeftDrive.enable();

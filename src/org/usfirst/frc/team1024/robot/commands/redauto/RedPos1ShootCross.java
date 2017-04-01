@@ -40,11 +40,11 @@ public class RedPos1ShootCross extends CommandGroup {
 		while (time.get() < startTime + 10.5 && Robot.oi.getBreakButton() == false) {
 			if (hasDone != true) {
 				Robot.shooter.shooter.setSetpoint(Robot.shooter.shooterSetSpeed);
-				Timer.delay(2.5); // for the shooter to get up to speed
+				Timer.delay(1.0); // for the shooter to get up to speed
 				Robot.hopper.flip(true);
 				hasDone = true;
 			}
-			Robot.blender.blend(-1.0);
+			Robot.blender.blend(-0.4);
 			Robot.hopper.agitate(1.0);
 		}
 		while (hasDrove != true && Robot.oi.getBreakButton() == false) {
