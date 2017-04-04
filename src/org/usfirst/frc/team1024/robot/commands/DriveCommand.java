@@ -23,6 +23,7 @@ public class DriveCommand extends Command {
 	
 	@Override
 	protected void execute() {
+		log("executing DriveCommand with leftPower " + leftPower + " , rightPower " + rightPower);
 		Robot.drivetrain.drive(leftPower, rightPower);
 		Timer.delay(time);
 		isDone = true;
@@ -33,8 +34,13 @@ public class DriveCommand extends Command {
 		return isDone;
 	}
 	
+	private void log(String msg) {
+		System.out.println(msg);
+	}
+	
 	@Override
 	protected void end() {
+		log("ending DriveCommand");
 		Robot.drivetrain.stop();
 	}
 	

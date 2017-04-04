@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team1024.robot.commands.redauto.*;
 import org.usfirst.frc.team1024.robot.commands.auto.HopperShoot;
 import org.usfirst.frc.team1024.robot.commands.auto.LineUpAndShoot;
+import org.usfirst.frc.team1024.robot.commands.auto.LineUpAndShootFromGearPin;
 import org.usfirst.frc.team1024.robot.commands.auto.Pos1Shoot;
 import org.usfirst.frc.team1024.robot.commands.auto.Pos2GearOnMiddlePeg;
 import org.usfirst.frc.team1024.robot.commands.auto.RedPos1ShootCrossArc;
@@ -180,7 +181,7 @@ public class Robot extends IterativeRobot {
 			break;
 		case 6:
 			//NOT USED
-			autonomousCommand = new LineUpAndShoot();
+			autonomousCommand = new LineUpAndShootFromGearPin();
 			break;
 		// pos3 N Peg
 		case 7:
@@ -260,20 +261,20 @@ public class Robot extends IterativeRobot {
 			autonomousCommand.cancel();
 		}
 		
-		List<PixyObject> pixyObjectList = getPixyObjects();
+		List<PixyObject> pixyObjectList = getPixyObjects(2);
 		if (pixyObjectList != null) {
 			printPixyStuff(pixyObjectList);
-			System.out.println("Got " + pixyObjectList.size() + " objects from the pixy");
+//			System.out.println("Got " + pixyObjectList.size() + " objects from the pixy");
 			for (int i = 0; i < pixyObjectList.size(); i++) {
 				DriverStation.reportError(pixyObjectList.get(i).toString(), false);
 			}
 		}
 	}
 
-	public static List<PixyObject> getPixyObjects() {
+	public static List<PixyObject> getPixyObjects(int imageSignatureNum) {
 		// pixy values are saved and read like PixyPacket.(x,y,width,height)
 		try {
-			return pixy.readFrame(1);
+			return pixy.readFrame(imageSignatureNum);
 		} catch (Exception e) {
 			DriverStation.reportError(e.getMessage(), true);
 			// e.printStackTrace();

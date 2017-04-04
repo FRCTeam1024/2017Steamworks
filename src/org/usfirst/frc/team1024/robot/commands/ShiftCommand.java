@@ -4,9 +4,9 @@ import org.usfirst.frc.team1024.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class shift extends Command {
+public class ShiftCommand extends Command {
 	String state;
-	public shift(String state) {
+	public ShiftCommand(String state) {
 		this.state = state;
 	}
 	
@@ -16,6 +16,8 @@ public class shift extends Command {
 	
 	@Override
 	protected void execute() {
+		Robot.drivetrain.shifter.set(false);
+		/*
 		if (state.equals("Low")) {
 			Robot.drivetrain.shifter.set(false);
 		} else if (state.equals("High")) {
@@ -23,6 +25,7 @@ public class shift extends Command {
 		} else {
 			Robot.drivetrain.shifter.set(true);
 		}
+		*/
 	}
 	
 	@Override
