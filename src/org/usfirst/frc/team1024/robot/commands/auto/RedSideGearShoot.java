@@ -1,46 +1,59 @@
 package org.usfirst.frc.team1024.robot.commands.auto;
 
+import java.sql.Time;
 import java.util.List;
 
 import org.usfirst.frc.team1024.Pixy.PixyObject;
 import org.usfirst.frc.team1024.robot.Robot;
-import org.usfirst.frc.team1024.robot.commands.*;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-// from the red side
-public class LineUpAndShootFromGearPin extends CommandGroup {
+public class RedSideGearShoot extends CommandGroup {
+
 	boolean hasDone = false;
+	boolean hasDrove = false;
 	boolean isDone = false;
+	boolean hasShot = false;
 
-	public LineUpAndShootFromGearPin() {
-		// addSequential(new ShiftCommand("High")); // this didn't work; no idea
-		// why
-
-		// addSequential(new DriveCommand(-0.2, 0.2, 2)); // drive straight back
-
-		// turn left (going backwards) a bit, to bring the image into view
-		// addSequential(new DriveCommand(-0.3, 0.1, 1));
-
-		/*
-		 * Currently the problem is that the 2nd DriveCommand doesn't actually
-		 * drive; With logging, we can see that the 2nd DriveCommand gets
-		 * started, but doesn't actually drive; don't know why The
-		 * LineUpAndShoot works reasonably well; it lines up fairly well
-		 */
-
-		// addSequential(new LineUpShooter());
+	public RedSideGearShoot() {
 	}
 
 	@Override
 	protected void initialize() {
-
 	}
 
 	@Override
 	protected void execute() {
+		Robot.drivetrain.navx.reset();
+		//Robot.drivetrain.shifter.set(true);
+		//Robot.drivetrain.drive(0.5, -0.5);
+		Timer time = new Timer();
+		time.start();
+		while(time.get() < 0.94) {
+			Robot.drivetrain.driveStraightPower(0.5);
+		}
+		//Timer.delay(0.94);
+		Robot.drivetrain.stop();
+		SmartDashboard.putNumber("Angle", Robot.drivetrain.navx.getAngle());
+		Timer.delay(1);
+		
+		while(Robot.drivetrain.navx.getAngle() > -30) {
+			Robot.drivetrain.drive(-0.2, -0.2);
+		}
+		Robot.drivetrain.stop();
+		
+		Timer.delay(0.5);
+		Robot.drivetrain.drive(0, 0);
+		Timer.delay(2);
+		time.reset();
+		time.start();
+		while(time.get() < 1.0) {
+			Robot.drivetrain.driveStraightPower(0.3);
+		}
+		Robot.drivetrain.stop();
+		Timer.delay(1.0);
 		Robot.drivetrain.drive(-0.3, 0.1);
 		Timer.delay(0.5);
 		Robot.drivetrain.stop();
@@ -92,7 +105,6 @@ public class LineUpAndShootFromGearPin extends CommandGroup {
 				}
 			}
 		}
-
 	}
 
 	private void log(String msg) {
@@ -100,20 +112,17 @@ public class LineUpAndShootFromGearPin extends CommandGroup {
 	}
 
 	@Override
-	protected boolean isFinished() {
-		return isDone;
-	}
+	protected boolean isFinished() { return isDone; }
 
 	@Override
 	protected void end() {
-		log("ending LineUpShooter Command");
 		Robot.shooter.stop();
 		Robot.hopper.flip(false);
-		Robot.blender.stop();
+		// Might have to set stuff to turn off later.
 	}
 
 	@Override
 	protected void interrupted() {
+		end();
 	}
-
 }

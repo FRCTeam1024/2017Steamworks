@@ -53,11 +53,14 @@ public class Drivetrain extends Subsystem implements Subsystem1024 {
 		rearRightDrive.set(2);
 		frontRightDrive.reverseOutput(true);
 		frontRightDrive.reverseSensor(true);
+		
 		frontLeftDrive.enableBrakeMode(true);
 		frontRightDrive.enableBrakeMode(true);
+		rearLeftDrive.enableBrakeMode(true);
+		rearRightDrive.enableBrakeMode(true);
 		// setFollowerMode(frontRightDrive, rearRightDrive);
 		try {
-			navx = new AHRS(I2C.Port.kOnboard);
+			navx = new AHRS(I2C.Port.kMXP);
 		} catch (RuntimeException ex) {
 			DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
 		}
@@ -159,7 +162,7 @@ public class Drivetrain extends Subsystem implements Subsystem1024 {
 		frontRightDrive.changeControlMode(TalonControlMode.PercentVbus);
 		rearLeftDrive.changeControlMode(TalonControlMode.PercentVbus);
 		rearRightDrive.changeControlMode(TalonControlMode.PercentVbus);
-
+		
 		frontLeftDrive.set(leftpower);
 		frontRightDrive.set(rightpower);
 		rearLeftDrive.set(leftpower);
@@ -273,5 +276,34 @@ public class Drivetrain extends Subsystem implements Subsystem1024 {
 	protected void initDefaultCommand() {
 		
 	}
+
+	public void driveStraightPower(double power) { // power
+		if (navx.getAngle() == 0) {
+			drive(power, -power);
+		} else if (navx.getAngle() < 0 && navx.getAngle() > -5) {
+			drive(power, -(0.95 * power));
+		} else if (navx.getAngle() < -5) {
+			drive(power, -(0.9 * power));
+		} else if (navx.getAngle() > 0 && navx.getAngle() < 5) {
+			drive((0.95 * power), -power);
+		} else if (navx.getAngle() > 5) {
+			drive((0.9 * power), -power);
+		}
+	}
+	
+	public void driveStraightPower(double power, double d1, double d2) { // power and delta
+		if (navx.getAngle() == 0) {
+			drive(power, -power);
+		} else if (navx.getAngle() < 0 && navx.getAngle() > -5) {
+			drive(power, -(d1 * power));
+		} else if (navx.getAngle() < -5) {
+			drive(power, -(d2 * power));
+		} else if (navx.getAngle() > 0 && navx.getAngle() < 5) {
+			drive((d1 * power), -power);
+		} else if (navx.getAngle() > 5) {
+			drive((d2 * power), -power);
+		}
+	}
+	
 	
 }

@@ -22,7 +22,7 @@ import org.usfirst.frc.team1024.robot.commands.auto.Pos1Shoot;
 import org.usfirst.frc.team1024.robot.commands.auto.Pos2GearOnMiddlePeg;
 import org.usfirst.frc.team1024.robot.commands.auto.RedPos1ShootCrossArc;
 import org.usfirst.frc.team1024.robot.commands.auto.RedPos1ShootCrossArcGear;
-import org.usfirst.frc.team1024.robot.commands.auto.RedPos1ShootCrossArcOppositeSide;
+import org.usfirst.frc.team1024.robot.commands.auto.RedSideGearShoot;
 import org.usfirst.frc.team1024.robot.commands.auto.BluePos1ShootCrossArc;
 import org.usfirst.frc.team1024.robot.commands.auto.CrossBaselinePower;
 
@@ -191,7 +191,7 @@ public class Robot extends IterativeRobot {
 			break;
 		case 8:
 			// just cross baseline
-			autonomousCommand = new RedPos1ShootCrossArcOppositeSide();
+			autonomousCommand = new RedSideGearShoot();
 			break;
 		case 9:
 			autonomousCommand = new CrossBaselinePower();
@@ -231,9 +231,10 @@ public class Robot extends IterativeRobot {
 		hasRun = true;
 		//logger.logAll();
 		outputTheThings();
-		// printGyro();
+		SmartDashboard.putNumber("Angle", drivetrain.navx.getAngle());
 		gear.setLED();
 		SmartDashboard.putBoolean("Break", gear.gearDetector.get());
+		printGyro();
 		gear.gearTransmitter.set(true);
 		drivetrain.drive(-oi.lJoy.getRawAxis(RobotMap.JOYSTICK_Y_AXIS_NUM),
 				oi.rJoy.getRawAxis(RobotMap.JOYSTICK_Y_AXIS_NUM));
@@ -261,7 +262,7 @@ public class Robot extends IterativeRobot {
 			autonomousCommand.cancel();
 		}
 		
-		List<PixyObject> pixyObjectList = getPixyObjects(2);
+		List<PixyObject> pixyObjectList = getPixyObjects(1);
 		if (pixyObjectList != null) {
 			printPixyStuff(pixyObjectList);
 //			System.out.println("Got " + pixyObjectList.size() + " objects from the pixy");

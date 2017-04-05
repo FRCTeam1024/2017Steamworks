@@ -27,6 +27,7 @@ public class Blender extends Subsystem implements Subsystem1024 {
 	 */
 	public void blend(double power) {
 		blenderMotor.set(power);
+		blenderMotor.enable();
 	}
 	
 	/**
