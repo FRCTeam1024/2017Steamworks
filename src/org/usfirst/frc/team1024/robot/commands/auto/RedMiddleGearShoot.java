@@ -11,14 +11,14 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class RedSideGearShoot extends CommandGroup {
+public class RedMiddleGearShoot extends CommandGroup {
 
 	boolean hasDone = false;
 	boolean hasDrove = false;
 	boolean isDone = false;
 	boolean hasShot = false;
 
-	public RedSideGearShoot() {
+	public RedMiddleGearShoot() {
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class RedSideGearShoot extends CommandGroup {
 			Robot.drivetrain.driveStraightPower(0.5);
 		}*/
 		
-		while(Robot.drivetrain.frontRightDrive.getDistanceInInches() < 15) {
+		while(Robot.drivetrain.frontRightDrive.getDistanceInInches() < 15) { // change this later
 			Robot.drivetrain.driveStraightPower(0.5);
 		}
 		while(Robot.drivetrain.frontRightDrive.getDistanceInInches() < 25) {
@@ -47,31 +47,10 @@ public class RedSideGearShoot extends CommandGroup {
 		while(Robot.drivetrain.frontRightDrive.getDistanceInInches() < 35) {
 			Robot.drivetrain.driveStraightPower(0.1);
 		}
-		//Timer.delay(0.94);
-		Robot.drivetrain.stop();
-		SmartDashboard.putNumber("Angle", Robot.drivetrain.navx.getAngle());
-		Timer.delay(1);
-		
-		while(Robot.drivetrain.navx.getAngle() > -Constants.ANGLE_TO_SIDE_PEG) {
-			Robot.drivetrain.drive(-0.2, -0.2);
-		}
 		Robot.drivetrain.stop();
 		
 		Timer.delay(0.5);
-		//Robot.drivetrain.drive(0, 0);
 		
-		time.reset();
-		double startingPoint = Robot.drivetrain.frontRightDrive.getDistanceInInches();
-		time.start();
-		
-		while (Robot.drivetrain.frontRightDrive.getDistanceInInches() < startingPoint + 24) {
-			Robot.drivetrain.driveStraightPower(0.3);
-		}
-//		while (Robot.drivetrain.frontRightDrive.getDistanceInInches() < startingPoint + 28) {
-//			Robot.drivetrain.driveStraightPower(0.1);
-//		}
-		
-		Robot.drivetrain.stop();
 		Robot.gear.clamp(0);
 		time.reset();
 		time.start();

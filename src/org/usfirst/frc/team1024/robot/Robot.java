@@ -17,11 +17,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team1024.robot.commands.redauto.*;
 import org.usfirst.frc.team1024.robot.commands.auto.HopperShoot;
 import org.usfirst.frc.team1024.robot.commands.auto.LineUpAndShoot;
-import org.usfirst.frc.team1024.robot.commands.auto.LineUpAndShootFromGearPin;
+import org.usfirst.frc.team1024.robot.commands.auto.RedMiddleGearShoot;
 import org.usfirst.frc.team1024.robot.commands.auto.Pos1Shoot;
 import org.usfirst.frc.team1024.robot.commands.auto.Pos2GearOnMiddlePeg;
 import org.usfirst.frc.team1024.robot.commands.auto.RedPos1ShootCrossArc;
-import org.usfirst.frc.team1024.robot.commands.auto.RedPos1ShootCrossArcGear;
+import org.usfirst.frc.team1024.robot.commands.auto.BlueSideGearShoot;
 import org.usfirst.frc.team1024.robot.commands.auto.RedSideGearShoot;
 import org.usfirst.frc.team1024.robot.commands.auto.BluePos1ShootCrossArc;
 import org.usfirst.frc.team1024.robot.commands.auto.CrossBaselinePower;
@@ -150,50 +150,33 @@ public class Robot extends IterativeRobot {
 		case 0:
 			break;
 		case 1:
+			//done
 			autonomousCommand = new Pos2GearOnMiddlePeg();
 			break;
 		case 2:
+			//not possible anymore
 			autonomousCommand = new Pos1Shoot();
 			break;
-		// shoot 10sec
-		// cross baseline
 		case 3:
-			//not used!!!
-			autonomousCommand = new RedPos1ShootCross();
+			//done
+			autonomousCommand = new BlueMiddleGearShoot();
 			break;
-		// shoot 5sec
-		// cross baseline
-		case 4:
-
-			// shoot, cross, arc
-			// square up
-			// set to 35% inside, 50% outside
-			// 1 second
+		case 4: //done
 			autonomousCommand = new BluePos1ShootCrossArc();
-
-			// delay 5sec
-			// move
-			// shoot 5sec
-			// cross baseline
 			break;
-		case 5:
+		case 5: //done
 			autonomousCommand = new RedPos1ShootCrossArc();
 			break;
-		case 6:
-			//NOT USED
-			autonomousCommand = new LineUpAndShootFromGearPin();
+		case 6: //done
+			autonomousCommand = new RedMiddleGearShoot();
 			break;
-		// pos3 N Peg
-		case 7:
-			//not used!!!
-			// hopper shoot
-			autonomousCommand = new RedPos1ShootCrossArcGear();
+		case 7: //done
+			autonomousCommand = new BlueSideGearShoot();
 			break;
-		case 8:
-			// just cross baseline
+		case 8: //done
 			autonomousCommand = new RedSideGearShoot();
 			break;
-		case 9:
+		case 9: //done
 			autonomousCommand = new CrossBaselinePower();
 			break;
 		}

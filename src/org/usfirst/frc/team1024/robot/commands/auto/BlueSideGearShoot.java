@@ -11,14 +11,14 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class RedSideGearShoot extends CommandGroup {
+public class BlueSideGearShoot extends CommandGroup {
 
 	boolean hasDone = false;
 	boolean hasDrove = false;
 	boolean isDone = false;
 	boolean hasShot = false;
 
-	public RedSideGearShoot() {
+	public BlueSideGearShoot() {
 	}
 
 	@Override
@@ -52,8 +52,8 @@ public class RedSideGearShoot extends CommandGroup {
 		SmartDashboard.putNumber("Angle", Robot.drivetrain.navx.getAngle());
 		Timer.delay(1);
 		
-		while(Robot.drivetrain.navx.getAngle() > -Constants.ANGLE_TO_SIDE_PEG) {
-			Robot.drivetrain.drive(-0.2, -0.2);
+		while(Robot.drivetrain.navx.getAngle() > Constants.ANGLE_TO_SIDE_PEG) {
+			Robot.drivetrain.drive(0.2, 0.2);
 		}
 		Robot.drivetrain.stop();
 		
@@ -92,7 +92,7 @@ public class RedSideGearShoot extends CommandGroup {
 		time.reset();
 		time.start();
 		while(time.get() < 0.3) {
-			Robot.drivetrain.drive(-0.3, 0.1);
+			Robot.drivetrain.drive(0.1, -0.3);
 		}
 		Robot.drivetrain.stop();
 		

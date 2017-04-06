@@ -9,6 +9,8 @@ public class Constants {
 	public static final double DISTANCE_TO_BOILER_HOPPER = 78.5;
 	public static final double DISTANCE_TO_BOILER_HOPPER_SWITCH = 78.5 + 26.5; // This is probs the distance we want to go
 	public static final double DISTANCE_TO_BOILER_HOPPER_SWITCH_CENTER = 78.5 + 26.5 + 15.0;
+	
+	public static final double ANGLE_TO_SIDE_PEG = 30;
 	//Robot Constants:
 	/**
 	 * Measured from left to right (inches).
