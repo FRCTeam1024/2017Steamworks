@@ -60,6 +60,11 @@ public class RobotMap {
 		public static final int GEAR_TRANSMITTER_PORT = 1;
 		
 		public static final int GEAR_LED_PORT = 0;
+	
+		//Pixy
+	
+		public static final int PIXY_POWER_PORT = 2;
+		public static final int PIXY_DEVICE_ADDRESS = 0x54;
 		
 		
 	//Controls
@@ -67,8 +72,25 @@ public class RobotMap {
 		public static final int LOGITECH_PORT = 0;
 		public static final int LEFT_JOYSTICK_PORT = 1;
 		public static final int RIGHT_JOYSTICK_PORT = 2;
-		
-		public static final int JOYSTICK_Y_AXIS_NUM = 1;
-		
-		
+	
+		public static final int LOGI_A_BUTTON          = 1;
+		public static final int LOGI_B_BUTTON          = 2;
+		public static final int LOGI_X_BUTTON          = 3;
+		public static final int LOGI_Y_BUTTON          = 4;
+	
+		public static final int LOGI_LEFT_BUMPER       = 5;
+		public static final int LOGI_RIGHT_BUMPER      = 6;
+		public static final int LOGI_LEFT_TRIGGER      = 7;
+		public static final int LOGI_RIGHT_TRIGGER     = 8;
+	
+		public static final int LOGI_BACK_BUTTON       = 9;
+		public static final int LOGI_START_BUTTON      = 10;
+	
+		public static final int LOGI_LEFT_CLICK_STICK  = 11;
+		public static final int LOGI_RIGHT_CLICK_STICK = 12;
+	
+		public static final double LOGI_LEFT_STICK_X   = 0;
+		public static final double LOGI_LEFT_STICK_Y   = 1;
+		public static final double LOGI_RIGHT_STICK_X  = 2;
+		public static final double LOGI_RIGHT_STICK_Y  = 3;
 }
