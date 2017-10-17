@@ -31,8 +31,6 @@ import org.usfirst.frc.team1024.Pixy.PixyI2C;
 import org.usfirst.frc.team1024.Pixy.PixyObject;
 import org.usfirst.frc.team1024.Pixy.PixyPacket;
 
-// import org.usfirst.frc.team1024.robot.commands.auto.Pos2GearOnMiddlePeg;
-
 import org.usfirst.frc.team1024.robot.subsystems.Blender;
 import org.usfirst.frc.team1024.robot.subsystems.Climber;
 import org.usfirst.frc.team1024.robot.subsystems.Drivetrain;
@@ -77,7 +75,6 @@ public class Robot extends IterativeRobot {
 	public int autoSelected;
 
 	Command autonomousCommand;
-	SendableChooser<Command> chooser = new SendableChooser<>();
 
 	public boolean shooterSetState = false;
 
@@ -85,14 +82,14 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		NetworkTable.globalDeleteAll();
-		pixyI2C = new I2C(Port.kMXP, 0x54);
+		pixyI2C = new I2C(Port.kMXP, RobotMap.PIXY_DEVICE_ADDRESS);
 		shooter.initDashboard();
 		drivetrain.initDashboard();
 		//logger = new Logger();
 		drivetrain.frontLeftDrive.setEncPosition(0);
 		drivetrain.frontRightDrive.setEncPosition(0);
 
-		pixyPower = new DigitalOutput(2);
+		pixyPower = new DigitalOutput(RobotMap.PIXY_POWER_PORT);
 		pixyPower.set(true);
 		
 		pixy = new PixyI2C();
@@ -126,7 +123,7 @@ public class Robot extends IterativeRobot {
 		if (!autoChooser.getButtonA()) {
 			autoSelected++;
 			Timer.delay(.2);
-			while (!autoChooser.getButtonA())
+			while (!autoChooser.getButtonA()) //I have no idea why this is a while loop
 				;
 			if (autoSelected > 9)
 				autoSelected = 9;
@@ -235,12 +232,12 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putBoolean("Break", gear.gearDetector.get());
 		gear.gearTransmitter.set(true);
 		drivetrain.drive(-oi.lJoy.getRawAxis(RobotMap.JOYSTICK_Y_AXIS_NUM),
-				oi.rJoy.getRawAxis(RobotMap.JOYSTICK_Y_AXIS_NUM));
+						 oi.rJoy.getRawAxis(RobotMap.JOYSTICK_Y_AXIS_NUM));
 
-		blender.blend(0.5 * oi.logi.getRawAxis(3));// Blender
-		hopper.agitator.set(oi.logi.getRawAxis(3));
-		hopper.agitate(oi.logi.getRawAxis(3));
-		climber.climb(Math.abs(oi.logi.getRawAxis(1)));// Climber
+		blender.blend(0.5 * oi.logi.getRawAxis(3));
+		//hopper.agitator.set(oi.logi.getRawAxis(3)); rip hopper :(
+		//hopper.agitate(oi.logi.getRawAxis(3));
+		climber.climb(Math.abs(oi.logi.getRawAxis(1))); //Take the absolute value of the input so it can only go up
 
 		if (oi.logi.getRawButton(1) == true) {
 			gear.clamper.set(Value.kOff);
